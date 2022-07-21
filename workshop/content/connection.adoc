@@ -1,0 +1,77 @@
+:guid: %guid%
+:ssh_command: %ssh_command%
+:ssh_password: %ssh_password%
+:ssh_username: %ssh_username%
+:targethost_fqdn: %targethost%
+:markup-in-source: verbatim,attributes,quotes
+:show_solution: true
+
+
+
+WARNING:  Executing these setup tasks is a requirement before proceeding with the workshop exercises.
+
+== Workshop Setup
+
+These steps should be easy to click-through if you are using the bookbag terminal. 
+
+Connect to target host (bastion) via ssh:
+
+[source,options="nowrap",subs="{markup-in-source}",role="execute"]
+----
+*{ssh_command} -o "StrictHostKeyChecking no"*
+----
+
+Send the password:
+
+[source,options="nowrap",subs="{markup-in-source}",role="execute"]
+----
+*{ssh_password}*
+----
+
+Launch a 'tmux' (terminal multiplexer):
+
+[source,options="nowrap",subs="{markup-in-source}",role="execute"]
+----
+*tmux*
+----
+
+Use sudo to escalate your user priviledges:
+
+[source,options="nowrap",subs="{markup-in-source}",role="execute"]
+----
+*sudo -i*
+----
+
+And finally, execute the workshop setup script:
+
+[source,options="nowrap",subs="{markup-in-source}",role="execute"]
+----
+*cd ~/RHEL9-Workshop; ./rhel9-workshop.sh all*
+----
+
+The setup will take about 8 minutes.  We will use this time to review RHEL 8 at a highlevel, talk about the workshop and help you get the most value out of your experience today.
+
+== Connection Information
+
+[bash,options="nowrap",subs="{markup-in-source}"]
+
+  * Unique session GUID: *{guid}*
+
+  * Target host FQDN: *{targethost_fqdn}*
+
+  * Username: *{ssh_username}*
+
+  * Password: *{ssh_password}*
+
+For easy access, here is the ssh command (and password) you can copy to your paste buffer.
+
+[source,options="nowrap",subs="{markup-in-source}",role="copy"]
+----
+*{ssh_command} -o "StrictHostKeyChecking no"*
+----
+
+[source,options="nowrap",subs="{markup-in-source}",role="copy"]
+----
+*{ssh_password}*
+----
+

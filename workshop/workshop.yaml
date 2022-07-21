@@ -1,0 +1,21 @@
+---
+name: Definitive RHEL8 Workshop (v8.4)
+modules:
+  activate:
+    - connection
+    - overview
+    - documentation/webconsole
+    - documentation/systemd
+    - documentation/firewalld
+    - documentation/nftables
+    - documentation/ebpf
+    - documentation/appstream-yum
+    - documentation/podman
+    - documentation/buildah
+    - documentation/image-builder
+    - documentation/virtualization
+    - documentation/tlog
+    - documentation/lvm-vdo
+    - documentation/stratis
+    - documentation/kpatch
+    - documentation/boom-kernel-parms
