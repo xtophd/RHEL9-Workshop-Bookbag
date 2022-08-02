@@ -15,7 +15,7 @@ endif::[]
 :disk4: /dev/sde
 :disk_glob: /dev/sd{b..e}
 :format_cmd_exec: source,options="nowrap",subs="{markup-in-source}",role="copy"
-:format_cmd_output: bash,options="nowrap"
+:format_cmd_output: bash,options="nowrap",subs="{markup-in-source}"
 ifeval::["%cloud_provider%" == "ec2"]
 :disk0: /dev/nvme0n1
 :disk1: /dev/nvme1n1
@@ -24,7 +24,6 @@ ifeval::["%cloud_provider%" == "ec2"]
 :disk4: /dev/nvme4n1
 :disk_glob: /dev/nvme{1..4}n1
 :format_cmd_exec: source,options="nowrap",subs="{markup-in-source}",role="execute"
-:format_cmd_output: bash,options="nowrap"
 endif::[]
 
 
@@ -96,17 +95,27 @@ Finally check the service status.
 
 [{format_cmd_output}]
 ----
-● stratisd.service - A daemon that manages a pool of block devices to create flexible file systems
-   Loaded: loaded (/usr/lib/systemd/system/stratisd.service; enabled; vendor preset: enabled)
-   Active: active (running) since Sat 2019-04-27 18:41:52 EDT; 10s ago
- 	Docs: man:stratisd(8)
- Main PID: 9562 (stratisd)
-	Tasks: 1 (limit: 24006)
-   Memory: 940.0K
-   CGroup: /system.slice/stratisd.service
-       	└─9562 /usr/libexec/stratisd --debug
+● stratisd.service - Stratis daemon
+     Loaded: loaded (/usr/lib/systemd/system/stratisd.service; enabled; vendor preset: enabled)
+     Active: active (running) since Mon 2022-08-01 21:56:27 UTC; 8min ago
+       Docs: man:stratisd(8)
+   Main PID: 43554 (stratisd)
+      Tasks: 6 (limit: 23122)
+     Memory: 1.6M
+        CPU: 257ms
+     CGroup: /system.slice/stratisd.service
+             └─43554 /usr/libexec/stratisd --log-level debug
 
-Apr 27 18:41:52 node2.example.com systemd[1]: Started A daemon that manages a pool of block devices to create flexible file systems.
+Aug 01 21:56:27 node2.qdq89.internal stratisd[43554]: [2022-08-01T21:56:27Z INFO  libstratis::stratis::run>
+Aug 01 21:56:27 node2.qdq89.internal stratisd[43554]: [2022-08-01T21:56:27Z INFO  libstratis::engine::stra>
+Aug 01 21:56:27 node2.qdq89.internal stratisd[43554]: [2022-08-01T21:56:27Z DEBUG libstratis::stratis::run>
+Aug 01 21:56:27 node2.qdq89.internal stratisd[43554]: [2022-08-01T21:56:27Z DEBUG libstratis::stratis::run>
+Aug 01 21:56:27 node2.qdq89.internal stratisd[43554]: [2022-08-01T21:56:27Z INFO  libstratis::stratis::ipc>
+Aug 01 21:56:27 node2.qdq89.internal stratisd[43554]: [2022-08-01T21:56:27Z DEBUG libstratis::stratis::run>
+Aug 01 21:56:27 node2.qdq89.internal stratisd[43554]: [2022-08-01T21:56:27Z DEBUG libstratis::stratis::run>
+Aug 01 21:56:27 node2.qdq89.internal systemd[1]: Started Stratis daemon.
+Aug 01 21:56:37 node2.qdq89.internal stratisd[43554]: [2022-08-01T21:56:37Z DEBUG libstratis::stratis::run>
+Aug 01 22:04:42 node2.qdq89.internal systemd[1]: Started Stratis daemon.
 ----
 
 == Create Storage Pool
@@ -130,12 +139,12 @@ Since we will be reusing the same resources for many exercises, we will begin by
 
 [{format_cmd_exec}]
 ----
-*vgremove -ff vg_lab*
+*stratis fs destroy summitpool summitfs*
 ----
 
 [{format_cmd_exec}]
 ----
-*pvremove {disk_glob}*
+*stratis pool destroy summitpool summitfs*
 ----
 
 [{format_cmd_exec}]
@@ -222,8 +231,8 @@ Now create a filesystem, a directory mount point, and mount the filesystem:
 *stratis fs list*
 ----
 
-----
 [{format_cmd_output}]
+----
 Pool Name   Name      Used     Created            Device                            UUID
 summitpool  summitfs  546 MiB  Apr 18 2020 09:15  /dev/stratis/summitpool/summitfs  095fb4891a5743d0a589217071ff71dc
 ----
@@ -311,7 +320,7 @@ Finally, Stratis also makes it easy to add space to a pool.  Suppose the “summ
 
 [{format_cmd_exec}]
 ----
-*stratis pool add-data summitpool {disk4}*
+*stratis pool add-data summitpool {disk3}*
 ----
 
 [{format_cmd_exec}]
@@ -324,8 +333,7 @@ Finally, Stratis also makes it easy to add space to a pool.  Suppose the “summ
 Pool Name    Device Node    Physical Size   State   Tier
 summitpool   {disk1}                5 GiB  In-use   Data
 summitpool   {disk2}                5 GiB  In-use   Data
-summitpool   {disk3}                5 GiB  In-use  Cache
-summitpool   {disk4}                5 GiB  In-use   Data
+summitpool   {disk3}                5 GiB  In-use   Data
 ----
 
 Verify that the pool shows the additional space, and that the amount used is now in a safe range.
@@ -347,7 +355,7 @@ Stratis also makes it easy to add cache devices.  For example, say the filesyste
 
 [{format_cmd_exec}]
 ----
-*stratis pool init-cache summitpool  {disk3}*
+*stratis pool init-cache summitpool  {disk4}*
 ----
 
 [{format_cmd_exec}]
@@ -357,23 +365,24 @@ Stratis also makes it easy to add cache devices.  For example, say the filesyste
 
 [{format_cmd_output}]
 ----
-Pool Name	Device Node    Physical Size   State   Tier
-summitpool   {disk1}                 5 GiB  In-use   Data
-summitpool   {disk2}                 5 GiB  In-use   Data
-summitpool   {disk3}                 5 GiB  In-use  Cache
+Pool Name    Device Node    Physical Size   State   Tier
+summitpool   {disk1}                5 GiB  In-use   Data
+summitpool   {disk2}                5 GiB  In-use   Data
+summitpool   {disk3}                5 GiB  In-use   Data
+summitpool   {disk4}                5 GiB  In-use  Cache
 ----
 
 == Additional Resources
 
 Red Hat Documentation
 
-    * link:https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/8/html/managing_file_systems/setting-up-stratis-file-systems_managing-file-systems[Managing Filesystems: Chapter 39. Setting Up Stratis File Systems]
+    * link:https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/9/html/managing_file_systems/setting-up-stratis-file-systems_managing-file-systems[Managing Filesystems: Chapter 39. Setting Up Stratis File Systems]
 
 [discrete]
 == End of Unit
 
 ifdef::env-github[]
-link:../RHEL8-Workshop.adoc#toc[Return to TOC]
+link:../RHEL9-Workshop.adoc#toc[Return to TOC]
 endif::[]
 
 ////
