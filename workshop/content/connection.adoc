@@ -5,6 +5,14 @@
 :targethost_fqdn: %targethost%
 :markup-in-source: verbatim,attributes,quotes
 :show_solution: true
+:format_cmd_exec: source,options="nowrap",subs="{markup-in-source}",role="copy"
+:format_cmd_exec2: source,options="nowrap",subs="{markup-in-source}",role="copy"
+:format_cmd_output: bash,options="nowrap",subs="{markup-in-source}"
+ifeval::["%cloud_provider%" == "ec2"]
+:format_cmd_exec: source,options="nowrap",subs="{markup-in-source}",role="execute"
+:format_cmd_exec2: source,options="nowrap",subs="{markup-in-source}",role="execute-2"
+endif::[]
+
 
 
 
@@ -16,40 +24,65 @@ These steps should be easy to click-through if you are using the bookbag termina
 
 Connect to target host (bastion) via ssh:
 
-[source,options="nowrap",subs="{markup-in-source}",role="execute"]
+[{format_cmd_exec}]
 ----
 *{ssh_command} -o "StrictHostKeyChecking no"*
 ----
 
 Send the password:
 
-[source,options="nowrap",subs="{markup-in-source}",role="execute"]
+[{format_cmd_exec}]
 ----
 *{ssh_password}*
 ----
 
 Launch a 'tmux' (terminal multiplexer):
 
-[source,options="nowrap",subs="{markup-in-source}",role="execute"]
+[{format_cmd_exec}]
 ----
 *tmux*
 ----
 
 Use sudo to escalate your user priviledges:
 
-[source,options="nowrap",subs="{markup-in-source}",role="execute"]
+[{format_cmd_exec}]
 ----
 *sudo -i*
 ----
 
 And finally, execute the workshop setup script:
 
-[source,options="nowrap",subs="{markup-in-source}",role="execute"]
+[{format_cmd_exec}]
 ----
 *cd ~/RHEL9-Workshop; ./rhel9-workshop.sh all*
 ----
 
 The setup will take about 8 minutes.  We will use this time to review RHEL 8 at a highlevel, talk about the workshop and help you get the most value out of your experience today.
+
+
+== Set Up Terminal 2
+
+Like wise, let us proceed to set up the second terminal for use later.
+
+[{format_cmd_exec2}]
+----
+*{ssh_command} -o "StrictHostKeyChecking no"*
+----
+
+[{format_cmd_exec2}]
+----
+*{ssh_password}*
+----
+
+[{format_cmd_exec2}]
+----
+*tmux*
+----
+
+[{format_cmd_exec2}]
+----
+*sudo -i*
+----
 
 == Connection Information
 
