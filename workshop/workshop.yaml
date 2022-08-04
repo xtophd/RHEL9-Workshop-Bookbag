@@ -9,7 +9,6 @@ modules:
     - documentation/firewalld
     - documentation/nftables
     - documentation/ebpf
-    - documentation/appstream-yum
     - documentation/podman
     - documentation/buildah
     - documentation/image-builder
