@@ -40,7 +40,7 @@ Launch a 'tmux' (terminal multiplexer):
 
 [{format_cmd_exec}]
 ----
-*tmux*
+*tmux attach -t TERM1 || tmux new -s TERM1*
 ----
 
 Use sudo to escalate your user priviledges:
@@ -76,7 +76,7 @@ Like wise, let us proceed to set up the second terminal for use later.
 
 [{format_cmd_exec2}]
 ----
-*tmux*
+*tmux attach -t TERM2 || tmux new -s TERM2*
 ----
 
 [{format_cmd_exec2}]
