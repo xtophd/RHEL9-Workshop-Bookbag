@@ -55,7 +55,7 @@ There are 4 systems:
   * node1
   * node2
   * node3
-  * node4
+  * leapp
 
 The network domain is likely `example.com` but not necessarily so.  We expect most exercises and envionments will work by using the short hostnames.  So when asked to use `node1` for a unit:
 
