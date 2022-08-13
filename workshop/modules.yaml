@@ -47,4 +47,7 @@ modules:
     exit_sign: "Managing GRUB2 with Boom"
   documentation/boom-kernel-parms:
     name:      "Managing GRUB2 with Boom"
+    exit_sign: "LEAPP In-Place Upgrades"
+  documentation/leapp:
+    name:      "LEAPP In-Place Upgrades"
     exit_sign: "Finish Workshop"

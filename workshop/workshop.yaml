@@ -18,3 +18,4 @@ modules:
     - documentation/stratis
     - documentation/kpatch
     - documentation/boom-kernel-parms
+    - documentation/leapp
