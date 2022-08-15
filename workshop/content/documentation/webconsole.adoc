@@ -1,7 +1,7 @@
 :sectnums:
 :sectnumlevels: 3
 :markup-in-source: verbatim,attributes,quotes
-:imagesdir: ./_images/rhel8.4-cockpit
+:imagesdir: ./_images/cockpit-rhel90
 ifdef::env-github[]
 :tip-caption: :bulb:
 :note-caption: :information_source:
@@ -102,7 +102,7 @@ And the following UserID and Password:
 ----
 
 ====
-image::slide1.png[Cockpit Login]
+image::Slide1.PNG[Cockpit Login]
 ====
 
 == Webconsole Overview
@@ -114,32 +114,44 @@ After you successfully sign-on, you will land on the overview page which present
   * Disk I/O
   * Network traffic
 
-Also make note that your userid has "Administrative Access", meaning that your userid is configured on the host as part of the "wheel" security group.
+Also make note that your userid needs "Administrative Access", and since the userid is configured on the host as part of the "wheel" security group you are presented with the option to turn administrative access on.
 
 ====
-image::slide2.png[Cockpit Overview]
+image::Slide2.PNG[Cockpit Overview]
+====
+
+Please proceed to enable administrative access and then verify.
+
+====
+image::Slide3.PNG[Cockpit Overview]
 ====
 
 == Enable Persistent Metrics
 
 It's nice that certain statistics about your system are available for inspection, but by default the webconsole does NOT store statistics long term.  For this, you need to install “Performance Co-pilot (pcp)”, the cockpit-pcp plugin and lastly enable "persistent metrics collection" in the webconsole.
 
-Start by clicking on the link "Enable stored metrics".
+Start by clicking on the link "View deatils and history" on the "Usage" tile.
 
 ====
-image::slide3.png[Cockpit Enable Stored Metrics]
+image::Slide4.PNG[View details and history]
 ====
 
-If your system has not already had the Performance Copilot packages installed, a dialog box should have appeared to confirm the automatic install.  In our case, the software is already installed and you can proceed to view some performance data by selecting "View Details" on the "Usage" card.
+Next, we need to enable the collection of metrics data.
 
 ====
-image::slide4.png[View Usage Details]
+image::Slide5.PNG[Metrics Settings]
 ====
+
+====
+image::Slide6.PNG[Enable Metrics]
+====
+
+If your system has not already had the Performance Copilot packages installed, a dialog box should have appeared to confirm the automatic install.  In our case, the software is already installed and you can proceed to view some performance data.
 
 Take a moment to review the available performance information.  Since the workshop likely has not be up for very long, there is probably nothing interesting to see yet.  Towards the end of the workshop, return to this page and see your performance data.
 
 ====
-image::slide5.png[Performance Charts]
+image::Slide7.PNG[Performance Charts]
 ====
 
 To configure and enable stored metrics by hand, you can use follow the commands below.
@@ -161,13 +173,13 @@ systemctl restart cockpit.socket
 RHEL 9 comes with several pre-canned performance tuning profiles from Tuned. Since this is a virtual machine, the default profile “virtual-guest” was selected. You can easily switch profile via the Web Console web UI. In this exercise, we will change the profile to “throughput-performance”
 
 ====
-image::slide6.png[Cockpit Perf Profile]
+image::Slide8.PNG[Cockpit Perf Profile]
 ====
 
 A dialog box will appear.  Scroll and find "throughput-performance" and select.
 
 ====
-image::slide7.png[Cockpit Perf Throughout]
+image::Slide9.PNG[Cockpit Perf Throughout]
 ====
 
 
@@ -177,7 +189,7 @@ image::slide7.png[Cockpit Perf Throughout]
 Under the log section, you can inspect the system's logs.
 
 ====
-image::slide8.png[Cockpit Logs]
+image::Slide10.PNG[Cockpit Logs]
 ====
 
 Have a look at the search capabilities and notice that you can set criteria by:
@@ -187,7 +199,7 @@ Have a look at the search capabilities and notice that you can set criteria by:
   * Service
 
 ====
-image::slide9.png[Cockpit Logs Criteria]
+image::Slide11.PNG[Cockpit Logs Criteria]
 ====
 
 
@@ -199,7 +211,7 @@ Under the networking section, you can monitor and manage current networking acti
 Due to the nature of workshops, we refrain from making and saving changes to the network at this time but feel free to explore.
 
 ====
-image::slide10.png[Cockpit Network]
+image::Slide12.PNG[Cockpit Network]
 ====
 
 
@@ -211,19 +223,19 @@ Also under the networking section, you can configure your firewall rules.
 For the next exercise, let's enable a rule for NTP (Network Time Protocol).  Begin by selecting the Networking category and "Edit rules and zones".
 
 ====
-image::slide11.png[Cockpit Firewall]
+image::Slide13.PNG[Cockpit Firewall]
 ====
 
 Now you should see a list of active services and ports.  Proceed to select "Add services"
 
 ====
-image::slide12.png[Cockpit Firewall Service]
+image::Slide14.PNG[Cockpit Firewall Service]
 ====
 
 In the dialog box enter 'ntp' as the filter, select 'ntp' and hit "Add services".
 
 ====
-image::slide13.png[Cockpit Firewall Dialog]
+image::Slide15.PNG[Cockpit Firewall Dialog]
 ====
 
 
@@ -235,13 +247,13 @@ Now that you enabled a NTP firewall rule, let’s make sure an NTP service provi
 Remember that RHEL 8 uses a provider called 'chrony' for ntp.  So you can search for either 'chrony' or 'ntp'.
 
 ====
-image::slide14.png[Cockpit Services]
+image::Slide16.PNG[Cockpit Services]
 ====
 
 Turns out, chronyd is already enabled and active.  Nothing to do here...
 
 ====
-image::slide15.png[Cockpit Services]
+image::Slide17.PNG[Cockpit Services]
 ====
 
 
@@ -253,13 +265,13 @@ The core functionality of being able to manage multiple nodes from a single inte
 We begin by selecting the pull-down in the top-left corner.
 
 ====
-image::slide16.png[Cockpit Services]
+image::Slide18.PNG[Cockpit Services]
 ====
 
 Now it is only a matter of selecting 'Add new host' and entering a few data points.
 
 ====
-image::slide17.png[Cockpit Services]
+image::Slide19.PNG[Cockpit Services]
 ====
 
 Add the additional systems from your workshop cluster.
@@ -280,19 +292,19 @@ Add the additional systems from your workshop cluster.
 ----
 
 ====
-image::slide18.png[Cockpit Add Nodes]
+image::Slide20.PNG[Cockpit Add Nodes]
 ====
 
 Now when you hit the pull-down, you have complete access and managibility of the additional nodes.
 
 ====
-image::slide19.png[Cockpit Remote Nodes]
+image::Slide21.PNG[Cockpit Remote Nodes]
 ====
 
 Go ahead and select node1 and then access a terminal session. Very handy!
 
 ====
-image::slide20.png[Cockpit Remote Terminal]
+image::Slide22.PNG[Cockpit Remote Terminal]
 ====
 
 == Conclusion
