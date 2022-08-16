@@ -7,10 +7,9 @@
 == Presented By
 
   * Christoph Doerbeck
-  * Karl Abbott
   * Eddie Chen
   * Gordon Keegan
-  * Matt St. Onge
+  * Lynn Dixon
 
 == Overview
 
@@ -35,7 +34,7 @@ Please don't forget to review this session at the completion of this lab.  Your 
 
 NOTE:  This whole effort is done using official Red Hat software and although things can likely be set up to work with upstream software components (Fedora, CentOS, etc...), alternate derivatives of RHEL are not tested or validated with these exercises.
 
-Source for this workshop: http://github.com/xtophd/RHEL8-Workshop
+Source for this workshop: http://github.com/xtophd/RHEL9-Workshop
 
 == Environment Description
 
@@ -49,7 +48,7 @@ You can use the convenient shell provided to the right of these instructions (bo
 
 Activities in this workshop are performed on virtual machines running in a public cloud.  Each attendee has received their own unique environment and will be provided administrator priviledges when needed.
 
-There are 4 systems:
+There are 5 systems:
 
   * bastion - primary system and launch point to other hosts
   * node1
