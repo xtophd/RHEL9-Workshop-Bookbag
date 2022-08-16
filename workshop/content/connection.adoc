@@ -57,7 +57,7 @@ And finally, execute the workshop setup script:
 *cd ~/RHEL9-Workshop; ./rhel9-workshop.sh all*
 ----
 
-The setup will take about 8 minutes.  We will use this time to review RHEL 8 at a highlevel, talk about the workshop and help you get the most value out of your experience today.
+The setup could take about 10 minutes.  We will use this time to review RHEL 9 at a highlevel, talk about the workshop and help you get the most value out of your experience today.
 
 
 == Set Up Terminal 2
@@ -84,7 +84,7 @@ Like wise, let us proceed to set up the second terminal for use later.
 *sudo -i*
 ----
 
-== Connection Information
+== Connection Details
 
 [bash,options="nowrap",subs="{markup-in-source}"]
 
