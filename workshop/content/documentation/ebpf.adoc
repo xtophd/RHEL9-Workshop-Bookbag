@@ -26,7 +26,10 @@ endif::[]
 
 eBPF (The Extended Berkeley Packet Filter) is an in-kernel virtual machine that allows code execution in the kernel space, in a restricted sandbox environment with access to a limited set of functions. There are numerous components shipped by Red Hat that utilize the eBPF virtual machine. Each component is in a different development phase, and thus not all components are currently fully supported. Those that are not supported are available as a *Technology Preview* and are not intended for production use.For information on Red Hat scope of support for Technology Preview features, see: link:https://access.redhat.com/support/offerings/techpreview/[Technology Preview Features Support Scope]
 
-In this unit, we will be focusing on the kernel tracing offering shipped as bcc-tools (BPF Compiler Collection Tools). There are just over 100 tools shipped in this package. A few things of note:
+In this unit, we will be focusing on the kernel tracing offering shipped as bcc-tools (BPF Compiler Collection Tools).   We will also touch on bpftrace which is a tool  to compile scripts to BPF-bytecode.  
+
+
+There are just over 100 tools shipped in this package. A few things of note:
 
      * All of these tools live in `/usr/share/bcc/tools`.
      * These tools must run as the root user as any eBPF program can read kernel data. As such, injecting eBPF bytecode as a regular user is not allowed in RHEL 8.
@@ -70,7 +73,7 @@ Start by installing the *BPF Compiler Collection* (bcc-tools) and kernel-devel p
 
 [{format_cmd_exec}]
 ----
-*dnf install bcc-tools kernel-devel-$(uname -r) -y*
+*dnf install bcc-tools bpftracestrace kernel-devel-$(uname -r) -y*
 ----
 
 Now, we have a lot of interesting tools installed in /usr/share/bcc/tools along with accompanying man pages.
@@ -466,263 +469,199 @@ In the `cachestat` terminal, issue a Ctrl-C and this will return you to a prompt
 
 
 
-== bcc-tools: trace
+== bpftrace
 
 This tool is a swiss army knife allowing you to specify functions to trace and messages to be printed when certain conditions are met.
 
-Let's use start this educational journey by examining what system calls a simple command executes.  The command is 'cat /etc/fstab' and we will use strace to see what happens.
+bpftrace makes use of:
 
+  * BCC for interacting with the Linux BPF system
+  * as well as existing Linux tracing capabilities: 
+    * kernel dynamic tracing (kprobes)
+    * user-level dynamic tracing (uprobes)
+    * tracepoints
+ 
+
+Let us start this educational journey by examining what system calls a simple command executes.  
+
+To begin, we need a test file to use as our target.
 
 [{format_cmd_exec}]
 ----
-*strace -c cat /etc/fstab > /dev/null*
+*touch /tmp/workshop.tmp*
+----
+
+The command we will evaluate is `cat /tmp/workshop.tmp` and we will use strace to list the system calls
+made and with what frequency (count). 
+
+[{format_cmd_exec}]
+----
+*strace -c cat /tmp/workshop.tmp*
 ----
 
 [{format_cmd_output}]
 ----
 % time     seconds  usecs/call     calls    errors syscall
 ------ ----------- ----------- --------- --------- ----------------
- 35.36    0.000169           5        31        13 openat
- 23.01    0.000110           5        22           mmap
- 10.67    0.000051           2        20           close
- 10.04    0.000048           2        19           newfstatat
-  8.37    0.000040          10         4           mprotect
-  6.28    0.000030          15         2           munmap
-  2.93    0.000014           2         5           read
-  1.05    0.000005           1         3           brk
-  0.63    0.000003           3         1           getrandom
-  0.42    0.000002           2         1           write
-  0.42    0.000002           2         1           futex
-  0.42    0.000002           2         1           fadvise64
-  0.42    0.000002           2         1           prlimit64
-  0.00    0.000000           0         4           pread64
-  0.00    0.000000           0         1         1 access
-  0.00    0.000000           0         1           execve
-  0.00    0.000000           0         2         1 arch_prctl
-  0.00    0.000000           0         1           set_tid_address
-  0.00    0.000000           0         1           set_robust_list
+ 28.86    0.000267         267         1           execve
+ 28.76    0.000266           8        31        13 openat
+ 12.97    0.000120           5        22           mmap
+  9.19    0.000085           4        20           close
+  7.46    0.000069           3        19           newfstatat
+  3.24    0.000030           7         4           mprotect
+  2.38    0.000022          11         2           munmap
+  1.51    0.000014           3         4           read
+  1.30    0.000012           3         4           pread64
+  0.97    0.000009           3         3           brk
+  0.86    0.000008           8         1         1 access
+  0.54    0.000005           2         2         1 arch_prctl
+  0.54    0.000005           5         1           getrandom
+  0.32    0.000003           3         1           futex
+  0.32    0.000003           3         1           fadvise64
+  0.32    0.000003           3         1           prlimit64
+  0.22    0.000002           2         1           set_tid_address
+  0.22    0.000002           2         1           set_robust_list
 ------ ----------- ----------- --------- --------- ----------------
-100.00    0.000478           3       121        15 total
+100.00    0.000925           7       119        15 total
+----
+
+What we see is that our command used the 'openat' systemcall 31 times.  Among those calls, 13 resulted in errors but 
+are likely harmless attempts to open files that do not exist.
+
+
+
+=== bpftrace: count all syscalls 
+
+Next, let's use *bpftrace* to create a similar output of counted system calls.  We will use a wildcarded tracepoint 'sys_enter_*'
+to get all the relevant syscalls.
+
+[{format_cmd_exec}]
+----
+bpftrace -e 'tracepoint:syscalls:sys_enter_* { if (comm == "cat") { @[probe] = count(); } }' -c "cat /tmp/workshop.tmp"
+----
+
+[{format_cmd_output}]
+----
+Attaching 337 probes...
+
+
+@[tracepoint:syscalls:sys_enter_access]: 1
+@[tracepoint:syscalls:sys_enter_futex]: 1
+@[tracepoint:syscalls:sys_enter_set_tid_address]: 1
+@[tracepoint:syscalls:sys_enter_set_robust_list]: 1
+@[tracepoint:syscalls:sys_enter_prlimit64]: 1
+@[tracepoint:syscalls:sys_enter_fadvise64]: 1
+@[tracepoint:syscalls:sys_enter_getrandom]: 1
+@[tracepoint:syscalls:sys_enter_exit_group]: 1
+@[tracepoint:syscalls:sys_enter_munmap]: 2
+@[tracepoint:syscalls:sys_enter_arch_prctl]: 2
+@[tracepoint:syscalls:sys_enter_brk]: 3
+@[tracepoint:syscalls:sys_enter_mprotect]: 4
+@[tracepoint:syscalls:sys_enter_pread64]: 4
+@[tracepoint:syscalls:sys_enter_read]: 4
+@[tracepoint:syscalls:sys_enter_newfstatat]: 19
+@[tracepoint:syscalls:sys_enter_close]: 20
+@[tracepoint:syscalls:sys_enter_mmap]: 22
+@[tracepoint:syscalls:sys_enter_openat]: 31
+
+----
+
+This should line up almost 1-to-1 with the previous output from strace, note that 'sys_enter_openat' is 31.
+
+
+
+=== bpftrace: count specific syscall 
+
+Now we are going to limit the probe to only show 'sys_enter_openat' thereby only setting 1 probe and collecting a count.
+
+[{format_cmd_exec}]
+----
+bpftrace -e 'tracepoint:syscalls:sys_enter_openat { if (comm == "cat") { @[probe] = count(); } }' -c "cat /tmp/workshop.tmp"
+----
+
+[{format_cmd_output}]
+----
+Attaching 1 probe...
+
+
+@[tracepoint:syscalls:sys_enter_openat]: 31
+
 ----
 
 
-In this case, what we see is that our command used the 'openat' systemcall 31 times.  There were also 13 errors, but 
-most of those are likely harmless attempts to open files that do not exist.
+
+=== bpftrace: set probe on specific file
+
+NOTE: For this last exercise we will utilize both terminal sessions again.  
+
+The objective is to set a probe and identify any process that opens our targeted file.
+
+    * -e [PROBE CODE]
+    ** *tracepoint:syscalls:sys_enter_openat:* is the tracepoint probe type (kernel static tracing)
+    ** conditional if() to evaluate args->filename for a match
+    ** print() the desired output
+    *** typical *pid*, *uid*, *gid* fields
+    *** *comm* is process's name
+    *** *args->filename* is the filename being accessed
+    * -c [COMMAND] to run command after probes are set and exit
+
 
 [discrete]
 ==== Primary Terminal (node2)
 
-Next, let us use bpftrace to watch file opens as they happen and print process names and file paths.
-
-    * *tracepoint:syscalls:sys_enter_openat*: is the tracepoint probe type (kernel static tracing)
-    * trigger when the *openat()* syscall is entered. 
-    * *comm* is a builtin variable that has the current process's name.
-    * *args* is a pointer to a struct containing all the tracepoint arguments (members of this struct can be found with: bpftrace -vl tracepoint:syscalls:sys_enter_openat)
+Proceed to set the probe in the primary terminal.
 
 [{format_cmd_exec}]
 ----
-bpftrace -e 'tracepoint:syscalls:sys_enter_openat { printf("%s %s\n", comm, str(args->filename)); }'
+bpftrace -e 'tracepoint:syscalls:sys_enter_openat { if (str(args->filename) == "/tmp/workshop.tmp") { printf( "%d %d %d %s %s\n", pid, uid, gid, comm, str(args->filename)); }}'
 ----
+
 
 [discrete]
 ==== Secondary Terminal (bastion)
 
-To trigger some file opens, use the second terminal from bastion:
+To generate some output, you will need to utilize the second terminal and open the target with a couple of different tools.  From the bastion host, run the following:
 
 [{format_cmd_exec2}]
 ----
-*ssh node2 "cat /etc/fstab"*
+*ssh node2 "cat /tmp/workshop.tmp"*
 ----
 
-
-[discrete]
-==== Results
-
-Before analyzing the results, return to your primary terminal and press CTRL-C  to interrupt the bpftrace.
-
-
-
-Somewhere in your output should have been a block something like this:
-
-[{format_cmd_output}]
+[{format_cmd_exec2}]
 ----
-<... SNIP ...>
-
-cat /usr/lib/locale/en_US.utf8/LC_ADDRESS
-cat /usr/lib/locale/en_US.UTF-8/LC_NAME
-cat /usr/lib/locale/en_US.utf8/LC_NAME
-cat /usr/lib/locale/en_US.UTF-8/LC_PAPER
-cat /usr/lib/locale/en_US.utf8/LC_PAPER
-cat /usr/lib/locale/en_US.UTF-8/LC_MESSAGES
-cat /usr/lib/locale/en_US.utf8/LC_MESSAGES
-cat /usr/lib/locale/en_US.utf8/LC_MESSAGES/SYS_LC_MESSAGES
-cat /usr/lib/locale/en_US.UTF-8/LC_MONETARY
-cat /usr/lib/locale/en_US.utf8/LC_MONETARY
-cat /usr/lib/locale/en_US.UTF-8/LC_COLLATE
-cat /usr/lib/locale/en_US.utf8/LC_COLLATE
-cat /usr/lib/locale/en_US.UTF-8/LC_TIME
-cat /usr/lib/locale/en_US.utf8/LC_TIME
-cat /usr/lib/locale/en_US.UTF-8/LC_NUMERIC
-cat /usr/lib/locale/en_US.utf8/LC_NUMERIC
-cat /usr/lib/locale/en_US.UTF-8/LC_CTYPE
-cat /usr/lib/locale/en_US.utf8/LC_CTYPE
-cat /etc/fstab
-
-<... SNIP ...>
+*ssh node2 "grep something /tmp/workshop.tmp"*
 ----
 
-From this outpu we can see the 'cat' program trying to open files including /etc/fstab.
-
-
-
-
-== WORK IN PROGRESS
-
-
-[{format_cmd_exec}]
+[{format_cmd_exec2}]
 ----
-*perf probe -F *open**
+*ssh node2 "echo < /tmp/workshop.tmp"*
 ----
 
-
-Let's do a simple trace in which we will dynamically trace the do_sys_open() kernel function and print the names of the files opened. 
 
 [discrete]
 ==== Primary Terminal (node2)
 
-To run this tool, execute the following and give it a couple of seconds to get set up:
-
-[{format_cmd_exec}]
-----
-*/usr/share/bcc/tools/trace 'p::do_sys_open "%s", arg2'*
-----
+Finally back to the primary terminal you should have seen some output like this:
 
 [{format_cmd_output}]
 ----
-PID     TID     COMM            FUNC             -
+Attaching 1 probe...
+2741 0 0 cat /tmp/workshop.tmp
+2757 0 0 grep /tmp/workshop.tmp
+2772 0 0 bash /tmp/workshop.tmp
 ----
 
-[discrete]
-==== Secondary Terminal (bastion)
+This displays the process-id along with the user and group ids of programs that tried to access our file.
 
-In your second terminal, establish yourself as described below and then run the following command:
+Go ahead and hit CTL-C in the primary terminal to exit bpftrace.
 
-[{format_cmd_exec2}]
-----
-*ssh node2 "cat /etc/fstab"*
-----
-
-[discrete]
-==== Primary Terminal (node2)
-
-In the `trace` terminal, you will see something similar to:
-
-[{format_cmd_output}]
-----
-32559   32559   cat             do_sys_open      b'/etc/ld.so.cache'
-32559   32559   cat             do_sys_open      b'/lib64/libc.so.6'
-32559   32559   cat             do_sys_open      b'/usr/lib/locale/locale-archive'
-32559   32559   cat             do_sys_open      b'/usr/share/locale/locale.alias'
-32559   32559   cat             do_sys_open      b'/usr/lib/locale/en_US.UTF-8/LC_IDENTIFICATION'
-32559   32559   cat             do_sys_open      b'/usr/lib/locale/en_US.utf8/LC_IDENTIFICATION'
-32559   32559   cat             do_sys_open      b'/usr/lib64/gconv/gconv-modules.cache'
-32559   32559   cat             do_sys_open      b'/usr/lib/locale/en_US.UTF-8/LC_MEASUREMENT'
-32559   32559   cat             do_sys_open      b'/usr/lib/locale/en_US.utf8/LC_MEASUREMENT'
-32559   32559   cat             do_sys_open      b'/usr/lib/locale/en_US.UTF-8/LC_TELEPHONE'
-32559   32559   cat             do_sys_open      b'/usr/lib/locale/en_US.utf8/LC_TELEPHONE'
-32559   32559   cat             do_sys_open      b'/usr/lib/locale/en_US.UTF-8/LC_ADDRESS'
-32559   32559   cat             do_sys_open      b'/usr/lib/locale/en_US.utf8/LC_ADDRESS'
-32559   32559   cat             do_sys_open      b'/usr/lib/locale/en_US.UTF-8/LC_NAME'
-32559   32559   cat             do_sys_open      b'/usr/lib/locale/en_US.utf8/LC_NAME'
-32559   32559   cat             do_sys_open      b'/usr/lib/locale/en_US.UTF-8/LC_PAPER'
-32559   32559   cat             do_sys_open      b'/usr/lib/locale/en_US.utf8/LC_PAPER'
-32559   32559   cat             do_sys_open      b'/usr/lib/locale/en_US.UTF-8/LC_MESSAGES'
-32559   32559   cat             do_sys_open      b'/usr/lib/locale/en_US.utf8/LC_MESSAGES'
-32559   32559   cat             do_sys_open      b'/usr/lib/locale/en_US.utf8/LC_MESSAGES/SYS_LC_MESSAGES'
-32559   32559   cat             do_sys_open      b'/usr/lib/locale/en_US.UTF-8/LC_MONETARY'
-32559   32559   cat             do_sys_open      b'/usr/lib/locale/en_US.utf8/LC_MONETARY'
-32559   32559   cat             do_sys_open      b'/usr/lib/locale/en_US.UTF-8/LC_COLLATE'
-32559   32559   cat             do_sys_open      b'/usr/lib/locale/en_US.utf8/LC_COLLATE'
-32559   32559   cat             do_sys_open      b'/usr/lib/locale/en_US.UTF-8/LC_TIME'
-32559   32559   cat             do_sys_open      b'/usr/lib/locale/en_US.utf8/LC_TIME'
-32559   32559   cat             do_sys_open      b'/usr/lib/locale/en_US.UTF-8/LC_NUMERIC'
-32559   32559   cat             do_sys_open      b'/usr/lib/locale/en_US.utf8/LC_NUMERIC'
-32559   32559   cat             do_sys_open      b'/usr/lib/locale/en_US.UTF-8/LC_CTYPE'
-32559   32559   cat             do_sys_open      b'/usr/lib/locale/en_US.utf8/LC_CTYPE'
-32559   32559   cat             do_sys_open      b'/etc/fstab'
-----
-
-Go ahead and Ctrl-C `trace` and then let's do one more trace, this time, tracing the return values out of `trace`:
-
-[{format_cmd_exec}]
-----
-*/usr/share/bcc/tools/trace 'r::do_sys_open "ret: %d", retval'*
-----
-
-[discrete]
-==== Secondary Terminal (bastion)
-
-[{format_cmd_exec2}]
-----
-*ssh node2 "cat /etc/fstab"*
-----
-
-[{format_cmd_output}]
-----
-PID     TID     COMM            FUNC             -
-----
-
-[discrete]
-==== Primary Terminal (node2)
-
-In the `trace` terminal, you will see something similar to:
-
-[{format_cmd_output}]
-----
-PID     TID     COMM            FUNC             -
-32576   32576   cat             do_sys_open      ret: 3
-32576   32576   cat             do_sys_open      ret: 3
-32576   32576   cat             do_sys_open      ret: -2
-32576   32576   cat             do_sys_open      ret: 3
-32576   32576   cat             do_sys_open      ret: -2
-32576   32576   cat             do_sys_open      ret: 3
-32576   32576   cat             do_sys_open      ret: 3
-32576   32576   cat             do_sys_open      ret: -2
-32576   32576   cat             do_sys_open      ret: 3
-32576   32576   cat             do_sys_open      ret: -2
-32576   32576   cat             do_sys_open      ret: 3
-32576   32576   cat             do_sys_open      ret: -2
-32576   32576   cat             do_sys_open      ret: 3
-32576   32576   cat             do_sys_open      ret: -2
-32576   32576   cat             do_sys_open      ret: 3
-32576   32576   cat             do_sys_open      ret: -2
-32576   32576   cat             do_sys_open      ret: 3
-32576   32576   cat             do_sys_open      ret: -2
-32576   32576   cat             do_sys_open      ret: 3
-32576   32576   cat             do_sys_open      ret: 3
-32576   32576   cat             do_sys_open      ret: -2
-32576   32576   cat             do_sys_open      ret: 3
-32576   32576   cat             do_sys_open      ret: -2
-32576   32576   cat             do_sys_open      ret: 3
-32576   32576   cat             do_sys_open      ret: -2
-32576   32576   cat             do_sys_open      ret: 3
-32576   32576   cat             do_sys_open      ret: -2
-32576   32576   cat             do_sys_open      ret: 3
-32576   32576   cat             do_sys_open      ret: -2
-32576   32576   cat             do_sys_open      ret: 3
-32576   32576   cat             do_sys_open      ret: 3
-----
-
-Go to the terminal with `trace` running and issue a Ctrl-C. This will end the process and return you to the command line. 
-
-You may also now type `exit` in one of your tmux panes to return to having just one pane visible.
-
-There is a lot more that you can do with this tool when you actually need to start tracing what is getting passed into kernel functions and what is being returned by those kernel functions.
+This concludes the exercises related to EBPF.
 
 == Additional Resources
 
 You can find more information:
 
+    * link:https://github.com/iovisor/bpftrace/blob/master/docs/tutorial_one_liners.md[The bpftrace One-Liner Tutorial]
     * link:https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/9/html/configuring_and_managing_networking/assembly_understanding-the-ebpf-features-in-rhel_configuring-and-managing-networking[Understanding eBPF Features]
     * link:https://lab.redhat.com/ebpf-tracing[Performance observability in practice with bcc-tools: A lab on lab.redhat.com]
     * link:http://www.brendangregg.com/ebpf.html[Linux Extended BPF (eBPF Tracing Tools) - Brendan Gregg]
