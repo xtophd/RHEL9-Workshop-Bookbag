@@ -1,5 +1,5 @@
 ---
-name: Definitive RHEL8 Workshop (v8.4)
+name: Definitive RHEL9 Workshop (v9.0)
 modules:
   activate:
     - connection
