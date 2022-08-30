@@ -3,6 +3,7 @@
 :markup-in-source: verbatim,attributes,quotes
 ifdef::env-github[]
 :tip-caption: :bulb:
+:imagesdir: ./_images
 :note-caption: :information_source:
 :important-caption: :heavy_exclamation_mark:
 :caution-caption: :fire:
@@ -53,9 +54,49 @@ Verify that you are on the right host for these exercises.
 # *workshop-leapp-checkhost.sh*
 ----
 
-You are now ready to proceed with these exercises.
+== Current RHEL Version Verification
+
+Verify through a few commands that this is currently running RHEL8.  These will show the current version of RHEL, the version of the running kernel and the rpm repos available to the system.
+
+[source,options="nowrap",subs="{markup-in-source}",role="copy"]
+----
+cat /etc/redhat-release
+----
+
+[{format_cmd_output}]
+----
+Red Hat Enterprise Linux release 8.6 (Ootpa)
+----
+
+[source,options="nowrap",subs="{markup-in-source}",role="copy"]
+----
+uname -r
+----
+
+[{format_cmd_output}]
+----
+4.18.0-372.9.1.el8.x86_64
+----
+
+[source,options="nowrap",subs="{markup-in-source}",role="copy"]
+----
+yum repolist
+----
+
+[{format_cmd_output}]
+----
+Updating Subscription Management repositories.
+repo id                                    repo name
+rhel-8-for-x86_64-appstream-rpms           Red Hat Enterprise Linux 8 for x86_64 - AppStream (RPMs)
+rhel-8-for-x86_64-baseos-rpms              Red Hat Enterprise Linux 8 for x86_64 - BaseOS (RPMs)
+rhel-8-for-x86_64-supplementary-rpms       Red Hat Enterprise Linux 8 for x86_64 - Supplementary (RPMs)----
+----
+
+You are now ready to proceed with the exercises.
 
 == Host Preparation
+
+NOTE: The steps listed here are for reference outside of this workshop only.  None of these steps need to be performed for the exercise to function.
 
 === Package Repositories
 
@@ -63,7 +104,7 @@ First item of business is to ensure the proper software repositories are enabled
 
 If necessary, begin by disabling any local static repos and switching to the latest managed ones from Red Hat.
 
-WARNING: Remember to skip these steps if you can connected to a Satellite or directly to redhat.com.
+WARNING: You can probably skip this step if you can connect to a Satellite or directly to redhat.com.
 
 [source,options="nowrap",subs="{markup-in-source}",role="copy"]
 ----
@@ -154,25 +195,25 @@ leapp preupgrade
 
 The output from the previous command should have listed a few items that are inhibiting the upgrade of the host.
 
-[source,options="nowrap",subs="{markup-in-source}"]
+[{format_cmd_output}]
 ----
-=======================================================
+=================================================
                      UPGRADE INHIBITED
-=======================================================
+=================================================
 
 
 Debug output written to /var/log/leapp/leapp-preupgrade.log
 
-=======================================================
+=================================================
                            REPORT
-=======================================================
+=================================================
 
 A report has been generated at /var/log/leapp/leapp-report.json
 A report has been generated at /var/log/leapp/leapp-report.txt
 
-=======================================================
+=================================================
                        END OF REPORT
-=======================================================
+=================================================
 
 Answerfile has been generated at /var/log/leapp/answerfile
 
@@ -189,14 +230,14 @@ head /var/log/leapp/leapp-report.txt
 
 The first two lines indicate a Risk Factor, in this case high/inhibitor meaning that this issue will prevent the upgrade from proceeding.  Followed by a Summary of the issue:
 
-[source,options="nowrap",subs="{markup-in-source}"]
+[{format_cmd_output}]
 ----
 Summary: Firewalld has enabled configuration option "AllowZoneDrifiting" which has been removed in RHEL-9. New behavior is as if "AllowZoneDrifiting" was set to "no".
 ----
 
 This tells us that there is a Firewalld configuration that was allowed in RHEL8 that is no longer allowed in RHEL9.  The next line tells us a "hint" at how to remediate the issue so that the upgrade can proceed:
 
-[source,options="nowrap",subs="{markup-in-source}"]
+[{format_cmd_output}]
 ----
 Remediation: [hint] Set AllowZoneDrifting=no in /etc/firewalld/firewalld.conf
 ----
@@ -206,7 +247,6 @@ And the following line gives an actual command that can be used to make the chan
 [source,options="nowrap",subs="{markup-in-source}",role="copy"]
 ----
 sed -i "s/^AllowZoneDrifting=.*/AllowZoneDrifting=no/" /etc/firewalld/firewalld.conf
-[source,options="nowrap",subs="{markup-in-source}",role="copy"]
 ----
 
 Now re-run the preupgrade, this time there should be no inhibitors
@@ -221,16 +261,16 @@ This time we expect the output to come back clean without any inhibitors that wo
 [source,options="nowrap",subs="{markup-in-source}"]
 ----
 
-============================================================
+=================================================
                            REPORT
-============================================================
+=================================================
 
 A report has been generated at /var/log/leapp/leapp-report.json
 A report has been generated at /var/log/leapp/leapp-report.txt
 
-============================================================
+=================================================
                        END OF REPORT
-============================================================
+=================================================
 
 Answerfile has been generated at /var/log/leapp/answerfile
 ----
@@ -244,13 +284,107 @@ Everything should be ready to run the upgrade.  This will install several rpms, 
 leapp upgrade
 ----
 
-== Summary
+After several minutes (5 - 8) you should see an almost identical report output indicating that phase one of the upgrade has completed
 
+[{format_cmd_output}]
+----
+
+=================================================
+                           REPORT
+=================================================
+
+A report has been generated at /var/log/leapp/leapp-report.json
+A report has been generated at /var/log/leapp/leapp-report.txt
+
+=================================================
+                       END OF REPORT
+=================================================
+
+Answerfile has been generated at /var/log/leapp/answerfile
+----
+
+And that a reboot is now required for the upgrade to proceed.  Without console access you won't be able to see the final steps of the upgrade.
+
+[source,options="nowrap",subs="{markup-in-source}",role="copy"]
+----
+# reboot
+----
+
+[{format_cmd_output}]
+----
+Connection to leapp closed by remote host.
+Connection to leapp closed.
+----
+
+after another 7 - 10 minutes, you should be able to ssh back in from the bastion host
+
+[bash,options="nowrap",subs="{markup-in-source}"]
+----
+$ *ssh leapp*
+----
+
+Use `sudo` to elevate your privileges.
+
+[bash,options="nowrap",subs="{markup-in-source}"]
+----
+$ *sudo -i*
+----
+
+== Final RHEL Version Verification
+
+Finally, re-run the commands from earlier to verify that the leapp node has actually been upgraded to RHEL9
+
+[source,options="nowrap",subs="{markup-in-source}",role="copy"]
+----
+cat /etc/redhat-release
+----
+
+[{format_cmd_output}]
+----
+Red Hat Enterprise Linux release 9.0 (Plow)
+----
+
+[source,options="nowrap",subs="{markup-in-source}",role="copy"]
+----
+uname -r
+----
+
+[{format_cmd_output}]
+----
+5.14.0-70.17.1.el9_0.x86_64
+----
+
+[source,options="nowrap",subs="{markup-in-source}",role="copy"]
+----
+dnf repolist
+----
+
+[{format_cmd_output}]
+----
+Updating Subscription Management repositories.
+repo id                                    repo name
+rhel-9-for-x86_64-appstream-rpms           Red Hat Enterprise Linux 9 for x86_64 - AppStream (RPMs)
+rhel-9-for-x86_64-baseos-rpms              Red Hat Enterprise Linux 9 for x86_64 - BaseOS (RPMs)
+rhel-9-for-x86_64-supplementary-rpms       Red Hat Enterprise Linux 9 for x86_64 - Supplementary (RPMs)
+----
+
+
+== A Word About Web Console Integration
+
+This exercise has illustrated a very simple example of upgrading a RHEL8 system in place to a RHEL9 system, with a single issue that was easy to remediate and no applications running on top of the OS.  In the real world, there are likely to be more issues that need to be addressed and in some cases there are known issues that will prevent an in place upgrade (see official Red Hat documentation link below).  There is a Web Console plugin that makes it easier to visualize and in many cases remediate upgrade inhibitors that arise.  The rpm is called "cockpit-leapp" and once installed will enable visualization like this
+
+====
+image::leapp-weboconsole-sample.png[Sample Leapp PreUpgrade Web Console Report]
+====
+
+== Final Summary
+
+Whether upgrading in place is right is a decision that needs to be made from one environment to the next, one group to the next, even from one system to the next.  What makes sense for one application might not make sense for another.  As with any OS upgrade, test in the lab and do backups!
 
 [discrete]
 == Additional Reference Materials
 
-* link:https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/9/html-single/upgrading_from_rhel_8_to_rhel_9/index[UPGRADING FROM RHEL 7 TO RHEL 8]
+* link:https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/9/html-single/upgrading_from_rhel_8_to_rhel_9/index[Uprading from RHEL 8 to RHEL 9]
 * link:https://access.redhat.com/articles/3664871[Data required by the Leapp utility for a disconnected RHEL in-place upgrade]
 
 [discrete]
