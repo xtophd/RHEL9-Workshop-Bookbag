@@ -1,6 +1,9 @@
 :sectnums:
 :sectnumlevels: 3
 :markup-in-source: verbatim,attributes,quotes
+:ssh_command: %ssh_command%
+:ssh_password: %ssh_password%
+:ssh_username: %ssh_username%
 ifdef::env-github[]
 :tip-caption: :bulb:
 :note-caption: :information_source:
@@ -41,25 +44,48 @@ For these exercises, you will primarily be using the host `node2` as user `root`
 
 TIP: Now is a great time to use the multi session capability of *tmux*.  Use `Ctrl-b "` to create another session with a split screen.  Cycle the active session back and forth with `CTRL-b n` (next) and `CTRL-b p` (previous).
 
+[discrete]
+==== Primary Terminal (node2)
+
 From host `bastion`, ssh to `node2`.
 
 [{format_cmd_exec}]
 ----
-*ssh node2*
+ssh node2
 ----
 
 Use `sudo` to elevate your privileges.
 
 [{format_cmd_exec}]
 ----
-*sudo -i*
+[[ "$UID" == 0 ]] || sudo -i
 ----
 
 Verify that you are on the right host for these exercises.
 
 [{format_cmd_exec}]
 ----
-*workshop-ebpf-checkhost.sh*
+workshop-ebpf-checkhost.sh
+----
+
+[discrete]
+==== Secondary Terminal (bastion)
+
+To help you set up your second terminal, here is the ssh command and password which you can use.
+
+[{format_cmd_exec2}]
+----
+[[ $(hostname -s) != "bastion" ]] && {ssh_command} -o "StrictHostKeyChecking no"
+----
+
+[{format_cmd_exec2}]
+----
+{ssh_password}
+----
+
+[{format_cmd_exec2}]
+----
+[[ "$UID" == 0 ]] || sudo -i
 ----
 
 You are now ready to proceed with these exercises.
@@ -73,7 +99,7 @@ Start by installing the *BPF Compiler Collection* (bcc-tools) and kernel-devel p
 
 [{format_cmd_exec}]
 ----
-*dnf install bcc-tools bpftrace strace kernel-devel-$(uname -r) -y*
+dnf install bcc-tools bpftrace strace kernel-devel-$(uname -r) -y
 ----
 
 Now, we have a lot of interesting tools installed in /usr/share/bcc/tools along with accompanying man pages.
@@ -93,7 +119,7 @@ To run this tool, execute the following and give it a couple of seconds to get s
 
 [{format_cmd_exec}]
 ----
-*/usr/share/bcc/tools/tcplife*
+/usr/share/bcc/tools/tcplife
 ----
 
 [{format_cmd_output}]
@@ -101,25 +127,30 @@ To run this tool, execute the following and give it a couple of seconds to get s
 PID   COMM       LADDR           LPORT RADDR           RPORT TX_KB RX_KB MS
 ----
 
+WARNING: It is important to wait until the tool is setup.  Do not proceed until you see the output headers (displayed above) appear.
+
 [discrete]
 ==== Secondary Terminal (bastion)
 
-In your second terminal, establish yourself as described below and then run the following command:
-
-  * host: *bastion*
-  * user: *root*
+Run a little script to generate some user activity.
 
 [{format_cmd_exec2}]
 ----
-*ssh node2 "sudo workshop-ebpf-rootkit.sh"*
+ssh node2 "sudo workshop-ebpf-rootkit.sh"
 ----
 
-This command should run for about 10 seconds and then exit.  
+This command should run for about 10 seconds and then exit.  Before porceeding to the results you can
+either hit `Ctrl-C` in the primary terminal OR send a sigkill to the process to terminate tcplife.
+
+[{format_cmd_exec2}]
+----
+ssh node2 "pkill tcplife"
+----
 
 [discrete]
-==== Primary Terminal (node2)
+==== Results 
 
-In the `tcplife` terminal, you should now see output similar to:
+In the primary terminal, you should now see output similar to:
 
 [{format_cmd_output}]
 ----
@@ -127,7 +158,7 @@ PID   COMM       LADDR           LPORT RADDR           RPORT TX_KB RX_KB MS
 28478 sshd       10.0.0.12       22    10.0.0.10       33514    14     2 9091.95
 ----
 
-Doing the math with my numbers above, my session was open for about 9 seconds and was initiated by IP 10.0.0.10, the bastion.
+Doing the math with the numbers above, this session was open for about 9 seconds and was initiated by IP 10.0.0.10 (the bastion host).
 
 In the `tcplife` terminal, issue a Ctrl-C and this will return you to a prompt.
 
@@ -146,13 +177,15 @@ Continuing on host `node2`, to run `execsnoop` as follows:
 
 [{format_cmd_exec}]
 ----
-*/usr/share/bcc/tools/execsnoop*
+/usr/share/bcc/tools/execsnoop
 ----
 
 [{format_cmd_output}]
 ----
 PCOMM            PID    PPID   RET ARGS
 ----
+
+WARNING: It is important to wait until the tool is setup.  Do not proceed until you see the output headers (displayed above) appear.
 
 [discrete]
 ==== Secondary Terminal (bastion)
@@ -161,13 +194,21 @@ In your second terminal having established yourself as root, run the following c
 
 [{format_cmd_exec2}]
 ----
-*ssh node2 "sudo workshop-ebpf-rootkit.sh"*
+ssh node2 "sudo workshop-ebpf-rootkit.sh"
+----
+
+Again, this command should run for about 10 seconds and then exit.  Before porceeding to the results you can
+either hit `Ctrl-C` in the primary terminal OR send a sigkill to the process to terminate execsnoop.
+
+[{format_cmd_exec2}]
+----
+ssh node2 "pkill execsnoop"
 ----
 
 [discrete]
-==== Primary Terminal (node2)
+==== Results
 
-In the `execsnoop` terminal, you should see output similar to:
+In the primary terminal, you should see output similar to:
 
 [{format_cmd_output}]
 ----
@@ -203,8 +244,6 @@ firewall-cmd     28542  28516    0 /usr/bin/firewall-cmd --state
 
 This shows you all the processes that ran exec() during that ssh login, their PID, their parent PID, their return code, and the arguments that were sent to the process. You could keep monitoring this for quite some time to catch potential bad actors on the system.
 
-In the `execsnoop` terminal, issue a Ctrl-C and this will return you to a prompt.
-
 
 
 == bcc-tools: mountsnoop
@@ -218,13 +257,15 @@ To run this tool, execute the following and give it a couple of seconds to get s
 
 [{format_cmd_exec}]
 ----
-*/usr/share/bcc/tools/mountsnoop*
+/usr/share/bcc/tools/mountsnoop
 ----
 
 [{format_cmd_output}]
 ----
 COMM             PID     TID     MNT_NS      CALL
 ----
+
+WARNING: It is important to wait until the tool is setup.  Do not proceed until you see the output headers (displayed above) appear.
 
 [discrete]
 ==== Secondary Terminal (bastion)
@@ -233,7 +274,7 @@ In your second terminal having established yourself as root, let's try to unmoun
 
 [{format_cmd_exec2}]
 ----
-*ssh node2 "sudo workshop-ebpf-unmountroot.sh"*
+ssh node2 "sudo workshop-ebpf-unmountroot.sh"
 ----
 
 [{format_cmd_output}]
@@ -242,7 +283,7 @@ umount: /: target is busy.
 ----
 
 [discrete]
-==== Primary Terminal (node2)
+==== Results
 
 Taking a look at the terminal running `mountsnoop`, we see:
 
@@ -260,7 +301,7 @@ Now let's try to unmount a filesystem that we should be able to unmount.  But be
 
 [{format_cmd_exec2}]
 ----
-*ssh node2 "grep /dev/shm /proc/mounts"*
+ssh node2 "grep /dev/shm /proc/mounts"
 ----
 
 [{format_cmd_output}]
@@ -272,13 +313,13 @@ Now proceed to umount `/dev/shm` on `node2`
 
 [{format_cmd_exec2}]
 ----
-*ssh node2 "sudo workshop-ebpf-unmountshm.sh"*
+ssh node2 "sudo workshop-ebpf-unmountshm.sh"
 ----
 
 [discrete]
-==== Primary Terminal (node2)
+==== Results
 
-Back to the `mountsnoop` terminal and you should see the following:
+Back to the primary terminal and you should see the following:
 
 [{format_cmd_output}]
 ----
@@ -294,13 +335,21 @@ Proceed to restore the /dev/shm mount as follows:
 
 [{format_cmd_exec2}]
 ----
-*ssh node2 "sudo workshop-ebpf-mountshm.sh"*
+ssh node2 "sudo workshop-ebpf-mountshm.sh"
+----
+
+This is the last step related to mountsnoop.  Before porceeding to the results you can
+either hit `Ctrl-C` in the primary terminal OR send a sigkill to the process to terminate mountsnoop.
+
+[{format_cmd_exec2}]
+----
+ssh node2 "pkill mountsnoop"
 ----
 
 [discrete]
-==== Primary Terminal (node2)
+==== Results
 
-Finally, back to the `mountsnoop` terminal and you should see the following:
+Finally, back to the primary terminal you should see the following:
 
 [{format_cmd_output}]
 ----
@@ -326,7 +375,7 @@ To run this tool, execute the following and give it a couple of seconds to get s
 
 [{format_cmd_exec}]
 ----
-*/usr/share/bcc/tools/cachestat 5*
+/usr/share/bcc/tools/cachestat 5
 ----
 
 [{format_cmd_output}]
@@ -334,23 +383,31 @@ To run this tool, execute the following and give it a couple of seconds to get s
    TOTAL   MISSES     HITS  DIRTIES   BUFFERS_MB  CACHED_MB
 ----
 
+WARNING: It is important to wait until the tool is setup.  Do not proceed until you see the output headers (displayed above) appear.
+
 [discrete]
 ==== Secondary Terminal (bastion)
 
-In your second terminal, establish yourself as described below and then run the following command:
-
-  * host: *node2*
-  * user: *root*
+Let's now run a little exercise that will generate some i/o.  This script 
+flushes the cache and then runs a series of `dd` commands.
 
 [{format_cmd_exec2}]
 ----
-*ssh node2 "workshop-ebpf-cachestat.sh"*
+ssh node2 "workshop-ebpf-cachestat.sh"
 ----
 
-This flushes the cache and then runs a series of `dd` commands to create some I/O.
+
+This command should run for a few seconds and then exit.  Before porceeding to the results you can
+either hit `Ctrl-C` in the primary terminal OR send a sigkill to the process to terminate cachestat.
+
+[{format_cmd_exec2}]
+----
+ssh node2 "pkill cachestat"
+----
+
 
 [discrete]
-==== Primary Terminal (node2)
+==== Results
 
 In the `cachestat` window, you should output similar to:
 
@@ -363,10 +420,6 @@ In the `cachestat` window, you should output similar to:
 ----
 
 This shows that we had 1216 page cache misses during a five second period while running the above loop but during that same period, there were 16016 hits, indicating great performance from the page cache.
-
-In the `cachestat` terminal, issue a Ctrl-C and this will return you to a prompt.
-
-
 
 
 
@@ -389,7 +442,7 @@ To begin, we need a test file to use as our target.
 
 [{format_cmd_exec}]
 ----
-*touch /tmp/workshop.tmp*
+touch /tmp/workshop.tmp
 ----
 
 The command we will evaluate is `cat /tmp/workshop.tmp` and we will use strace to list the system calls
@@ -397,7 +450,7 @@ made and with what frequency (count).
 
 [{format_cmd_exec}]
 ----
-*strace -c cat /tmp/workshop.tmp*
+strace -c cat /tmp/workshop.tmp
 ----
 
 [{format_cmd_output}]
@@ -525,7 +578,7 @@ To generate some output, you will need to utilize the second terminal and open t
 
 [{format_cmd_exec2}]
 ----
-*ssh node2 "cat /tmp/workshop.tmp"*
+ssh node2 "cat /tmp/workshop.tmp"
 ----
 
 [{format_cmd_exec2}]
@@ -535,12 +588,20 @@ To generate some output, you will need to utilize the second terminal and open t
 
 [{format_cmd_exec2}]
 ----
-*ssh node2 "echo < /tmp/workshop.tmp"*
+ssh node2 "echo < /tmp/workshop.tmp"
+----
+
+This is the last step related to bpftrace.  Before porceeding to the results you can
+either hit `Ctrl-C` in the primary terminal OR send a sigkill to the process to terminate bpftrace.
+
+[{format_cmd_exec2}]
+----
+ssh node2 "pkill bpftrace"
 ----
 
 
 [discrete]
-==== Primary Terminal (node2)
+==== Results
 
 Finally back to the primary terminal you should have seen some output like this:
 
@@ -556,7 +617,16 @@ This displays the process-id along with the user and group ids of programs that 
 
 Go ahead and hit CTL-C in the primary terminal to exit bpftrace.
 
+== Conclusion
+
 This concludes the exercises related to EBPF.
+
+Time to finish this unit and return the shell to it's home position.
+
+[{format_cmd_exec}]
+----
+workshop-finish-exercise.sh
+----
 
 == Additional Resources
 
