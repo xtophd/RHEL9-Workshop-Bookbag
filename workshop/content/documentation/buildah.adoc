@@ -259,7 +259,7 @@ podman images
 ----
 REPOSITORY                            TAG      IMAGE ID       CREATED          SIZE
 localhost/webserver2                  latest   a831badcea41   25 seconds ago   240 MB
-registry.access.redhat.com/ubi8/ubi   latest   8121a9f5303b   12 days ago      240 MB
+registry.access.redhat.com/ubi9/ubi   latest   8121a9f5303b   12 days ago      240 MB
 ----
 
 ==== Deploy
@@ -498,7 +498,7 @@ rough subscriptions for Red Hat products. This image is maintained by Red Hat an
 }
 ----
 
-The above allows us to look at the registry's copy of ubi8/ubi.
+The above allows us to look at the registry's copy of ubi9/ubi.
 
 Next let's run:
 
@@ -591,7 +591,7 @@ Let's take a test view of the contents of the largest gzip file (examine "origin
 
 [{format_cmd_exec}]
 ----
-tar tvzf 961425e673a750fb2d17875c2a4bf5a319c8681e4fdf81a5a6e2d819cef95e35
+tar ztvf $(ls --sort=size | head -1)
 ----
 
 [{format_cmd_output}]
