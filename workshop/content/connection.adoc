@@ -72,10 +72,7 @@ Like wise, let us proceed to set up the second terminal for use later.
 tmux attach -t TERM2 || tmux new -s TERM2
 ----
 
-[{format_cmd_exec2}]
-----
-sudo -i
-----
+
 
 == Connection Details
 

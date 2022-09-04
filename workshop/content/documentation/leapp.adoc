@@ -2,9 +2,11 @@
 :sectnumlevels: 3
 :markup-in-source: verbatim,attributes,quotes
 :imagesdir: ./_images
+:ssh_command: %ssh_command%
+:ssh_password: %ssh_password%
+:ssh_username: %ssh_username%
 ifdef::env-github[]
 :tip-caption: :bulb:
-
 :note-caption: :information_source:
 :important-caption: :heavy_exclamation_mark:
 :caution-caption: :fire:
@@ -28,7 +30,33 @@ endif::[]
 
 In this unit, we will get familiar with the upgrade tool called LEAPP.  LEAPP is a tool used to analyze an existing system and report on potential issues that could or would cause issues preventing an in-place upgrade, and once issues are addressed then perform the upgrade itself.  
 
-NOTE: For this exercise, _all_ automatic cut and paste commands will be directed to terminal 2 (lower terminal).  The intent is to dedicate terminal 2 to the leapp upgrade exercise, while using terminal 1 (upper terminal) for work in other exercises during the latter parts of the upgrade.  *If you haven't already completed the steps in the "Set Up Terminal 2" section of the initial "Workshop Setup" you will need to do so before proceeding.*
+WARNING:  This exercise requires the SECONDARY terminal and conflicts with any other exercise that 
+uses the secondary terminal.  Do not proceed if the secondary terminal is already in use with another exercise.
+
+Because the upgrade process is VERY time consuming lengthy process, this exercise uses the seconday terminal.  
+The intent is to dedicate secondary terminal to the leapp upgrade, there-by leaving the primary terminal available 
+for other exercises while the upgrade executes.
+
+To help you set up your second terminal (if you haven't connected to the bastion host already), here 
+is the ssh command and password which you can use.
+
+[{format_cmd_exec2}]
+----
+[[ $(hostname -s) != "bastion" ]] && {ssh_command} -o "StrictHostKeyChecking no"
+----
+
+[{format_cmd_exec2}]
+----
+{ssh_password}
+----
+
+[{format_cmd_exec2}]
+----
+[[ "$UID" == 0 ]] || sudo -i
+----
+
+You are now ready to proceed with these exercises.
+
 
 == Getting Started
 
@@ -38,21 +66,21 @@ From host `bastion`, ssh to `leapp`.
 
 [{format_cmd_exec2}]
 ----
-*ssh leapp*
+ssh leapp
 ----
 
 Use `sudo` to elevate your privileges.
 
 [{format_cmd_exec2}]
 ----
-*sudo -i*
+[[ "$UID" == 0 ]] || sudo -i
 ----
 
 Verify that you are on the right host for these exercises.
 
 [{format_cmd_exec2}]
 ----
-*workshop-leapp-checkhost.sh*
+workshop-leapp-checkhost.sh
 ----
 
 == Current RHEL Version Verification
@@ -107,45 +135,38 @@ If necessary, begin by disabling any local static repos and switching to the lat
 
 WARNING: You can probably skip this step if you can connect to a Satellite or directly to redhat.com.
 
-[source,options="nowrap",subs="{markup-in-source}",role="copy"]
+[{format_cmd_exec2}]
 ----
 yum-config-manager --disable my-rhel-8-server-rpm-repo
-
 ----
 
 Next, register the host and attach an entitlement.
 
-[source,options="nowrap",subs="{markup-in-source}",role="copy"]
+[{format_cmd_exec2}]
 ----
 subscription-manager register --auto-attach
-
 ----
 
 Finally, enable all of the correct software repositories.
 
-[source,options="nowrap",subs="{markup-in-source}",role="copy"]
+[{format_cmd_exec2}]
 ----
 subscription-manager repos --disable=*
 ----
 
-[source,options="nowrap",subs="{markup-in-source}",role="copy"]
+[{format_cmd_exec2}]
 ----
 subscription-manager repos --enable=rhel-8-for-x86_64-baseos-rpms --enable=rhel-8-for-x86_64-appstream-rpms
 ----
 
 Ensure that Red Hat Subscription Manager is set to consume the latest RHEL 8 content.
 
-[source,options="nowrap",subs="{markup-in-source}",role="copy"]
+[{format_cmd_exec2}]
 ----
 subscription-manager release --unset
 ----
 
-If you use the yum-plugin-versionlock plug-in to lock packages to a specific version, clear the lock as follows.
 
-[source,options="nowrap",subs="{markup-in-source}",role="copy"]
-----
-yum versionlock clear
-----
 
 == LEAPP Installation
 
@@ -155,7 +176,6 @@ Install the LEAPP tools and any dependencies
 [{format_cmd_exec2}]
 ----
 yum install -y leapp-upgrade
-
 ----
 
 === LEAPP Data
@@ -308,7 +328,7 @@ And that a reboot is now required for the upgrade to proceed.  Without console a
 
 [{format_cmd_exec2}]
 ----
-reboot
+[[ $(hostname -s) == "leapp" ]] && reboot
 ----
 
 [{format_cmd_output}]
@@ -319,16 +339,28 @@ Connection to leapp closed.
 
 after another 6 - 9 minutes, you should be able to ssh back in from the bastion host
 
+Here is a command you can run on the bastion to loop until the leapp host is
+back online
+
 [{format_cmd_exec2}]
 ----
-*ssh leapp*
+time until $( ping -c 1 leapp >/dev/null ) ; do echo -n "." ; done
+----
+
+WARNING: Do not proceed until the leapp upgrade process is complete
+
+
+
+[{format_cmd_exec2}]
+----
+ssh leapp
 ----
 
 Use `sudo` to elevate your privileges.
 
 [{format_cmd_exec2}]
 ----
-*sudo -i*
+[[ "$UID" == 0 ]] || sudo -i
 ----
 
 == Final RHEL Version Verification
@@ -378,9 +410,18 @@ This exercise has illustrated a very simple example of upgrading a RHEL8 system 
 image::leapp-weboconsole-sample.png[Sample Leapp PreUpgrade Web Console Report]
 ====
 
-== Final Summary
+== Conclusion
 
 Whether upgrading in place is right is a decision that needs to be made from one environment to the next, one group to the next, even from one system to the next.  What makes sense for one application might not make sense for another.  As with any OS upgrade, test in the lab and do backups!
+
+Time to finish this unit and return the shell to it's home position.
+
+[{format_cmd_exec}]
+----
+workshop-finish-exercise.sh
+----
+
+
 
 [discrete]
 == Additional Reference Materials
