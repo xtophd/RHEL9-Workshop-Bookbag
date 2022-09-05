@@ -134,7 +134,7 @@ Finally check the service status.
 
 [{format_cmd_exec}]
 ----
-systemctl status libvirtd
+systemctl --no-pager status libvirtd
 ----
 
 === Verify Virtualization Host Status
@@ -337,7 +337,7 @@ Verify that the httpd daemon is running.
 
 [{format_cmd_exec}]
 ----
-systemctl status httpd
+systemctl --no-pager status httpd
 ----
 
 Verifiy that the index.html is installed.
