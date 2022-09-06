@@ -1,5 +1,5 @@
 :sectnums:
-:sectnumlevels: 3
+:sectnumlevels: 2
 :markup-in-source: verbatim,attributes,quotes
 ifdef::env-github[]
 :tip-caption: :bulb:
@@ -22,14 +22,19 @@ endif::[]
 
 == Overview
 
-BOOM is a boot manager for Linux systems that support the 'BootLoader Specification' for boot entry configuration. It simplifies the creation of new or modified boot entries: for example, to boot snapshot images of the system created using LVM.
+Boom is a boot manager for Linux systems that support the 'BootLoader Specification' (BLS).  
 
-BOOM does not modify the existing boot loader configuration, and *only inserts* additional entries. The existing configuration is maintained, and any distribution integration, such as kernel installation and update scripts, continue to function as before.
+In short, boom:
 
-BOOM also has a simple command-line interface (CLI) and API.
+  * simplifies creation of new or modified boot entries
+  * includes a set of Python libraries and a command line tool
+  * does not modify the existing boot loader configuration
+  * *only inserts* additional entries
 
-The object of this exercise is quite simple.  We are going to create an alternative boot entry which 
-will load the same kernel with a few additional detectable parameters.
+The objectives of this exercise are quite simple:
+
+  * familiarize yourself with the basics of creating and mangaging boot entries
+  * create an customized alternative boot entry to load a detectable kernel parameter
 
 == Getting Started
 
@@ -58,23 +63,49 @@ workshop-boom-checkhost.sh
 
 You are now ready to proceed with these exercises.
 
-== Installation
 
-The following set of instructions will install Boom.
+
+== Core Concepts
+
+The Boom system uses a concept of "profiles" and "entries" to allow templated configurations to be cloned and modified.  This minimizes the need for the user to input complex boot parameters manually for each iteration of the configuration.
+
+So we begin with the management of boom profiles.
+
+
+
+=== Profile
+
+==== List / Show
+
+Just for reference, let's take a look at this systems existing profiles.  There could be many, or in some cases none.
 
 [{format_cmd_exec}]
 ----
-dnf install -y boom-boot
+boom profile list
 ----
 
-That was easy!
+[{format_plane}]
+----
+sID    Name                            OsVersion
+8896596 Fedora                          30 (Workstation Edition)
+4abe4f7 Red Hat Enterprise Linux        8 (Ootpa)
+72e3679 Red Hat Enterprise Linux Server 7.7 (Maipo)
+4aff687 Red Hat Enterprise Linux Server 7.8 (Maipo)
+----
+
+For a more detailed view, you can use the `profile show` sub-command.
+
+[{format_cmd_exec}]
+----
+boom profile show
+----
 
 
-== Overview
 
-=== Create a Profile
+==== Create
 
-Creating a new boot entry begins with a boom `profile`.
+Creating a profile is handled by a simple command.  However determining all of th various parameters
+can be challeging and are outside the scope of this lab.  Thus we have prepared a simple script to do the hard work.
 
 [{format_cmd_exec}]
 ----
@@ -100,19 +131,11 @@ Created profile with os_id e0ef3eb:
 
 NOTE: In this example, the root disk is identified by a UUID.  As a result, `boom` will incorrectly identify the paths to the kernel and initiramfs when creating the grub entry.  To avoid this current problem (bug?), we tweak the boom profile to add `/boot` to the paths.
 
-[NOTE]
-====
-_Native command(s) to make boom profile_
-[{format_cmd_output}]
-----
-boom profile create --from-host --uname-pattern el9 --kernel-pattern="/boot/vmlinuz-%{version}" --initramfs-pattern="/boot/initramfs-%{version}.img"
-----
-====
 
 
-=== Inpect a Profile
+==== Inspect
 
-Verify that the boom profile was created by the previous command.
+Verify that the boom profile was created by the previous command:
 
 [{format_cmd_exec}]
 ----
@@ -125,12 +148,70 @@ OsID    Name                     OsVersion
 e0ef3eb Red Hat Enterprise Linux 9.0 (Plow)
 ----
 
-=== Create GRUB Entry
+And for a more detailed view:
 
-Now to create a boot entry for grub which utilizes the same boot environment as the current system, but with a few
-added kernel parameters.
+[{format_cmd_exec}]
+----
+boom profile show --osversion "9.0 (Plow)"
+----
 
-==== Determine Root Device
+[{format_cmd_output}]
+----
+OS Profile (os_id=e0ef3eb)
+  OS ID: "e0ef3ebf3862de64e4082062f0063422796dcca6",
+  Name: "Red Hat Enterprise Linux", Short name: "rhel",
+  Version: "9.0 (Plow)", Version ID: "9.0",
+  Kernel pattern: "/vmlinuz-%{version}", Initramfs pattern: "/initramfs-%{version}.img",
+  Root options (LVM2): "rd.lvm.lv=%{lvm_root_lv}",
+  Root options (BTRFS): "rootflags=%{btrfs_subvolume}",
+  Options: "root=%{root_device} ro %{root_opts}",
+  Title: "%{os_name} %{os_version_id} (%{version})",
+  Optional keys: "", UTS release pattern: "el9"
+----
+
+
+=== Boot Entry
+
+Now it is time to create a boot entry for grub which utilizes the same 
+boot environment as the current system, but with a few added kernel parameters.
+
+
+
+==== List / Show
+
+Before we do any work, let's take a quick look at what exists already.
+
+[{format_cmd_exec}]
+----
+boom entry list
+----
+
+[{format_cmd_output}]
+----
+BootID  Version                     Name                     RootDevice
+0d96d09 5.14.0-70.13.1.el9_0.x86_64 Red Hat Enterprise Linux UUID=2af18441-b487-4dac-9729-2c12f5adc6ed
+----
+
+And for a more detailed view
+
+[{format_cmd_exec}]
+----
+boom entry show
+----
+
+[{format_cmd_output}]
+----
+Boot Entry (boot_id=0d96d09)
+  title Red Hat Enterprise Linux (5.14.0-70.13.1.el9_0.x86_64) 9.0 (Plow)
+  version 5.14.0-70.13.1.el9_0.x86_64
+  linux /vmlinuz-5.14.0-70.13.1.el9_0.x86_64
+  initrd /initramfs-5.14.0-70.13.1.el9_0.x86_64.img $tuned_initrd
+  options root=UUID=2af18441-b487-4dac-9729-2c12f5adc6ed console=ttyS0,115200n8 console=tty0 net.ifnames=0 rd.blacklist=nouveau nvme_core.io_timeout=4294967295 crashkernel=1G-4G:192M,4G-64G:256M,64G-:512M $tuned_params
+----
+
+
+
+==== Create
 
 First we need to determine the root device.  We can do this by inspecting the current kernel's boot commandline.
 
@@ -158,9 +239,6 @@ root=UUID=f7614c41-2835-4125-bb13-50772dc2f30c
 
 NOTE: In this scenario, the boot device is listed by a UUID.  Depending on the lab environment, you could see a logical volume name or a physcial device path.
 
-
-==== Create Entry
-
 Now we need to get to the actual device (or lvm) path.  Although this logic is not complicated, it's not really the focus of this exercise, so you've been provided another workshop-script.
 
 [{format_cmd_exec}]
@@ -186,21 +264,9 @@ Created entry with boot_id ed93f0f:
   options root=/dev/nvme0n1p4 ro
 ----
 
-[NOTE]
-====
-_Native command(s) to make grub entry_
-[{format_cmd_output}]
-----
-# For LVM base root
-boom create --title "RHEL 9 Workshop" --rootlv <VG>/<LV>
-
-# For block device base root
-boom create --title "RHEL 9 Workshop" --root-device <ROOT-DEVICE>
-----
-====
 
 
-==== Inspect Entries
+==== Inspect
 
 Take a look at currently configured boom-boot entries.
 
@@ -236,7 +302,9 @@ Boot Entry (boot_id=ed93f0f)
   options root=/dev/nvme0n1p4 ro
 ----
 
-==== Delete Grub Entry
+
+
+==== Delete 
 
 [{format_cmd_exec}]
 ----
@@ -247,9 +315,38 @@ boom entry delete $BOOM_BOOTID
 
 
 
-== Custom Boot Options
+== Exercise: Custom Kernel Options
 
-=== Create Grub Entry
+=== Profile
+
+The profile we will use was created during the Core Concepts exercise above.  
+Let's take a look at the details to confirm everthing is in order.
+
+[{format_cmd_exec}]
+----
+boom profile show --osversion "9.0 (Plow)"
+----
+
+[{format_cmd_output}]
+----
+OS Profile (os_id=e0ef3eb)
+  OS ID: "e0ef3ebf3862de64e4082062f0063422796dcca6",
+  Name: "Red Hat Enterprise Linux", Short name: "rhel",
+  Version: "9.0 (Plow)", Version ID: "9.0",
+  Kernel pattern: "/vmlinuz-%{version}", Initramfs pattern: "/initramfs-%{version}.img",
+  Root options (LVM2): "rd.lvm.lv=%{lvm_root_lv}",
+  Root options (BTRFS): "rootflags=%{btrfs_subvolume}",
+  Options: "root=%{root_device} ro %{root_opts}",
+  Title: "%{os_name} %{os_version_id} (%{version})",
+  Optional keys: "", UTS release pattern: "el9"
+----
+
+
+
+=== Boot Entry
+
+Again, to avoid some of the complexities considered outside the scope this lab we will
+run a prepared script to configure the boot entry.
 
 [{format_cmd_exec}]
 ----
@@ -262,26 +359,28 @@ Determining root device...
 UUID reduction if necessary...
 Creating GRUB2 entry...
 
-DEBUG: boom create --title 'RHEL 9 Workshop' --root-device /dev/vda1 -a custom_value=true
+DEBUG: boom create --title 'RHEL 9 Workshop' --root-device /dev/nvme0n1p4 -a custom_value=true
 
-WARNING - Boom grub2 integration is disabled in '/boot/../etc/default/boom'
-Created entry with boot_id a07736e:
+WARNING - Options for BootEntry(boot_id=0d96d09) do not match OsProfile: marking read-only
+Created entry with boot_id d3958f5:
   title RHEL 9 Workshop
-  machine-id 4739d97a827c41e2a71d911afb7941af
-  version 4.18.0-147.el8.x86_64
-  linux /vmlinuz-4.18.0-147.el8.x86_64
-  initrd /initramfs-4.18.0-147.el8.x86_64.img
-  options root=/dev/vda1 ro custom_value=true
+  machine-id ec2456f2c1811fbaaee80613c453f272
+  version 5.14.0-70.13.1.el9_0.x86_64
+  linux /vmlinuz-5.14.0-70.13.1.el9_0.x86_64
+  initrd /initramfs-5.14.0-70.13.1.el9_0.x86_64.img
+  options root=/dev/nvme0n1p4 ro custom_value=true
 ----
 
 Notice in the options that we slipped in the `custom_value=true`.
 
-=== Set Next Boot to Custom Entry
+
+
+=== GRUB: Set Default Entry
 
 WARNING: If possible, bring up the virtual machine console for node3 before proceeding.  
 
 Before reboot, there are 2 options to invoke the right loader at restart:
-  . enter the GRUB menu and select at boot time
+  . enter the GRUB menu at startup and select at boot time
   . use grub-set-default to pre-select which one to load by default
   
 We are going to opt for pre-select since it's easier to script.  Use the following workshop to inspect 
@@ -317,7 +416,7 @@ title="RHEL 9 Workshop"
 id="ec2e0c92349d906c08af3ffadd95217f-ba5706a-5.14.0-70.13.1.el9_0.x86_64"
 ----
 
-WARNING: *DO NOT PROCEED TO REBOOT* unless both `kernel=` and `initrd=` include the path `/boot/<filename>`.
+WARNING: *DO NOT PROCEED* unless both `kernel=` and `initrd=` include the path `/boot/<filename>`.
 
 We want to reboot to our "RHEL 9 Workshop", so we need to isolate and use the "index" from above.
 
@@ -326,6 +425,7 @@ We want to reboot to our "RHEL 9 Workshop", so we need to isolate and use the "i
 eval $(grubby --info=$(workshop-boom-grublist.sh | grep -m1 "Workshop" | awk '{print $1}')| grep index)
 grub2-set-default $index
 ----
+
 
 
 === Inspect
@@ -342,6 +442,7 @@ grub2-editenv list
 saved_entry=1
 boot_success=0
 ----
+
 
 
 === Reboot
@@ -384,7 +485,7 @@ Wahoo! You are done.  If you have any questions, please ask.
 
 Time to finish this unit and return the shell to it's home position.
 
-[{format_cmd_exec2}]
+[{format_cmd_exec}]
 ----
 workshop-finish-exercise.sh
 ----
