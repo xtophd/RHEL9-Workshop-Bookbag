@@ -47,12 +47,8 @@ Use sudo to escalate your user priviledges and run the setup:
 
 [{format_cmd_exec}]
 ----
-sudo -- bash -c "cd /root/RHEL9-Workshop; ./rhel9-workshop.sh all"
+sudo -i
 ----
-
-The setup could take about 10 minutes.  We will use this time to review RHEL 9 at a highlevel, talk about the workshop and help you get the most value out of your experience today.
-
-
 
 == Set Up Terminal 2
 
@@ -73,6 +69,12 @@ Like wise, let us proceed to set up the second terminal for use later.
 workshop-tmux.sh TERM2
 ----
 
+[{format_cmd_exec2}]
+----
+sudo -i
+----
+
+You are now ready to proceed with the exercises.
 
 
 == Connection Details
