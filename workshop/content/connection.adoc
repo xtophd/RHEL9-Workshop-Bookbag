@@ -40,7 +40,7 @@ Launch a 'tmux' (terminal multiplexer):
 
 [{format_cmd_exec}]
 ----
-tmux attach -t TERM1 || tmux new -s TERM1
+workshop-tmux.sh TERM1 
 ----
 
 Use sudo to escalate your user priviledges and run the setup:
@@ -51,6 +51,7 @@ sudo -- bash -c "cd /root/RHEL9-Workshop; ./rhel9-workshop.sh all"
 ----
 
 The setup could take about 10 minutes.  We will use this time to review RHEL 9 at a highlevel, talk about the workshop and help you get the most value out of your experience today.
+
 
 
 == Set Up Terminal 2
@@ -69,7 +70,7 @@ Like wise, let us proceed to set up the second terminal for use later.
 
 [{format_cmd_exec2}]
 ----
-tmux attach -t TERM2 || tmux new -s TERM2
+workshop-tmux.sh TERM2
 ----
 
 
@@ -85,16 +86,4 @@ tmux attach -t TERM2 || tmux new -s TERM2
   * Username: *{ssh_username}*
 
   * Password: *{ssh_password}*
-
-For easy access, here is the ssh command (and password) you can copy to your paste buffer.
-
-[source,options="nowrap",subs="{markup-in-source}",role="copy"]
-----
-{ssh_command} -o "StrictHostKeyChecking no"
-----
-
-[source,options="nowrap",subs="{markup-in-source}",role="copy"]
-----
-{ssh_password}
-----
 
