@@ -108,12 +108,12 @@ uname -r
 
 [{format_cmd_output}]
 ----
-4.18.0-372.9.1.el8.x86_64
+4.18.0-372.32.1.el8_6.x86_64
 ----
 
 [{format_cmd_exec2}]
 ----
-yum repolist
+dnf repolist
 ----
 
 [{format_cmd_output}]
@@ -137,11 +137,11 @@ First item of business is to ensure the proper software repositories are enabled
 
 If necessary, begin by disabling any local static repos and switching to the latest managed ones from Red Hat.
 
-WARNING: You can probably skip this step if you are not connected to a Satellite or directly to redhat.com.
+WARNING: You can probably skip this step if you are connected to a Satellite or directly to redhat.com.
 
 [{format_cmd_exec2}]
 ----
-yum-config-manager --disable my-rhel-8-server-rpm-repo
+dnf config-manager --set-disabled my-rhel-8-server-rpm-repo
 ----
 
 Next, register the host and attach an entitlement.
@@ -163,11 +163,16 @@ subscription-manager repos --disable=*
 subscription-manager repos --enable=rhel-8-for-x86_64-baseos-rpms --enable=rhel-8-for-x86_64-appstream-rpms
 ----
 
-Ensure that Red Hat Subscription Manager is set to consume the latest RHEL 8 content.
+Ensure that Red Hat Subscription Manager is set to consume the latest RHEL 8.6 content.
 
 [{format_cmd_exec2}]
 ----
-subscription-manager release --unset
+subscription-manager release 
+----
+
+[{format_cmd_output}]
+----
+Release: 8.6
 ----
 
 
@@ -179,7 +184,7 @@ Install the LEAPP tools and any dependencies
 
 [{format_cmd_exec2}]
 ----
-yum install -y leapp-upgrade
+dnf install -y leapp-upgrade
 ----
 
 === Cleanup
