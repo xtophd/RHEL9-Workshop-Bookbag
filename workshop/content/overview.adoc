@@ -9,6 +9,7 @@
   * Christoph Doerbeck
   * Eddie Chen
   * Gordon Keegan
+  * Matt St. Onge
   * Lynn Dixon
 
 == Overview
