@@ -1,5 +1,5 @@
 ---
-name: Definitive RHEL9 Workshop (v9.0)
+name: Definitive RHEL9 Workshop (v9.1)
 modules:
   activate:
     - connection
