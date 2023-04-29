@@ -95,7 +95,7 @@ In RHEL 9, you have a choice on how to implement and manage the firewall.  In wh
 
 For 99% of all use cases the firewalld tools are the best choice.  For this lab however we are trying to introduce `nft` and demonstrate some differences to the former `iptables`.
 
-Let us now being to understand the constructs that build the firewall rules: Tables, Chains & Rules.
+Let us now begin to understand the constructs that build the firewall rules: Tables, Chains & Rules.
 
 
 
