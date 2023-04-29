@@ -191,7 +191,7 @@ Sat 2019-04-27 21:21:58.770887 EDT [s=bcde42e4c96048c3908657177414e202;i=70c;b=b
 
 Each one of those entries makes up a chunk of a session recording.  It is by way of searching the system journal and identifying the correct TLOG_REC for a specific session, that you can then play back the session using `tlog-play`.
 
-We have taken the liberty of scripting this "search" to playback the last session log from the user cloud-user.
+We have taken the liberty of scripting this "search" to playback the last session log from the user other-user.
 Once you hit enter on the command below, you will see a note that "Playback Started..." and again when "Playback Finished...".  
 Be patient until it completes and your root prompt returns.
 
