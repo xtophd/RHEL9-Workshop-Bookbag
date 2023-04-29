@@ -498,7 +498,7 @@ Destination     Gateway         Genmask         Flags Metric Ref    Use Iface
 
 === Filesystem
 
-Finally, look at the filesystem(S) in the container's namespace.
+Finally, look at the filesystem(s) in the container's namespace.
 
 [{format_cmd_exec}]
 ----
