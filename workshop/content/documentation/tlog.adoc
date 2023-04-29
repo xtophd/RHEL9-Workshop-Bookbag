@@ -27,7 +27,7 @@ Tlog is a terminal I/O recording and playback package for Linux.  The session lo
 
 If you have successfully run the RHEL 8 lab preparation playbook, then node1.example.com has already been properly configured for session logging.  What follows are some basic exercises to demonstrate how this facility functions.
 
-Starting with RHEL 9, TLOG is configured by a relatively simple system-role.  We will com back to that later.
+Starting with RHEL 9, TLOG is configured by a relatively simple system-role.  We will come back to that later.
 
 == Getting Started
 
@@ -154,7 +154,7 @@ ftp:*:17988:0:99999:7:::
 ...SNIP...
 ----
 
-We are done with our limited nafarious activities, so proceed to `exit`
+We are done with our limited nefarious activities, so proceed to `exit`
 
 [{format_cmd_exec}]
 ----
