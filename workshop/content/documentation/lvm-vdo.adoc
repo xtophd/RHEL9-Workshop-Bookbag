@@ -163,7 +163,7 @@ fsadm
 
 In this exercise, you will perform steps to make a new filesystem available to the system using the Logical Volume Management tools.  
 
-We will begin with a simple linear volume (concatination).
+We will begin with a simple linear volume (concatenation).
 
 === Clean Up Devices
 
