@@ -101,7 +101,7 @@ Similar to systemd, firewalld implements the concept of a service:
   * a destination address (or range) for IPv4 and/or IPv6.
 
 
-There are nearly 50 built-in services shipped with firewalld.  You can also create your own service configs from scratch or customize the default files.  More on that coovered in the exercises below.
+There are nearly 50 built-in services shipped with firewalld.  You can also create your own service configs from scratch or customize the default files.  More on that covered in the exercises below.
 
 Let's take a quick look at the default configuration for ssh & http to start.
 
