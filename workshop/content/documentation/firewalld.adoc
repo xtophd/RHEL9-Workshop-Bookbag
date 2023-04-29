@@ -250,7 +250,7 @@ public (active)
 
 == Managing Default Services
 
-Default Services are those that are pre-defined by configuration files in either */etc/firewalld* or */usr/lib/firewalld*.  This would include any configs delivered by Red Hat as part of the operating system or those added by a system administer.
+Default Services are those that are pre-defined by configuration files in either */etc/firewalld* or */usr/lib/firewalld*.  This would include any configs delivered by Red Hat as part of the operating system or those added by a system administrator.
 
 Here we will take a moment to enable the http and https service ports.
 
