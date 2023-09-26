@@ -33,11 +33,6 @@ endif::[]
 
 = LVM and VDO : Storage Management and Data Optimization
 
-WARNING: (WORKSHOP VERSON 9.1) PLEASE NOTE THAT THE VDO PORTION OF THIS LAB IS NON-FUNCTIONAL
-AND TEMPORARILY DISABLED.  THE LVM EXERCISES ARE FINE AND WE ENCOURAGE YOU TO PROCEEDURE UNTIL THE
-ACTUAL ACTIVATION OF THE VDO DEDUP MODULE (7.5), AFTER WHICH PLEASE SCROLL TO
-THE CONCLUSION OF THIS UNIT AND RUN `workshop-finish-exercise.sh`
-
 == Overview
 
 A Logical Volume Manager is a software layer on top of physical hard disks and partitions, which creates an abstraction of continuity and ease-of-use for managing the lifecycle of those devices (ie: addition, removal, replacement, repartitioning, backup, etc).
@@ -168,7 +163,7 @@ fsadm
 
 In this exercise, you will perform steps to make a new filesystem available to the system using the Logical Volume Management tools.  
 
-We will begin with a simple linear volume (concatenation).
+We will begin with a simple linear volume (concatination).
 
 === Clean Up Devices
 
@@ -324,7 +319,7 @@ resize2fs /dev/vg_lab/lab1
 Let us take a look at the logical volume.  Notice a few things:
 
   * we added `seg_size` to the options to report segment size
-  * the logical volume is comprised of 2 devices ({disk1},{disk2})
+  * the logical volume is comprised of 2 devices (vdb, vdc)
   * the first segment is completely used at 5g
   * the second segment is almost used, but has some space remaining
   * Over all, the volume group has approximately 500mb remaining
@@ -434,12 +429,6 @@ lvcreate -y --type raid10 -m1 -i 2 -n lv_raid10 -l 95%FREE vg_lab
 
 
 === Add VDO Deduplication
-
-
-WARNING: (WORKSHOP VERSON 9.1) PLEASE NOTE THAT THE VDO PORTION OF THIS LAB IS NON-FUNCTIONAL 
-AND TEMPORARILY DISABLED.  WE LOOK TOWARD THE 9.2 RELEASE TO REMEDIATE THIS ISSUE.  PLEASE SCROLL TO
-THE CONCLUSION OF THIS UNIT AND RUN THE `workshop-finish-exercise.sh`
-
 
 [{format_cmd_exec}]
 ----

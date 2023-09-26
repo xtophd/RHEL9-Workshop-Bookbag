@@ -24,7 +24,7 @@ MY_TMP="/var/tmp"
 
 GIT_REPO="https://github.com/xtophd"
 GIT_PROJECT="RHEL9-Workshop"
-GIT_BRANCH="summit-2023"
+GIT_BRANCH="rhel92-dev"
 
 DOC_SRC="${MY_TMP}/documentation/_include"
 DOC_DST="./workshop/content/documentation"
