@@ -56,6 +56,11 @@ is the ssh command and password which you can use.
 
 [{format_cmd_exec2}]
 ----
+workshop-tmux.sh TERM2
+----
+
+[{format_cmd_exec2}]
+----
 [[ "$UID" == 0 ]] || sudo -i
 ----
 
@@ -122,6 +127,7 @@ Updating Subscription Management repositories.
 repo id                                    repo name
 rhel-8-for-x86_64-appstream-rpms           Red Hat Enterprise Linux 8 for x86_64 - AppStream (RPMs)
 rhel-8-for-x86_64-baseos-rpms              Red Hat Enterprise Linux 8 for x86_64 - BaseOS (RPMs)
+rhel-8-for-x86_64-supplementary-rpms       Red Hat Enterprise Linux 8 for x86_64 - Supplementary (RPMs)----
 ----
 
 You are now ready to proceed with the exercises.
@@ -420,6 +426,7 @@ Updating Subscription Management repositories.
 repo id                                    repo name
 rhel-9-for-x86_64-appstream-rpms           Red Hat Enterprise Linux 9 for x86_64 - AppStream (RPMs)
 rhel-9-for-x86_64-baseos-rpms              Red Hat Enterprise Linux 9 for x86_64 - BaseOS (RPMs)
+rhel-9-for-x86_64-supplementary-rpms       Red Hat Enterprise Linux 9 for x86_64 - Supplementary (RPMs)
 ----
 
 
@@ -459,4 +466,5 @@ endif::[]
 
 ////
 Always end files with a blank line to avoid include problems.
+Verified for RHEL92
 ////
