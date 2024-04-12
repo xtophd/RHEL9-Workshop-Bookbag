@@ -1,6 +1,6 @@
 :guid: %guid%
 :ssh_command: %ssh_command%
-:ssh_password: %ssh_password%
+:bastion_ssh_password: %bastion_ssh_password%
 :ssh_username: %ssh_username%
 :targethost_fqdn: %targethost%
 :markup-in-source: verbatim,attributes,quotes
@@ -33,7 +33,7 @@ Send the password:
 
 [{format_cmd_exec}]
 ----
-{ssh_password}
+{bastion_ssh_password}
 ----
 
 Launch a 'tmux' (terminal multiplexer):
@@ -61,7 +61,7 @@ Like wise, let us proceed to set up the second terminal for use later.
 
 [{format_cmd_exec2}]
 ----
-{ssh_password}
+{bastion_ssh_password}
 ----
 
 [{format_cmd_exec2}]
@@ -87,5 +87,5 @@ You are now ready to proceed with the exercises.
 
   * Username: *{ssh_username}*
 
-  * Password: *{ssh_password}*
+  * Password: *{bastion_ssh_password}*
 
