@@ -33,7 +33,7 @@ Send the password:
 
 [{format_cmd_exec}]
 ----
-{bastion_ssh_password}
+{ssh_password}
 ----
 
 Launch a 'tmux' (terminal multiplexer):
@@ -61,7 +61,7 @@ Like wise, let us proceed to set up the second terminal for use later.
 
 [{format_cmd_exec2}]
 ----
-{bastion_ssh_password}
+{ssh_password}
 ----
 
 [{format_cmd_exec2}]
