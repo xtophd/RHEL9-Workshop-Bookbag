@@ -25,7 +25,7 @@ is the ssh command and password which you can use.
 
 [{format_cmd_exec2}]
 ----
-{ssh_password}
+{bastion_ssh_password}
 ----
 
 [{format_cmd_exec2}]

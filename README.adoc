@@ -1,0 +1,11 @@
+== RHEL 9 Workshop
+
+This repo is the "Showroom" version of the RHEL 9 Workshop.
+Showroom is the default presentation system for RHDP.
+It replaces Bookbag, which is defunct.
+
+For more information about Showroom, see:
+
+* https://github.com/rhpds/showroom_template_default
+
+Or contact the RHDP team inside Red Hat.
