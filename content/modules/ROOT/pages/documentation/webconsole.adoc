@@ -61,12 +61,12 @@ And the following UserID and Password:
 
 [source,options="nowrap",subs="{markup-in-source}",role="copy"]
 ----
-%ssh_username%
+{bastion_ssh_user_name}
 ----
 
 [source,options="nowrap",subs="{markup-in-source}",role="copy"]
 ----
-%ssh_password%
+{bastion_ssh_password}
 ----
 
 ====

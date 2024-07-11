@@ -15,7 +15,7 @@ Send the password:
 
 [{format_cmd_exec}]
 ----
-{ssh_password}
+{bastion_ssh_password}
 ----
 
 Launch a 'tmux' (terminal multiplexer):
@@ -43,7 +43,7 @@ Like wise, let us proceed to set up the second terminal for use later.
 
 [{format_cmd_exec2}]
 ----
-{ssh_password}
+{bastion_ssh_password}
 ----
 
 [{format_cmd_exec2}]
@@ -58,7 +58,6 @@ sudo -i
 
 You are now ready to proceed with the exercises.
 
-
 == Connection Details
 
 [bash,options="nowrap",subs="{markup-in-source}"]
@@ -67,6 +66,6 @@ You are now ready to proceed with the exercises.
 
   * Target host FQDN: *{targethost_fqdn}*
 
-  * Username: *{ssh_username}*
+  * Username: *{bastion_ssh_user_name}*
 
-  * Password: *{ssh_password}*
+  * Password: *{bastion_ssh_password}*
