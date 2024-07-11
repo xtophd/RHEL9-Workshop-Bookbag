@@ -1,30 +1,4 @@
-:sectnums:
-:sectnumlevels: 3
-:markup-in-source: verbatim,attributes,quotes
-:ssh_command: %ssh_command%
-:ssh_password: %ssh_password%
-:ssh_username: %ssh_username%
-ifdef::env-github[]
-:tip-caption: :bulb:
-:note-caption: :information_source:
-:important-caption: :heavy_exclamation_mark:
-:caution-caption: :fire:
-:warning-caption: :warning:
-endif::[]
-:format_cmd_exec: source,options="nowrap",subs="{markup-in-source}",role="copy"
-:format_cmd_exec2: source,options="nowrap",subs="{markup-in-source}",role="copy"
-:format_cmd_output: bash,options="nowrap",subs="{markup-in-source}"
-:format_plain: bash,options="nowrap"
-ifeval::["%cloud_provider%" == "ec2"]
-:format_cmd_exec: source,options="nowrap",subs="{markup-in-source}",role="execute"
-:format_cmd_exec2: source,options="nowrap",subs="{markup-in-source}",role="execute-2"
-endif::[]
-
-
-:toc:
-:toclevels: 1
-
-= BPF Tracing - Observability of System Performance
+== BPF Tracing - Observability of System Performance
 
 == Overview
 
@@ -33,8 +7,7 @@ uses the secondary terminal.  Do not proceed if the secondary terminal is alread
 
 eBPF (The Extended Berkeley Packet Filter) is an in-kernel virtual machine that allows code execution in the kernel space, in a restricted sandbox environment with access to a limited set of functions. There are numerous components shipped by Red Hat that utilize the eBPF virtual machine. Each component is in a different development phase, and thus not all components are currently fully supported. Those that are not supported are available as a *Technology Preview* and are not intended for production use.For information on Red Hat scope of support for Technology Preview features, see: link:https://access.redhat.com/support/offerings/techpreview/[Technology Preview Features Support Scope]
 
-In this unit, we will be focusing on the kernel tracing offering shipped as bcc-tools (BPF Compiler Collection Tools).   We will also touch on bpftrace which is a tool  to compile scripts to BPF-bytecode.  
-
+In this unit, we will be focusing on the kernel tracing offering shipped as bcc-tools (BPF Compiler Collection Tools).   We will also touch on bpftrace which is a tool  to compile scripts to BPF-bytecode.
 
 == Getting Started
 
@@ -96,7 +69,6 @@ There are just over 100 tools shipped in this package. A few things of note:
      * These tools must run as the root user as any eBPF program can read kernel data. As such, injecting eBPF bytecode as a regular user is not allowed in RHEL 9.
      * Each tool has a man page to view the man page, run `man <tool name>`. These man pages include descriptions of the tools, provide the options that can be called and have information on the expected overhead of the specific tool.
 
-
 === Installation
 
 [discrete]
@@ -110,9 +82,6 @@ dnf install bcc-tools bpftrace strace kernel-devel-$(uname -r) -y
 ----
 
 Now, we have a lot of interesting tools installed in /usr/share/bcc/tools along with accompanying man pages.
-
-
-
 
 
 == Exercise: tcplife
@@ -155,7 +124,7 @@ ssh node2 "pkill tcplife"
 ----
 
 [discrete]
-==== Results 
+==== Results
 
 In the primary terminal, you should now see output similar to:
 
@@ -168,9 +137,6 @@ PID   COMM       LADDR           LPORT RADDR           RPORT TX_KB RX_KB MS
 Doing the math with the numbers above, this session was open for about 9 seconds and was initiated by IP 10.0.0.10 (the bastion host).
 
 In the `tcplife` terminal, issue a Ctrl-C and this will return you to a prompt.
-
-
-
 
 
 == Exercise: execsnoop
@@ -250,8 +216,6 @@ firewall-cmd     28542  28516    0 /usr/bin/firewall-cmd --state
 ----
 
 This shows you all the processes that ran exec() during that ssh login, their PID, their parent PID, their return code, and the arguments that were sent to the process. You could keep monitoring this for quite some time to catch potential bad actors on the system.
-
-
 
 == Exercise: mountsnoop
 
@@ -333,7 +297,7 @@ Back to the primary terminal and you should see the following:
 umount           20003   20003   4026531840  umount("/dev/shm", 0x0) = 0
 ----
 
-The umount command succeeded. 
+The umount command succeeded.
 
 [discrete]
 ==== Secondary Terminal (bastion)
@@ -369,8 +333,6 @@ As you can see, the `mountsnoop` tool is very useful for seeing what processes t
 
 In the `mountsnoop` terminal, issue a Ctrl-C and this will return you to a prompt.
 
-
-
 == Exercise: cachestat
 
 The `cachestat` tool traces kernel page cache functions and prints every five second summaries to aid you in workload characterization.
@@ -395,14 +357,13 @@ WARNING: It is important to wait until the tool is setup.  Do not proceed until 
 [discrete]
 ==== Secondary Terminal (bastion)
 
-Let's now run a little exercise that will generate some i/o.  This script 
+Let's now run a little exercise that will generate some i/o.  This script
 flushes the cache and then runs a series of `dd` commands.
 
 [{format_cmd_exec2}]
 ----
 ssh node2 "workshop-ebpf-cachestat.sh"
 ----
-
 
 This command should run for a few seconds and then exit.  Before porceeding to the results you can
 either hit `Ctrl-C` in the primary terminal OR send a sigkill to the process to terminate cachestat.
@@ -411,7 +372,6 @@ either hit `Ctrl-C` in the primary terminal OR send a sigkill to the process to 
 ----
 ssh node2 "pkill cachestat"
 ----
-
 
 [discrete]
 ==== Results
@@ -428,8 +388,6 @@ In the `cachestat` window, you should output similar to:
 
 This shows that we had 1216 page cache misses during a five second period while running the above loop but during that same period, there were 16016 hits, indicating great performance from the page cache.
 
-
-
 == Exercise: bpftrace
 
 This tool is a swiss army knife allowing you to specify functions to trace and messages to be printed when certain conditions are met.
@@ -437,13 +395,12 @@ This tool is a swiss army knife allowing you to specify functions to trace and m
 bpftrace makes use of:
 
   * BCC for interacting with the Linux BPF system
-  * as well as existing Linux tracing capabilities: 
+  * as well as existing Linux tracing capabilities:
     * kernel dynamic tracing (kprobes)
     * user-level dynamic tracing (uprobes)
     * tracepoints
- 
 
-Let us start this educational journey by examining what system calls a simple command executes.  
+Let us start this educational journey by examining what system calls a simple command executes.
 
 [discrete]
 ==== Primary Terminal (node2)
@@ -456,7 +413,7 @@ touch /tmp/workshop.tmp
 ----
 
 The command we will evaluate is `cat /tmp/workshop.tmp` and we will use strace to list the system calls
-made and with what frequency (count). 
+made and with what frequency (count).
 
 [{format_cmd_exec}]
 ----
@@ -489,12 +446,10 @@ strace -c cat /tmp/workshop.tmp
 100.00    0.000925           7       119        15 total
 ----
 
-What we see is that our command used the 'openat' systemcall 31 times.  Among those calls, 13 resulted in errors but 
+What we see is that our command used the 'openat' systemcall 31 times.  Among those calls, 13 resulted in errors but
 are likely harmless attempts to open files that do not exist.
 
-
-
-=== bpftrace: count all syscalls 
+=== bpftrace: count all syscalls
 
 Next, let's use *bpftrace* to create a similar output of counted system calls.  We will use a wildcarded tracepoint 'sys_enter_*'
 to get all the relevant syscalls.
@@ -510,7 +465,6 @@ bpftrace -e 'tracepoint:syscalls:sys_enter_* { if (comm == "cat") { @[probe] = c
 [{format_cmd_output}]
 ----
 Attaching 337 probes...
-
 
 @[tracepoint:syscalls:sys_enter_access]: 1
 @[tracepoint:syscalls:sys_enter_futex]: 1
@@ -535,9 +489,7 @@ Attaching 337 probes...
 
 This should line up almost 1-to-1 with the previous output from strace, note that 'sys_enter_openat' is 31.
 
-
-
-=== bpftrace: count specific syscall 
+=== bpftrace: count specific syscall
 
 Now we are going to limit the probe to only show 'sys_enter_openat' thereby only setting 1 probe and collecting a count.
 
@@ -553,16 +505,13 @@ bpftrace -e 'tracepoint:syscalls:sys_enter_openat { if (comm == "cat") { @[probe
 ----
 Attaching 1 probe...
 
-
 @[tracepoint:syscalls:sys_enter_openat]: 31
 
 ----
 
-
-
 === bpftrace: set probe on specific file
 
-NOTE: For this last exercise we will utilize both terminal sessions again.  
+NOTE: For this last exercise we will utilize both terminal sessions again.
 
 The objective is to set a probe and identify any process that opens our targeted file.
 
@@ -575,7 +524,6 @@ The objective is to set a probe and identify any process that opens our targeted
     *** *args->filename* is the filename being accessed
     * -c [COMMAND] to run command after probes are set and exit
 
-
 [discrete]
 ==== Primary Terminal (node2)
 
@@ -585,7 +533,6 @@ Proceed to set the probe in the primary terminal.
 ----
 bpftrace -e 'tracepoint:syscalls:sys_enter_openat { if (str(args->filename) == "/tmp/workshop.tmp") { printf( "%d %d %d %s %s\n", pid, uid, gid, comm, str(args->filename)); }}'
 ----
-
 
 [discrete]
 ==== Secondary Terminal (bastion)
@@ -614,7 +561,6 @@ either hit `Ctrl-C` in the primary terminal OR send a sigkill to the process to 
 ----
 ssh node2 "pkill bpftrace"
 ----
-
 
 [discrete]
 ==== Results
@@ -656,12 +602,3 @@ You can find more information:
 
 [discrete]
 == End of Unit
-
-ifdef::env-github[]
-link:../RHEL9-Workshop.adoc#toc[Return to TOC]
-endif::[]
-
-////
-Alway end files with a blank line to avoid include problems.
-Verified for RHEL 9.2
-////

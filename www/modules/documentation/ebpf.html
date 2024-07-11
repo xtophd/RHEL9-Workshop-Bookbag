@@ -1,0 +1,960 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Untitled :: Definitive RHEL9 Workshop (v9.1)</title>
+    <link rel="prev" href="nftables.html">
+    <link rel="next" href="podman.html">
+    <meta name="generator" content="Antora 3.1.7">
+    <link rel="stylesheet" href="../../_/css/site.css">
+<link rel="icon" href="../../_/img/favicon.ico" type="image/x-icon">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="https://developers.redhat.com" target="_blank"><img
+          src="../../_/img/header_logo.png" height="40px" alt="Red Hat Developer Program"></a>
+      <a class="navbar-item" href="../..">Definitive RHEL9 Workshop (v9.1)</a>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <a class="navbar-item" href="#">Books</a>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">CheatSheets</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="#">CheatSheet A</a>
+            <a class="navbar-item" href="#">CheatSheet B</a>
+            <a class="navbar-item" href="#">CheatSheet C</a>
+          </div>
+        </div>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">Upcoming Events</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="#">Event A</a>
+            <a class="navbar-item" href="#">Event B</a>
+            <a class="navbar-item" href="#">Event C</a>
+          </div>
+        </div>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">More Tutorials</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="#">Tutorial A</a>
+            <a class="navbar-item" href="#">Tutorial B</a>
+            <a class="navbar-item" href="#">Tutorial C</a>
+          </div>
+        </div>
+        <div class="navbar-item">
+          <span class="control">
+            <a class="button is-primary" href="#">Download</a>
+          </span>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="modules" data-version="master">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="../index.html" class=" query-params-link">Default Title</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../overview.html">Workshop Overview</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="webconsole.html">Web Console (cockpit)</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="systemd.html">Service Management (systemd)</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="firewalld.html">Firewall Management (firewalld)</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="nftables.html">Firewall Rules (nf-tables)</a>
+  </li>
+  <li class="nav-item is-current-page" data-depth="1">
+    <a class="nav-link" href="ebpf.html">eBPF Tracing (bcc-tools)</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="podman.html">Containers Management (podman)</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="buildah.html">Containers Dev (buildah)</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="image-builder.html">Image Builder (composer-cli)</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="virtualization.html">Virtualization (kvm,libvirt)</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="tlog.html">Session Logging (tlog)</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="lvm-vdo.html">Data Optimization (lvm,vdo)</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="stratis.html">Storage Management (stratis)</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="kpatch.html">Kernel Live Patching (kpatch)</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="boom-kernel-parms.html">Managing GRUB2 with Boom</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="leapp.html">LEAPP In-Place Upgrades</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">Default Title</span>
+    <span class="version">master</span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <span class="title">Default Title</span>
+      <ul class="versions">
+        <li class="version is-current">
+          <a href="../index.html">master</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="../connection.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="../index.html">Default Title</a></li>
+    <li><a href="ebpf.html">eBPF Tracing (bcc-tools)</a></li>
+  </ul>
+</nav>
+  <div class="edit-this-page"><a href="file:///Users/jmaltin/Development/RHEL9-Workshop-Showroom/content/modules/ROOT/pages/documentation/ebpf.adoc">Edit this Page</a></div>
+</div>
+  <div class="content">
+<article class="doc">
+<div class="sect1">
+<h2 id="_bpf_tracing_observability_of_system_performance"><a class="anchor" href="#_bpf_tracing_observability_of_system_performance"></a>BPF Tracing - Observability of System Performance</h2>
+<div class="sectionbody">
+
+</div>
+</div>
+<div class="sect1">
+<h2 id="_overview"><a class="anchor" href="#_overview"></a>Overview</h2>
+<div class="sectionbody">
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+This exercise requires the SECONDARY terminal and conflicts with any other exercise that
+uses the secondary terminal.  Do not proceed if the secondary terminal is already in use with another exercise.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>eBPF (The Extended Berkeley Packet Filter) is an in-kernel virtual machine that allows code execution in the kernel space, in a restricted sandbox environment with access to a limited set of functions. There are numerous components shipped by Red Hat that utilize the eBPF virtual machine. Each component is in a different development phase, and thus not all components are currently fully supported. Those that are not supported are available as a <strong>Technology Preview</strong> and are not intended for production use.For information on Red Hat scope of support for Technology Preview features, see: <a href="https://access.redhat.com/support/offerings/techpreview/">Technology Preview Features Support Scope</a></p>
+</div>
+<div class="paragraph">
+<p>In this unit, we will be focusing on the kernel tracing offering shipped as bcc-tools (BPF Compiler Collection Tools).   We will also touch on bpftrace which is a tool  to compile scripts to BPF-bytecode.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_getting_started"><a class="anchor" href="#_getting_started"></a>Getting Started</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>For these exercises, you will primarily be using the host <code>node2</code> as user <code>root</code>.  However, these exercises do REQUIRE a second terminal session to run commands on other hosts.  Please pay careful attention to what commands to run on different hosts.</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+Now is a great time to use the multi session capability of <strong>tmux</strong>.  Use <code>Ctrl-b "</code> to create another session with a split screen.  Cycle the active session back and forth with <code>CTRL-b n</code> (next) and <code>CTRL-b p</code> (previous).
+</td>
+</tr>
+</table>
+</div>
+<h4 id="_primary_terminal_node2" class="discrete">Primary Terminal (node2)</h4>
+<div class="paragraph">
+<p>From host <code>bastion</code>, ssh to <code>node2</code>.</p>
+</div>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">ssh node2</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Use <code>sudo</code> to elevate your privileges.</p>
+</div>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">[[ "$UID" == 0 ]] || sudo -i</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Verify that you are on the right host for these exercises.</p>
+</div>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">workshop-ebpf-checkhost.sh</code></pre>
+</div>
+</div>
+<h4 id="_secondary_terminal_bastion" class="discrete">Secondary Terminal (bastion)</h4>
+<div class="paragraph">
+<p>To help you set up your second terminal, here is the ssh command and password which you can use.</p>
+</div>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">[[ $(hostname -s) != "bastion" ]] &amp;&amp; sample_ssh_command -o "StrictHostKeyChecking no"</code></pre>
+</div>
+</div>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">sample_ssh_password</code></pre>
+</div>
+</div>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">[[ "$UID" == 0 ]] || sudo -i</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You are now ready to proceed with these exercises.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_core_concepts"><a class="anchor" href="#_core_concepts"></a>Core Concepts</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>There are just over 100 tools shipped in this package. A few things of note:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>All of these tools live in <code>/usr/share/bcc/tools</code>.</p>
+</li>
+<li>
+<p>These tools must run as the root user as any eBPF program can read kernel data. As such, injecting eBPF bytecode as a regular user is not allowed in RHEL 9.</p>
+</li>
+<li>
+<p>Each tool has a man page to view the man page, run <code>man &lt;tool name&gt;</code>. These man pages include descriptions of the tools, provide the options that can be called and have information on the expected overhead of the specific tool.</p>
+</li>
+</ul>
+</div>
+<div class="sect2">
+<h3 id="_installation"><a class="anchor" href="#_installation"></a>Installation</h3>
+<h4 id="_primary_terminal_node2_2" class="discrete">Primary Terminal (node2)</h4>
+<div class="paragraph">
+<p>Start by installing the <strong>BPF Compiler Collection</strong> (bcc-tools) and kernel-devel packages for the installed kernel:</p>
+</div>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">dnf install bcc-tools bpftrace strace kernel-devel-$(uname -r) -y</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Now, we have a lot of interesting tools installed in /usr/share/bcc/tools along with accompanying man pages.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_exercise_tcplife"><a class="anchor" href="#_exercise_tcplife"></a>Exercise: tcplife</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The <code>tcplife</code> tool monitors tcp connections on the system and measures the amount of time that they&#8217;ve been open, the local and remote ports involved in the connection and the amount of data transferred and received in kilobytes.</p>
+</div>
+<h4 id="_primary_terminal_node2_3" class="discrete">Primary Terminal (node2)</h4>
+<div class="paragraph">
+<p>To run this tool, execute the following and give it a couple of seconds to get set up:</p>
+</div>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">/usr/share/bcc/tools/tcplife</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="nowrap">PID   COMM       LADDR           LPORT RADDR           RPORT TX_KB RX_KB MS</pre>
+</div>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+It is important to wait until the tool is setup.  Do not proceed until you see the output headers (displayed above) appear.
+</td>
+</tr>
+</table>
+</div>
+<h4 id="_secondary_terminal_bastion_2" class="discrete">Secondary Terminal (bastion)</h4>
+<div class="paragraph">
+<p>Run a little script to generate some user activity.</p>
+</div>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">ssh node2 "sudo workshop-ebpf-rootkit.sh"</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This command should run for about 10 seconds and then exit.  Before porceeding to the results you can
+either hit <code>Ctrl-C</code> in the primary terminal OR send a sigkill to the process to terminate tcplife.</p>
+</div>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">ssh node2 "pkill tcplife"</code></pre>
+</div>
+</div>
+<h4 id="_results" class="discrete">Results</h4>
+<div class="paragraph">
+<p>In the primary terminal, you should now see output similar to:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="nowrap">PID   COMM       LADDR           LPORT RADDR           RPORT TX_KB RX_KB MS
+28478 sshd       10.0.0.12       22    10.0.0.10       33514    14     2 9091.95</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Doing the math with the numbers above, this session was open for about 9 seconds and was initiated by IP 10.0.0.10 (the bastion host).</p>
+</div>
+<div class="paragraph">
+<p>In the <code>tcplife</code> terminal, issue a Ctrl-C and this will return you to a prompt.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_exercise_execsnoop"><a class="anchor" href="#_exercise_execsnoop"></a>Exercise: execsnoop</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The <code>execsnoop</code> script monitors all calls to execve() and catches all processes that follow the fork&#8594;exec sequence, as well as processes that re-exec() themselves. Processes that fork() but do not exec() won&#8217;t be caught by this script.</p>
+</div>
+<h4 id="_primary_terminal_node2_4" class="discrete">Primary Terminal (node2)</h4>
+<div class="paragraph">
+<p>Continuing on host <code>node2</code>, to run <code>execsnoop</code> as follows:</p>
+</div>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">/usr/share/bcc/tools/execsnoop</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="nowrap">PCOMM            PID    PPID   RET ARGS</pre>
+</div>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+It is important to wait until the tool is setup.  Do not proceed until you see the output headers (displayed above) appear.
+</td>
+</tr>
+</table>
+</div>
+<h4 id="_secondary_terminal_bastion_3" class="discrete">Secondary Terminal (bastion)</h4>
+<div class="paragraph">
+<p>In your second terminal having established yourself as root, run the following command:</p>
+</div>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">ssh node2 "sudo workshop-ebpf-rootkit.sh"</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Again, this command should run for about 10 seconds and then exit.  Before porceeding to the results you can
+either hit <code>Ctrl-C</code> in the primary terminal OR send a sigkill to the process to terminate execsnoop.</p>
+</div>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">ssh node2 "pkill execsnoop"</code></pre>
+</div>
+</div>
+<h4 id="_results_2" class="discrete">Results</h4>
+<div class="paragraph">
+<p>In the primary terminal, you should see output similar to:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="nowrap">PCOMM            PID    PPID   RET ARGS
+sshd             28512  749      0 /usr/sbin/sshd -D -oCiphers=aes256-gcm@openssh.com,chacha20-poly1305@openssh.com,aes256-ctr,aes256-cbc,aes128-gcm@openssh.com,aes128-ctr,aes128-cb -oMACs=hmac-sha2-256-etm@openssh.com,hmac-sha1-etm@openssh.com,umac-128-etm@openssh.com,hmac-sha2-512-etm@openssh.com,hmac-sha2- -oGSSAPIKexAlgorithms=gss-gex-sha1-,gss-group14-sha1- -oKexAlgorithms=curve25519-sha256@libssh.org,ecdh-sha2-nistp256,ecdh-sha2-nistp384,ecdh-sha2-nistp521,diffie-hellman-group-excha -oHostKeyAlgorithms=rsa-sha2-256,ecdsa-sha2-nistp256,ecdsa-sha2-nistp256-cert-v01@openssh.com,ecdsa-sha2-nistp384,ecdsa-sha2-nis -oPubkeyAcceptedKeyTypes=rsa-sha2-256,ecdsa-sha2-nistp256,ecdsa-sha2-nistp256-cert-v01@openssh.com,ecdsa-sha2-nistp384,ecdsa-sha -R
+unix_chkpwd      28514  28512    0 /usr/sbin/unix_chkpwd root chkexpiry
+bash             28516  28515    0 /bin/bash -c workshop-ebpf-rootkit.sh
+grepconf.sh      28517  28516    0 /usr/libexec/grepconf.sh -c
+grep             28518  28517    0 /usr/bin/grep -qsi ^COLOR.*none /etc/GREP_COLORS
+grepconf.sh      28519  28516    0 /usr/libexec/grepconf.sh -c
+grep             28520  28519    0 /usr/bin/grep -qsi ^COLOR.*none /etc/GREP_COLORS
+grepconf.sh      28521  28516    0 /usr/libexec/grepconf.sh -c
+grep             28522  28521    0 /usr/bin/grep -qsi ^COLOR.*none /etc/GREP_COLORS
+sed              28524  28523    0 /usr/bin/sed -r -e s/^[[:blank:]]*([[:upper:]_]+)=([[:print:][:digit:]\._-]+|"[[:print:][:digit:]\._-]+")/export \1=\2/;t;d /etc/locale.conf
+uname            28525  28516    0 /usr/bin/uname -a
+sleep            28526  28516    0 /usr/bin/sleep 1
+who              28527  28516    0 /usr/bin/who
+sleep            28528  28516    0 /usr/bin/sleep 1
+grep             28530  28516    0 /usr/bin/grep root /etc/passwd
+sleep            28531  28516    0 /usr/bin/sleep 1
+grep             28532  28516    0 /usr/bin/grep root /etc/shadow
+sleep            28533  28516    0 /usr/bin/sleep 1
+cat              28534  28516    0 /usr/bin/cat /etc/fstab
+sleep            28535  28516    0 /usr/bin/sleep 1
+ps               28536  28516    0 /usr/bin/ps -ef
+sleep            28537  28516    0 /usr/bin/sleep 1
+netstat          28538  28516    0 /usr/bin/netstat -tulpn
+sleep            28539  28516    0 /usr/bin/sleep 1
+getenforce       28540  28516    0 /usr/sbin/getenforce
+sleep            28541  28516    0 /usr/bin/sleep 1
+firewall-cmd     28542  28516    0 /usr/bin/firewall-cmd --state</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This shows you all the processes that ran exec() during that ssh login, their PID, their parent PID, their return code, and the arguments that were sent to the process. You could keep monitoring this for quite some time to catch potential bad actors on the system.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_exercise_mountsnoop"><a class="anchor" href="#_exercise_mountsnoop"></a>Exercise: mountsnoop</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Similar in nature to <code>execsnoop</code>, <code>mountsnoop</code> traces the mount() and umount() syscalls which show processes that are attempting to mount (or unmount) filesystems.</p>
+</div>
+<h4 id="_primary_terminal_node2_5" class="discrete">Primary Terminal (node2)</h4>
+<div class="paragraph">
+<p>To run this tool, execute the following and give it a couple of seconds to get set up:</p>
+</div>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">/usr/share/bcc/tools/mountsnoop</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="nowrap">COMM             PID     TID     MNT_NS      CALL</pre>
+</div>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+It is important to wait until the tool is setup.  Do not proceed until you see the output headers (displayed above) appear.
+</td>
+</tr>
+</table>
+</div>
+<h4 id="_secondary_terminal_bastion_4" class="discrete">Secondary Terminal (bastion)</h4>
+<div class="paragraph">
+<p>In your second terminal having established yourself as root, let&#8217;s try to unmount a something we know can NOT be unmounted. For this, we&#8217;ll pick the root filesystem '/'.</p>
+</div>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">ssh node2 "sudo workshop-ebpf-unmountroot.sh"</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="nowrap">umount: /: target is busy.</pre>
+</div>
+</div>
+<h4 id="_results_3" class="discrete">Results</h4>
+<div class="paragraph">
+<p>Taking a look at the terminal running <code>mountsnoop</code>, we see:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="nowrap">umount           20001   20001   4026531840  umount("/", 0x0) = -EBUSY</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This shows us that the mount is busy and cannot be unmounted.</p>
+</div>
+<h4 id="_secondary_terminal_bastion_5" class="discrete">Secondary Terminal (bastion)</h4>
+<div class="paragraph">
+<p>Now let&#8217;s try to unmount a filesystem that we should be able to unmount.  But before doing so, look at the mount options to ensure we can restore it correctly.  On <code>node2</code> run the following:</p>
+</div>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">ssh node2 "grep /dev/shm /proc/mounts"</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="nowrap">tmpfs /dev/shm tmpfs <strong>rw,seclabel,nosuid,nodev,relatime</strong> 0 0</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Now proceed to umount <code>/dev/shm</code> on <code>node2</code></p>
+</div>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">ssh node2 "sudo workshop-ebpf-unmountshm.sh"</code></pre>
+</div>
+</div>
+<h4 id="_results_4" class="discrete">Results</h4>
+<div class="paragraph">
+<p>Back to the primary terminal and you should see the following:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="nowrap">umount           20003   20003   4026531840  umount("/dev/shm", 0x0) = 0</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The umount command succeeded.</p>
+</div>
+<h4 id="_secondary_terminal_bastion_6" class="discrete">Secondary Terminal (bastion)</h4>
+<div class="paragraph">
+<p>Proceed to restore the /dev/shm mount as follows:</p>
+</div>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">ssh node2 "sudo workshop-ebpf-mountshm.sh"</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This is the last step related to mountsnoop.  Before porceeding to the results you can
+either hit <code>Ctrl-C</code> in the primary terminal OR send a sigkill to the process to terminate mountsnoop.</p>
+</div>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">ssh node2 "pkill mountsnoop"</code></pre>
+</div>
+</div>
+<h4 id="_results_5" class="discrete">Results</h4>
+<div class="paragraph">
+<p>Finally, back to the primary terminal you should see the following:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="nowrap">mount            48024   48024   1832832     mount("tmpfs", "/dev/shm", "tmpfs", MS_NOSUID|MS_NODEV, "seclabel,inode64") = 0</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This shows us that the mount succeeded and all the options that were passed into the system call.</p>
+</div>
+<div class="paragraph">
+<p>As you can see, the <code>mountsnoop</code> tool is very useful for seeing what processes that are calling the mount and umount system calls and what the results of those calls are.</p>
+</div>
+<div class="paragraph">
+<p>In the <code>mountsnoop</code> terminal, issue a Ctrl-C and this will return you to a prompt.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_exercise_cachestat"><a class="anchor" href="#_exercise_cachestat"></a>Exercise: cachestat</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The <code>cachestat</code> tool traces kernel page cache functions and prints every five second summaries to aid you in workload characterization.</p>
+</div>
+<h4 id="_primary_terminal_node2_6" class="discrete">Primary Terminal (node2)</h4>
+<div class="paragraph">
+<p>To run this tool, execute the following and give it a couple of seconds to get set up:</p>
+</div>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">/usr/share/bcc/tools/cachestat 5</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="nowrap">   TOTAL   MISSES     HITS  DIRTIES   BUFFERS_MB  CACHED_MB</pre>
+</div>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+It is important to wait until the tool is setup.  Do not proceed until you see the output headers (displayed above) appear.
+</td>
+</tr>
+</table>
+</div>
+<h4 id="_secondary_terminal_bastion_7" class="discrete">Secondary Terminal (bastion)</h4>
+<div class="paragraph">
+<p>Let&#8217;s now run a little exercise that will generate some i/o.  This script
+flushes the cache and then runs a series of <code>dd</code> commands.</p>
+</div>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">ssh node2 "workshop-ebpf-cachestat.sh"</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This command should run for a few seconds and then exit.  Before porceeding to the results you can
+either hit <code>Ctrl-C</code> in the primary terminal OR send a sigkill to the process to terminate cachestat.</p>
+</div>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">ssh node2 "pkill cachestat"</code></pre>
+</div>
+</div>
+<h4 id="_results_6" class="discrete">Results</h4>
+<div class="paragraph">
+<p>In the <code>cachestat</code> window, you should output similar to:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="nowrap">    HITS   MISSES  DIRTIES HITRATIO   BUFFERS_MB  CACHED_MB
+   16016     1216        0   92.94%            0        266
+    8891        0        0  100.00%            0        322
+       0        0        0    0.00%            0        322</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This shows that we had 1216 page cache misses during a five second period while running the above loop but during that same period, there were 16016 hits, indicating great performance from the page cache.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_exercise_bpftrace"><a class="anchor" href="#_exercise_bpftrace"></a>Exercise: bpftrace</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>This tool is a swiss army knife allowing you to specify functions to trace and messages to be printed when certain conditions are met.</p>
+</div>
+<div class="paragraph">
+<p>bpftrace makes use of:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>BCC for interacting with the Linux BPF system</p>
+</li>
+<li>
+<p>as well as existing Linux tracing capabilities:</p>
+</li>
+<li>
+<p>kernel dynamic tracing (kprobes)</p>
+</li>
+<li>
+<p>user-level dynamic tracing (uprobes)</p>
+</li>
+<li>
+<p>tracepoints</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Let us start this educational journey by examining what system calls a simple command executes.</p>
+</div>
+<h4 id="_primary_terminal_node2_7" class="discrete">Primary Terminal (node2)</h4>
+<div class="paragraph">
+<p>To begin, we need a test file to use as our target.</p>
+</div>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">touch /tmp/workshop.tmp</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The command we will evaluate is <code>cat /tmp/workshop.tmp</code> and we will use strace to list the system calls
+made and with what frequency (count).</p>
+</div>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">strace -c cat /tmp/workshop.tmp</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="nowrap">% time     seconds  usecs/call     calls    errors syscall
+------ ----------- ----------- --------- --------- ----------------
+ 28.86    0.000267         267         1           execve
+ 28.76    0.000266           8        31        13 openat
+ 12.97    0.000120           5        22           mmap
+  9.19    0.000085           4        20           close
+  7.46    0.000069           3        19           newfstatat
+  3.24    0.000030           7         4           mprotect
+  2.38    0.000022          11         2           munmap
+  1.51    0.000014           3         4           read
+  1.30    0.000012           3         4           pread64
+  0.97    0.000009           3         3           brk
+  0.86    0.000008           8         1         1 access
+  0.54    0.000005           2         2         1 arch_prctl
+  0.54    0.000005           5         1           getrandom
+  0.32    0.000003           3         1           futex
+  0.32    0.000003           3         1           fadvise64
+  0.32    0.000003           3         1           prlimit64
+  0.22    0.000002           2         1           set_tid_address
+  0.22    0.000002           2         1           set_robust_list
+------ ----------- ----------- --------- --------- ----------------
+100.00    0.000925           7       119        15 total</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>What we see is that our command used the 'openat' systemcall 31 times.  Among those calls, 13 resulted in errors but
+are likely harmless attempts to open files that do not exist.</p>
+</div>
+<div class="sect2">
+<h3 id="_bpftrace_count_all_syscalls"><a class="anchor" href="#_bpftrace_count_all_syscalls"></a>bpftrace: count all syscalls</h3>
+<div class="paragraph">
+<p>Next, let&#8217;s use <strong>bpftrace</strong> to create a similar output of counted system calls.  We will use a wildcarded tracepoint 'sys_enter_*'
+to get all the relevant syscalls.</p>
+</div>
+<h4 id="_primary_terminal_node2_8" class="discrete">Primary Terminal (node2)</h4>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">bpftrace -e 'tracepoint:syscalls:sys_enter_* { if (comm == "cat") { @[probe] = count(); } }' -c "cat /tmp/workshop.tmp"</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="nowrap">Attaching 337 probes...
+
+@[tracepoint:syscalls:sys_enter_access]: 1
+@[tracepoint:syscalls:sys_enter_futex]: 1
+@[tracepoint:syscalls:sys_enter_set_tid_address]: 1
+@[tracepoint:syscalls:sys_enter_set_robust_list]: 1
+@[tracepoint:syscalls:sys_enter_prlimit64]: 1
+@[tracepoint:syscalls:sys_enter_fadvise64]: 1
+@[tracepoint:syscalls:sys_enter_getrandom]: 1
+@[tracepoint:syscalls:sys_enter_exit_group]: 1
+@[tracepoint:syscalls:sys_enter_munmap]: 2
+@[tracepoint:syscalls:sys_enter_arch_prctl]: 2
+@[tracepoint:syscalls:sys_enter_brk]: 3
+@[tracepoint:syscalls:sys_enter_mprotect]: 4
+@[tracepoint:syscalls:sys_enter_pread64]: 4
+@[tracepoint:syscalls:sys_enter_read]: 4
+@[tracepoint:syscalls:sys_enter_newfstatat]: 19
+@[tracepoint:syscalls:sys_enter_close]: 20
+@[tracepoint:syscalls:sys_enter_mmap]: 22
+@[tracepoint:syscalls:sys_enter_openat]: 31</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This should line up almost 1-to-1 with the previous output from strace, note that 'sys_enter_openat' is 31.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_bpftrace_count_specific_syscall"><a class="anchor" href="#_bpftrace_count_specific_syscall"></a>bpftrace: count specific syscall</h3>
+<div class="paragraph">
+<p>Now we are going to limit the probe to only show 'sys_enter_openat' thereby only setting 1 probe and collecting a count.</p>
+</div>
+<h4 id="_primary_terminal_node2_9" class="discrete">Primary Terminal (node2)</h4>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">bpftrace -e 'tracepoint:syscalls:sys_enter_openat { if (comm == "cat") { @[probe] = count(); } }' -c "cat /tmp/workshop.tmp"</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="nowrap">Attaching 1 probe...
+
+@[tracepoint:syscalls:sys_enter_openat]: 31</pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_bpftrace_set_probe_on_specific_file"><a class="anchor" href="#_bpftrace_set_probe_on_specific_file"></a>bpftrace: set probe on specific file</h3>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+For this last exercise we will utilize both terminal sessions again.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>The objective is to set a probe and identify any process that opens our targeted file.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>-e [PROBE CODE]</p>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>tracepoint:syscalls:sys_enter_openat:</strong> is the tracepoint probe type (kernel static tracing)</p>
+</li>
+<li>
+<p>conditional if() to evaluate args&#8594;filename for a match</p>
+</li>
+<li>
+<p>print() the desired output</p>
+<div class="ulist">
+<ul>
+<li>
+<p>typical <strong>pid</strong>, <strong>uid</strong>, <strong>gid</strong> fields</p>
+</li>
+<li>
+<p><strong>comm</strong> is process&#8217;s name</p>
+</li>
+<li>
+<p><strong>args&#8594;filename</strong> is the filename being accessed</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>-c [COMMAND] to run command after probes are set and exit</p>
+</li>
+</ul>
+</div>
+<h4 id="_primary_terminal_node2_10" class="discrete">Primary Terminal (node2)</h4>
+<div class="paragraph">
+<p>Proceed to set the probe in the primary terminal.</p>
+</div>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">bpftrace -e 'tracepoint:syscalls:sys_enter_openat { if (str(args-&gt;filename) == "/tmp/workshop.tmp") { printf( "%d %d %d %s %s\n", pid, uid, gid, comm, str(args-&gt;filename)); }}'</code></pre>
+</div>
+</div>
+<h4 id="_secondary_terminal_bastion_8" class="discrete">Secondary Terminal (bastion)</h4>
+<div class="paragraph">
+<p>To generate some output, you will need to utilize the second terminal and open the target with a couple of different tools.  From the bastion host, run the following:</p>
+</div>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">ssh node2 "cat /tmp/workshop.tmp"</code></pre>
+</div>
+</div>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs"><strong>ssh node2 "grep something /tmp/workshop.tmp"</strong></code></pre>
+</div>
+</div>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">ssh node2 "echo &lt; /tmp/workshop.tmp"</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This is the last step related to bpftrace.  Before porceeding to the results you can
+either hit <code>Ctrl-C</code> in the primary terminal OR send a sigkill to the process to terminate bpftrace.</p>
+</div>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">ssh node2 "pkill bpftrace"</code></pre>
+</div>
+</div>
+<h4 id="_results_7" class="discrete">Results</h4>
+<div class="paragraph">
+<p>Finally back to the primary terminal you should have seen some output like this:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="nowrap">Attaching 1 probe...
+2741 0 0 cat /tmp/workshop.tmp
+2757 0 0 grep /tmp/workshop.tmp
+2772 0 0 bash /tmp/workshop.tmp</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This displays the process-id along with the user and group ids of programs that tried to access our file.</p>
+</div>
+<div class="paragraph">
+<p>Go ahead and hit CTL-C in the primary terminal to exit bpftrace.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_conclusion"><a class="anchor" href="#_conclusion"></a>Conclusion</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>This concludes the exercises related to EBPF.</p>
+</div>
+<div class="paragraph">
+<p>Time to finish this unit and return the shell to it&#8217;s home position.</p>
+</div>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">workshop-finish-exercise.sh</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_additional_resources"><a class="anchor" href="#_additional_resources"></a>Additional Resources</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>You can find more information:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://github.com/iovisor/bpftrace/blob/master/docs/tutorial_one_liners.md">The bpftrace One-Liner Tutorial</a></p>
+</li>
+<li>
+<p><a href="https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/9/html/configuring_and_managing_networking/assembly_understanding-the-ebpf-features-in-rhel_configuring-and-managing-networking">Understanding eBPF Features</a></p>
+</li>
+<li>
+<p><a href="https://lab.redhat.com/ebpf-tracing">Performance observability in practice with bcc-tools: A lab on lab.redhat.com</a></p>
+</li>
+<li>
+<p><a href="http://www.brendangregg.com/ebpf.html">Linux Extended BPF (eBPF Tracing Tools) - Brendan Gregg</a></p>
+</li>
+<li>
+<p><a href="https://developers.redhat.com/search?t=bpf">eBPF blogs on Red Hat Developer</a></p>
+</li>
+</ul>
+</div>
+<h2 id="_end_of_unit" class="discrete">End of Unit</h2>
+</div>
+</div>
+<nav class="pagination">
+  <span class="prev"><a href="nftables.html" class="query-params-link">Firewall Rules (nf-tables)</a></span>
+  <span class="next"><a href="podman.html" class="query-params-link">Containers Management (podman)</a></span>
+</nav>
+</article>
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <a class="rhd-logo" href="https://developers.redhat.com" target="_blank"></div>
+</footer>
+<script src="../../_/js/vendor/clipboard.js"></script>
+<script src="../../_/js/site.js"></script>
+<script async src="../../_/js/vendor/highlight.js"></script>
+  </body>
+</html>

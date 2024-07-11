@@ -1,0 +1,32 @@
+name: modules
+title: Default Title
+version: master
+nav:
+  - modules/ROOT/nav.adoc
+
+asciidoc:
+  attributes:
+    lab_name: "I'm the lab_name var"
+    release-version: master
+    page-pagination: true
+    my_var: "foo"
+    guid: my-guid
+    ssh_user: devops
+    page-links:
+    - url: https://redhat.com
+      text: Red Hat
+    ssh_command: sample_ssh_command
+    ssh_password: sample_ssh_password
+    ssh_username: sample_ssh_username
+    targethost_fqdn: sample_targethost
+    markup-in-source: verbatim,attributes,quotes
+    show_solution: sample
+    format_plain: bash,options="nowrap",subs="-attributes"
+    format_cmd_exec: source,options="nowrap",,role="copy",subs="{markup-in-source}"
+    format_cmd_exec2: source,options="nowrap",role="copy",subs="{markup-in-source}"
+    format_cmd_output: bash,options="nowrap",subs="{markup-in-source}"
+    USER_GUID: sample_GUID
+    USERNAME: sample_USERNAME
+    cloud_provider: ec2
+    subdomain: sample_subdomain
+    nic0: eth0

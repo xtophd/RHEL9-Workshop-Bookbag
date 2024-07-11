@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Untitled :: Definitive RHEL9 Workshop (v9.1)</title>
+    <meta name="generator" content="Antora 3.1.7">
+    <link rel="stylesheet" href="../../_/css/site.css">
+<link rel="icon" href="../../_/img/favicon.ico" type="image/x-icon">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="https://developers.redhat.com" target="_blank"><img
+          src="../../_/img/header_logo.png" height="40px" alt="Red Hat Developer Program"></a>
+      <a class="navbar-item" href="../..">Definitive RHEL9 Workshop (v9.1)</a>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <a class="navbar-item" href="#">Books</a>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">CheatSheets</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="#">CheatSheet A</a>
+            <a class="navbar-item" href="#">CheatSheet B</a>
+            <a class="navbar-item" href="#">CheatSheet C</a>
+          </div>
+        </div>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">Upcoming Events</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="#">Event A</a>
+            <a class="navbar-item" href="#">Event B</a>
+            <a class="navbar-item" href="#">Event C</a>
+          </div>
+        </div>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">More Tutorials</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="#">Tutorial A</a>
+            <a class="navbar-item" href="#">Tutorial B</a>
+            <a class="navbar-item" href="#">Tutorial C</a>
+          </div>
+        </div>
+        <div class="navbar-item">
+          <span class="control">
+            <a class="button is-primary" href="#">Download</a>
+          </span>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="modules" data-version="master">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="../index.html" class=" query-params-link">Default Title</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../overview.html">Workshop Overview</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="webconsole.html">Web Console (cockpit)</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="systemd.html">Service Management (systemd)</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="firewalld.html">Firewall Management (firewalld)</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="nftables.html">Firewall Rules (nf-tables)</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="ebpf.html">eBPF Tracing (bcc-tools)</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="podman.html">Containers Management (podman)</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="buildah.html">Containers Dev (buildah)</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="image-builder.html">Image Builder (composer-cli)</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="virtualization.html">Virtualization (kvm,libvirt)</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="tlog.html">Session Logging (tlog)</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="lvm-vdo.html">Data Optimization (lvm,vdo)</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="stratis.html">Storage Management (stratis)</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="kpatch.html">Kernel Live Patching (kpatch)</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="boom-kernel-parms.html">Managing GRUB2 with Boom</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="leapp.html">LEAPP In-Place Upgrades</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">Default Title</span>
+    <span class="version">master</span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <span class="title">Default Title</span>
+      <ul class="versions">
+        <li class="version is-current">
+          <a href="../index.html">master</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="../connection.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+</nav>
+  <div class="edit-this-page"><a href="file:///Users/jmaltin/Development/RHEL9-Workshop-Showroom/content/modules/ROOT/pages/documentation/getting-started.adoc">Edit this Page</a></div>
+</div>
+  <div class="content">
+<article class="doc">
+<div class="sect1">
+<h2 id="_workshop_preparation_do_this_first"><a class="anchor" href="#_workshop_preparation_do_this_first"></a>Workshop Preparation (DO THIS FIRST!)</h2>
+<div class="sectionbody">
+
+</div>
+</div>
+<div class="sect1">
+<h2 id="_sign_on_to_bastion_host"><a class="anchor" href="#_sign_on_to_bastion_host"></a>Sign-On to <strong>bastion</strong> host</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Using the connection information and credentials provided by the instructor, get yourselves signed into your bastion session.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_invoke_tmux"><a class="anchor" href="#_invoke_tmux"></a>Invoke <strong>tmux</strong></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><strong>tmux</strong> is a very handy utilty for terminal session management.  If for any reason you lose connectivity or your session is terminated, <strong>tmux</strong> will preserve your session and allow you to reconnect.  There are MANY other features provided by this utility.  Some of them are listed in the primary document section titled <strong>Quick Overview of tmux</strong>.</p>
+</div>
+<div class="listingblock execute">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs"><strong>tmux</strong></code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_become_the_root_user"><a class="anchor" href="#_become_the_root_user"></a>Become the root user</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>In order to execute the environment preparation, we need to become the administrative user 'root'.</p>
+</div>
+<div class="listingblock execute">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs"><strong>sudo -i</strong></code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_only_with_explicit_instructions"><a class="anchor" href="#_only_with_explicit_instructions"></a>Only with Explicit Instructions</h2>
+<div class="sectionbody">
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+It is likely that your instructor (or the automated deployment system) has already performed these steps.  Do not replace, update or overwrite the configuration unless you are directed to do so.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Click on the commands below to expose steps to perform each action.  Remember, only do this if explicitly asked to do so.</p>
+</div>
+<details>
+<summary class="title">Commands to clone workshop from source</summary>
+<div class="content">
+<div class="paragraph">
+<p># cd ~</p>
+</div>
+<div class="paragraph">
+<p># git clone <a href="https://github.com/xtophd/RHEL9-Workshop" class="bare">https://github.com/xtophd/RHEL9-Workshop</a></p>
+</div>
+<div class="paragraph">
+<p># cd ./RHEL9-Workshop</p>
+</div>
+<div class="paragraph">
+<p># git branch &lt;branch-name&gt;</p>
+</div>
+</div>
+</details>
+<details>
+<summary class="title">Commands to update the workshop</summary>
+<div class="content">
+<div class="paragraph">
+<p># cd ~/RHEL9-Workshop</p>
+</div>
+<div class="paragraph">
+<p># git pull</p>
+</div>
+</div>
+</details>
+<details>
+<summary class="title">Commands to configure the workshop</summary>
+<div class="content">
+<div class="paragraph">
+<p># cd ~/RHEL9-Workshop</p>
+</div>
+<div class="paragraph">
+<p># cp ./sample-configs/[depoyment-type]/* ./config</p>
+</div>
+</div>
+</details>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_run_the_prep_script"><a class="anchor" href="#_run_the_prep_script"></a>Run the Prep Script</h2>
+<div class="sectionbody">
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+There are 2 package dependencies in order for the prep-script to function: ansible-core, rhel-system-roles.  The prep-script will attempt to install these packages if detected as missing.
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+If you run the deployment playbooks from the web console shell, you will be disconnected and have to sign in again.  If you used tmux, you can easily recover your shell with 'tmux a'
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Now we will run the playbooks that will set up all of the workshop exercises.</p>
+</div>
+<div class="listingblock execute">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">cd ~/RHEL9-Workshop
+
+./rhel9-workshop.sh all</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The preparation script will run for approximately 5 to 7 minutes on a fresh deployment.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_a_few_words_while_the_installer_runs"><a class="anchor" href="#_a_few_words_while_the_installer_runs"></a>A Few Words While the Installer Runs</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_new_in_rhel_9"><a class="anchor" href="#_new_in_rhel_9"></a>New in RHEL 9</h3>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+If the presenter (or partner) has some slides to show, this is a good place to use them.  Otherwise, here are some high-level bullets about RHEL 9.
+</td>
+</tr>
+</table>
+</div>
+<div class="sect3">
+<h4 id="_release_information"><a class="anchor" href="#_release_information"></a>Release Information</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>RHEL 9 GA Release Date: May 18th, 2022</p>
+</li>
+<li>
+<p>End of Full Support: May 2027</p>
+</li>
+<li>
+<p>End of Maintenance Support: May 2032</p>
+<div class="ulist">
+<ul>
+<li>
+<p><em>Subject to change, please refer to:</em> <a href="https://access.redhat.com/support/policy/updates/errata">Red Hat Enterprise Linux Life Cycle</a></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>RHEL 9 Release cadence is a predictable 6 month cycle</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_general_information"><a class="anchor" href="#_general_information"></a>General Information</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>Kernel Version: 5.14.0+</p>
+</li>
+<li>
+<p>System Compiler: GCC 11.2.1, LLVM 13.0.1</p>
+</li>
+<li>
+<p>Hardware Architectures: Intel/AMD 64-bit, IBM Power LE, IBM z Systems, ARM 64-bit</p>
+</li>
+<li>
+<p>Default File System: XFS</p>
+</li>
+<li>
+<p>Package Management: dnf 4.10</p>
+</li>
+<li>
+<p>Time Sync: Chrony</p>
+</li>
+<li>
+<p>Networking: Network Manager</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_conclusion"><a class="anchor" href="#_conclusion"></a>Conclusion</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The set up of the RHEL 8 Workshop should now be complete.  A couple of remaining words of advice:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Some exercises are dependant on the successful completion of other exercises.  Those dependencies will be noted.</p>
+</li>
+<li>
+<p>Pay attention to which user-id (login) to use</p>
+</li>
+<li>
+<p>Pay attention to which host to use</p>
+</li>
+<li>
+<p>There is an exam at the conclusion of the workshop&#8230;&#8203; #notreally</p>
+</li>
+</ol>
+</div>
+<h2 id="_end_of_unit" class="discrete">End of Unit</h2>
+</div>
+</div>
+</article>
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <a class="rhd-logo" href="https://developers.redhat.com" target="_blank"></div>
+</footer>
+<script src="../../_/js/vendor/clipboard.js"></script>
+<script src="../../_/js/site.js"></script>
+<script async src="../../_/js/vendor/highlight.js"></script>
+  </body>
+</html>

@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Untitled :: Definitive RHEL9 Workshop (v9.1)</title>
+    <link rel="prev" href="buildah.html">
+    <link rel="next" href="virtualization.html">
+    <meta name="generator" content="Antora 3.1.7">
+    <link rel="stylesheet" href="../../_/css/site.css">
+<link rel="icon" href="../../_/img/favicon.ico" type="image/x-icon">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="https://developers.redhat.com" target="_blank"><img
+          src="../../_/img/header_logo.png" height="40px" alt="Red Hat Developer Program"></a>
+      <a class="navbar-item" href="../..">Definitive RHEL9 Workshop (v9.1)</a>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <a class="navbar-item" href="#">Books</a>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">CheatSheets</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="#">CheatSheet A</a>
+            <a class="navbar-item" href="#">CheatSheet B</a>
+            <a class="navbar-item" href="#">CheatSheet C</a>
+          </div>
+        </div>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">Upcoming Events</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="#">Event A</a>
+            <a class="navbar-item" href="#">Event B</a>
+            <a class="navbar-item" href="#">Event C</a>
+          </div>
+        </div>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">More Tutorials</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="#">Tutorial A</a>
+            <a class="navbar-item" href="#">Tutorial B</a>
+            <a class="navbar-item" href="#">Tutorial C</a>
+          </div>
+        </div>
+        <div class="navbar-item">
+          <span class="control">
+            <a class="button is-primary" href="#">Download</a>
+          </span>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="modules" data-version="master">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="../index.html" class=" query-params-link">Default Title</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../overview.html">Workshop Overview</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="webconsole.html">Web Console (cockpit)</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="systemd.html">Service Management (systemd)</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="firewalld.html">Firewall Management (firewalld)</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="nftables.html">Firewall Rules (nf-tables)</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="ebpf.html">eBPF Tracing (bcc-tools)</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="podman.html">Containers Management (podman)</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="buildah.html">Containers Dev (buildah)</a>
+  </li>
+  <li class="nav-item is-current-page" data-depth="1">
+    <a class="nav-link" href="image-builder.html">Image Builder (composer-cli)</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="virtualization.html">Virtualization (kvm,libvirt)</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="tlog.html">Session Logging (tlog)</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="lvm-vdo.html">Data Optimization (lvm,vdo)</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="stratis.html">Storage Management (stratis)</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="kpatch.html">Kernel Live Patching (kpatch)</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="boom-kernel-parms.html">Managing GRUB2 with Boom</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="leapp.html">LEAPP In-Place Upgrades</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">Default Title</span>
+    <span class="version">master</span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <span class="title">Default Title</span>
+      <ul class="versions">
+        <li class="version is-current">
+          <a href="../index.html">master</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="../connection.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="../index.html">Default Title</a></li>
+    <li><a href="image-builder.html">Image Builder (composer-cli)</a></li>
+  </ul>
+</nav>
+  <div class="edit-this-page"><a href="file:///Users/jmaltin/Development/RHEL9-Workshop-Showroom/content/modules/ROOT/pages/documentation/image-builder.adoc">Edit this Page</a></div>
+</div>
+  <div class="content">
+<article class="doc">
+<div class="sect1">
+<h2 id="_image_builder"><a class="anchor" href="#_image_builder"></a>Image Builder</h2>
+<div class="sectionbody">
+
+</div>
+</div>
+<div class="sect1">
+<h2 id="_overview"><a class="anchor" href="#_overview"></a>Overview</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>When installing Red Hat Enterprise Linux from scratch, the traditional methods are:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Use the DVD ISO</p>
+</li>
+<li>
+<p>Use the BOOT ISO with network accessible repos</p>
+</li>
+<li>
+<p>Use the pre-built KVM Guest images (qcow2)</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Leveraging additional tools and services (ie: pxe, dhcp, kickstart, ansible automation, ipmi,
+redfish, etc&#8230;&#8203;) the process can be heavily automated and turned into a completely hands-free task.
+We have doing this for decades.</p>
+</div>
+<div class="paragraph">
+<p>Using Red Hat Enterprise Linux 9, there is a new method for creating RHEL images to add
+to your toolbox: <strong>Image Builder</strong>.</p>
+</div>
+<div class="paragraph">
+<p><strong>Image Builder</strong> is a collection of tools that create custom RHEL images in a variety of formats for
+compatibility with major cloud providers and virtualization technologies.  Meaning, you can design
+an OS blueprint and then specify the target platfrom to create an appropriate image (ie: VMWare,
+AWS, Openstack, KVM, etc&#8230;&#8203;).</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+You CAN create images of multiple RHEL minor releases that are different from the host (ex: RHEL 9.0, RHEL 9.1) but to do so requires additional repo configurations which are not available in this workshop environment.
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Internet connectivity is not a prerequisite, however Image Builder is configured to connect to Red Hat CDN by default and must be modified to work in an isolated environment or with content views provided by Red Hat Satellite.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_getting_started"><a class="anchor" href="#_getting_started"></a>Getting Started</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>For these exercises, you will be using the host <code>bastion</code> as user <code>root</code>.</p>
+</div>
+<div class="paragraph">
+<p>Use <code>sudo</code> to elevate your privileges.</p>
+</div>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">[[ "$UID" == 0 ]] || sudo -i</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Verify that you are on the right host for these exercises.</p>
+</div>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">workshop-imagebuilder-checkhost.sh</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You are now ready to proceed with these exercises.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_installation_and_configuration"><a class="anchor" href="#_installation_and_configuration"></a>Installation and Configuration</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Install the required packages - this will pull in several Python related dependencies.</p>
+</div>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">yum install -y osbuild-composer composer-cli cockpit-composer guestfs-tools</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Ensure everything is stopped while we reconfigure things for this exercise.</p>
+</div>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">systemctl stop osbuild-composer.socket
+systemctl stop osbuild-worker@.service.d osbuild-worker@1.service osbuild-composer.service</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Depending on the environment the workshop is running in, probably need to adjust
+the sources of the available repos used by the image-builder.</p>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+At this time, the assumption is that this host registered to a Red Hat Satellite Server.  Please consult your instructor for alternative instructions if this is not the case:
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>The steps to configure the image-builder have been condensed into a shell script.  If you are curious to examine exactly what is being done, have
+a look at /usr/local/bin/workshop-imagebuilder-config.sh.  Either way, go ahead and run it now.</p>
+</div>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">workshop-imagebuilder-config.sh</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>And with that, we are ready to proceed building images.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_create_a_blueprint"><a class="anchor" href="#_create_a_blueprint"></a>Create a Blueprint</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Blueprints are defined by a TOML configuration file.  A sample has been provided to get us started with a very basic definition.</p>
+</div>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">cat /usr/local/etc/imagebuilder-sample.toml</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="nowrap">name = "sample-webserver"
+description = "standard apache httpd webserver"
+version = "0.0.1"
+
+[customizations.services]
+enabled = ["httpd"]
+
+[customizations.firewall.services]
+enabled = ["http","https"]
+
+[[modules]]
+version = "2.4.*"
+name = "httpd"
+
+[[modules]]
+version = "2.4.*"
+name = "mod_ssl"
+
+[[packages]]
+version = "*"
+name = "openssh-server"
+
+[[packages]]
+version = "*"
+name = "rsync"</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Looking over the blueprint, it should be apparent that this image blueprint builds on a standard RHEL base by:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>enabling the httpd service</p>
+</li>
+<li>
+<p>adding a few packages</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Now we need to push the blueprint to our image builder catalog.</p>
+</div>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">composer-cli blueprints push /usr/local/etc/imagebuilder-sample.toml</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_list_blueprints"><a class="anchor" href="#_list_blueprints"></a>List Blueprints</h2>
+<div class="sectionbody">
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">composer-cli blueprints list</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="nowrap">sample-webserver</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>A nice quick way to determine if the local <code>Image Builder</code> can resolve all dependencies for the blueprint is to run  it thorugh a <code>depsolve</code>.  Here you can also see a full list of rpms that will be installed on the image.</p>
+</div>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">composer-cli blueprints depsolve sample-webserver</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If everything is in order, you output should look something like this.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="nowrap">blueprint: sample-webserver v0.0.1
+    libseccomp-2.5.2-2.el9.x86_64
+    libpwquality-1.4.4-8.el9.x86_64
+    kmod-28-7.el9.x86_64
+    libutempter-1.2.1-6.el9.x86_64
+    lz4-libs-1.9.3-5.el9.x86_64
+    libnfnetlink-1.0.1-21.el9.x86_64
+    libacl-2.3.1-3.el9.x86_64
+    libkcapi-hmaccalc-1.3.1-3.el9.x86_64
+    libcap-ng-0.8.2-7.el9.x86_64
+    libnghttp2-1.43.0-5.el9.x86_64
+    json-c-0.14-11.el9.x86_64
+    filesystem-3.16-2.el9.x86_64
+    kmod-libs-28-7.el9.x86_64
+    python3-dbus-1.2.18-2.el9.x86_64
+...SNIP...</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If you see errors or packages that can not be resolved, this is likely a problem with the osbuild repo configuration(s).  Let your instructor know and hopefully this can be fixed.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_compose_a_blueprint"><a class="anchor" href="#_compose_a_blueprint"></a>Compose a Blueprint</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>We are now ready to compose the blueprint into an image.</p>
+</div>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">composer-cli compose start sample-webserver qcow2</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="nowrap">Compose 812019dd-20e5-4528-a99b-09fbe47ca2d8 added to the queue</pre>
+</div>
+</div>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">composer-cli compose status</code></pre>
+</div>
+</div>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">composer-cli compose list</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="nowrap">812019dd-20e5-4528-a99b-09fbe47ca2d8 *FINISHED* sample-webserver 0.0.1 qcow2</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>It may take a few minutes, but eventually you should see a "FINISHED" status.  Here is a
+simple command to wait for the compose to finish.</p>
+</div>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">time until $(composer-cli compose list | tail -n +2 | grep -qi finished); do echo -n "." ; sleep 3; done</code></pre>
+</div>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+It is critical to wait for the compose to finish before proceeding.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_retrieve_the_qcow_image"><a class="anchor" href="#_retrieve_the_qcow_image"></a>Retrieve the QCOW Image</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>We need to grab a copy of the image and put it in the right place for our platform.</p>
+</div>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">cd /var/lib/libvirt/images</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Take a moment to identify the UUID of the created image.</p>
+</div>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">composer-cli compose list</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="nowrap">812019dd-20e5-4528-a99b-09fbe47ca2d8 *FINISHED* sample-webserver 0.0.1 qcow2</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Here is a helpful way to store the last FINISHED image UUID to an environment variable.</p>
+</div>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">export IMAGE_UUID=$(composer-cli compose list | grep -m 1 FINISHED | awk '{print $1}')</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Now use the UUID from your ouput to extract the QCOW image.</p>
+</div>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">composer-cli compose image $IMAGE_UUID</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Finally you can rename it to something a little more convinient</p>
+</div>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">mv $IMAGE_UUID-disk.qcow2 vmguest.qcow2</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_conclusion"><a class="anchor" href="#_conclusion"></a>Conclusion</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>In the next unit, we will tackle how to utilize the native virtualization
+technology included with RHEL to launch your custom built image.</p>
+</div>
+<div class="paragraph">
+<p>Time to finish this unit and return the shell to it&#8217;s home position.</p>
+</div>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">workshop-finish-exercise.sh</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_additional_resources"><a class="anchor" href="#_additional_resources"></a>Additional Resources</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Image Builder</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://github.com/rlucente-se-jboss/RFESummit2021">RHEL for Edge Demo</a></p>
+</li>
+<li>
+<p><a href="https://access.redhat.com/solutions/5773421">Configuring Image Builder with Satellite</a></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Cockpit Project Page</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="http://cockpit-project.org/blog/category/release.html">Cockpit Project</a></p>
+</li>
+</ul>
+</div>
+<h2 id="_end_of_unit" class="discrete">End of Unit</h2>
+</div>
+</div>
+<nav class="pagination">
+  <span class="prev"><a href="buildah.html" class="query-params-link">Containers Dev (buildah)</a></span>
+  <span class="next"><a href="virtualization.html" class="query-params-link">Virtualization (kvm,libvirt)</a></span>
+</nav>
+</article>
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <a class="rhd-logo" href="https://developers.redhat.com" target="_blank"></div>
+</footer>
+<script src="../../_/js/vendor/clipboard.js"></script>
+<script src="../../_/js/site.js"></script>
+<script async src="../../_/js/vendor/highlight.js"></script>
+  </body>
+</html>

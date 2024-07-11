@@ -1,36 +1,4 @@
-:sectnums:
-:sectnumlevels: 3
-:markup-in-source: verbatim,attributes,quotes
-:imagesdir: ./_images/cockpit-rhel92
-ifdef::env-github[]
-:tip-caption: :bulb:
-:note-caption: :information_source:
-:important-caption: :heavy_exclamation_mark:
-:caution-caption: :fire:
-:warning-caption: :warning:
-endif::[]
-:ssh_username: <Provided-By-Instructor>
-:ssh_password: <Provided-By-Instructor>
-:targethost_fqdn: <Provided-By-Instructor>
-:subdomain: example.com
-:format_cmd_exec: source,options="nowrap",subs="{markup-in-source}",role="copy"
-:format_cmd_output: bash,options="nowrap",subs="{markup-in-source}"
-ifeval::["%cloud_provider%" == "ec2"]
-:ssh_password: %ssh_password%
-:ssh_username: %ssh_username%
-:targethost_fqdn: %targethost%
-:subdomain: %subdomain_internal%
-:format_cmd_exec: source,options="nowrap",subs="{markup-in-source}",role="execute"
-endif::[]
-
-
-
-:toc:
-:toclevels: 1
-
-
-
-= Web Console
+== Web Console
 
 == Overview
 
@@ -75,8 +43,6 @@ firewall-cmd --reload
 
 That completes the installation and configuration of the Web Console.
 
-
-
 == Webconsole Login
 
 NOTE:  Please note that by default, the webconsole is configured to use port 9090.  Thus you would normally add :9090 to the end of the URL.  However for the purposes of this lab and to provide the greatest degree of internet compatability the webconsole has been additionally enabled on port 443.
@@ -87,7 +53,7 @@ Accept the various notifications about insecure ceritificates, and then login in
 
 Use the following URL:
 
-  * link:https://{targethost_fqdn}/[] 
+  * link:https://{targethost_fqdn}/[]
 
 And the following UserID and Password:
 
@@ -166,8 +132,6 @@ systemctl restart cockpit.socket
 ----
 ====
 
-
-
 == Change Performance Profile
 
 RHEL 9 comes with several pre-canned performance tuning profiles from Tuned. Since this is a virtual machine, the default profile “virtual-guest” was selected. You can easily switch profile via the Web Console web UI. In this exercise, we will change the profile to “throughput-performance”
@@ -181,8 +145,6 @@ A dialog box will appear.  Scroll and find "throughput-performance" and select.
 ====
 image::Slide9.PNG[Cockpit Perf Throughout]
 ====
-
-
 
 == View Logs
 
@@ -202,8 +164,6 @@ Have a look at the search capabilities and notice that you can set criteria by:
 image::Slide11.PNG[Cockpit Logs Criteria]
 ====
 
-
-
 == Network Management
 
 Under the networking section, you can monitor and manage current networking activities and devices. You can create a network bond, team, bridge, and vlan all driven by the webconsle GUI.
@@ -214,11 +174,9 @@ Due to the nature of workshops, we refrain from making and saving changes to the
 image::Slide12.PNG[Cockpit Network]
 ====
 
-
-
 == Firewall Management
 
-Also under the networking section, you can configure your firewall rules. 
+Also under the networking section, you can configure your firewall rules.
 
 For the next exercise, let's enable a rule for NTP (Network Time Protocol).  Begin by selecting the Networking category and "Edit rules and zones".
 
@@ -238,8 +196,6 @@ In the dialog box enter 'ntp' as the filter, select 'ntp' and hit "Add services"
 image::Slide15.PNG[Cockpit Firewall Dialog]
 ====
 
-
-
 == Service Management
 
 Now that you enabled a NTP firewall rule, let’s make sure an NTP service provider is enabled and running under the Web Console Services section.
@@ -255,8 +211,6 @@ Turns out, chronyd is already enabled and active.  Nothing to do here...
 ====
 image::Slide17.PNG[Cockpit Services]
 ====
-
-
 
 == Remote Node Management
 
@@ -325,11 +279,3 @@ You can find more information:
 
 [discrete]
 == End of Unit
-
-ifdef::env-github[]
-link:../RHEL9-Workshop.adoc#toc[Return to TOC]
-endif::[]
-
-////
-Always end files with a blank line to avoid include problems.
-////

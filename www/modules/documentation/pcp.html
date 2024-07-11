@@ -1,0 +1,1118 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Untitled :: Definitive RHEL9 Workshop (v9.1)</title>
+    <meta name="generator" content="Antora 3.1.7">
+    <link rel="stylesheet" href="../../_/css/site.css">
+<link rel="icon" href="../../_/img/favicon.ico" type="image/x-icon">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="https://developers.redhat.com" target="_blank"><img
+          src="../../_/img/header_logo.png" height="40px" alt="Red Hat Developer Program"></a>
+      <a class="navbar-item" href="../..">Definitive RHEL9 Workshop (v9.1)</a>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <a class="navbar-item" href="#">Books</a>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">CheatSheets</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="#">CheatSheet A</a>
+            <a class="navbar-item" href="#">CheatSheet B</a>
+            <a class="navbar-item" href="#">CheatSheet C</a>
+          </div>
+        </div>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">Upcoming Events</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="#">Event A</a>
+            <a class="navbar-item" href="#">Event B</a>
+            <a class="navbar-item" href="#">Event C</a>
+          </div>
+        </div>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">More Tutorials</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="#">Tutorial A</a>
+            <a class="navbar-item" href="#">Tutorial B</a>
+            <a class="navbar-item" href="#">Tutorial C</a>
+          </div>
+        </div>
+        <div class="navbar-item">
+          <span class="control">
+            <a class="button is-primary" href="#">Download</a>
+          </span>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="modules" data-version="master">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="../index.html" class=" query-params-link">Default Title</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../overview.html">Workshop Overview</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="webconsole.html">Web Console (cockpit)</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="systemd.html">Service Management (systemd)</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="firewalld.html">Firewall Management (firewalld)</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="nftables.html">Firewall Rules (nf-tables)</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="ebpf.html">eBPF Tracing (bcc-tools)</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="podman.html">Containers Management (podman)</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="buildah.html">Containers Dev (buildah)</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="image-builder.html">Image Builder (composer-cli)</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="virtualization.html">Virtualization (kvm,libvirt)</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="tlog.html">Session Logging (tlog)</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="lvm-vdo.html">Data Optimization (lvm,vdo)</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="stratis.html">Storage Management (stratis)</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="kpatch.html">Kernel Live Patching (kpatch)</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="boom-kernel-parms.html">Managing GRUB2 with Boom</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="leapp.html">LEAPP In-Place Upgrades</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">Default Title</span>
+    <span class="version">master</span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <span class="title">Default Title</span>
+      <ul class="versions">
+        <li class="version is-current">
+          <a href="../index.html">master</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="../connection.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+</nav>
+  <div class="edit-this-page"><a href="file:///Users/jmaltin/Development/RHEL9-Workshop-Showroom/content/modules/ROOT/pages/documentation/pcp.adoc">Edit this Page</a></div>
+</div>
+  <div class="content">
+<article class="doc">
+<div class="sect1">
+<h2 id="_performance_co_pilot_grafana_and_bpftrace"><a class="anchor" href="#_performance_co_pilot_grafana_and_bpftrace"></a>Performance Co-Pilot, Grafana, and bpftrace</h2>
+<div class="sectionbody">
+
+</div>
+</div>
+<div class="sect1">
+<h2 id="_overview"><a class="anchor" href="#_overview"></a>Overview</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Performance Co-Pilot is a suite of tools, services, and libraries for monitoring, visualizing, storing, and analyzing system-level performance measurements. Starting with RHEL 8.2, we are delivering version 5.0.2, which has many enhancements, including providing <a href="https://openmetrics.io">OpenMetrics</a> compliant data over pmproxy that can be used by other collectors such as prometheus.</p>
+</div>
+<div class="paragraph">
+<p>RHEL 8 also provides Grafana, a graphing, visualization tool, which we integrate with Performance Co-Pilot to graph metrics in real time.</p>
+</div>
+<div class="paragraph">
+<p>Combined with bpftrace, we are able to get at very interesting data from the kernel.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_getting_started"><a class="anchor" href="#_getting_started"></a>Getting Started</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>For these exercises, you will primarily be using the hosts <code>node2</code> and <code>node3</code>  as user <code>root</code>.  However, these exercises do REQUIRE a second terminal session to run commands on other hosts.  Please pay careful attention to what commands to run on different hosts.</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+Now is a great time to use the multi session capability of <strong>tmux</strong>.  Use <code>Ctrl-b "</code> to create another session with a split screen.  Cycle the active session back and forth with <code>CTRL-b n</code> (next) and <code>CTRL-b p</code> (previous).
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>From host <code>bastion</code>, ssh to <code>node2</code>.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="nowrap">$ <strong>ssh node2</strong></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Use <code>sudo</code> to elevate your privileges.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="nowrap">$ <strong>sudo -i</strong></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Verify that you are on the right host for these exercises.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="nowrap"># <strong>workshop-pcp-checkhost.sh</strong></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You are now ready to proceed with these exercises.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_installation"><a class="anchor" href="#_installation"></a>Installation</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Start by installing pcp,grafana,redis,js-d3-flame-graph, and others:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="nowrap"># <strong>dnf install pcp pcp-system-tools grafana grafana-pcp cockpit-pcp bpftrace bcc-tools pcp-pmda-bpftrace cyrus-sasl-md5 cyrus-sasl-lib redis js-d3-flame-graph -y</strong></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_pminfo_and_pmrep"><a class="anchor" href="#_pminfo_and_pmrep"></a>pminfo and pmrep</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Since we now have pcp installed and running on our machines, let&#8217;s run the following on node1:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="nowrap">pminfo | grep kernel | head -n 15</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This will return similar output to:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="nowrap">kernel.all.load
+kernel.all.intr
+kernel.all.pswitch
+kernel.all.sysfork
+kernel.all.running
+kernel.all.blocked
+kernel.all.boottime
+kernel.all.hz
+kernel.all.uptime
+kernel.all.idletime
+kernel.all.nusers
+kernel.all.nroots
+kernel.all.nsessions
+kernel.all.lastpid
+kernel.all.runnable</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This represents 15 pcp metrics that have the word "kernel" in them. Let&#8217;s use the <code>pmrep</code> command to see what the load on our system currently is:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="nowrap">pmrep kernel.all.load -s 15</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This will return output similar to:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="nowrap">  k.a.load  k.a.load  k.a.load
+  1 minute  5 minute  15 minut
+
+     0.010     0.010     0.000
+     0.010     0.010     0.000
+     0.010     0.010     0.000
+     0.010     0.010     0.000
+     0.010     0.010     0.000
+     0.010     0.010     0.000
+     0.010     0.010     0.000
+     0.010     0.010     0.000
+     0.010     0.010     0.000
+     0.010     0.010     0.000
+     0.010     0.010     0.000
+     0.010     0.010     0.000
+     0.010     0.010     0.000
+     0.010     0.010     0.000
+     0.010     0.010     0.000</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This gives us 15 samples at a 1-second interval for the 1-minute, 5-minute, and 15-minute load average for this host. In order to make this more interesting, we can start stress-ng in the second terminal:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="nowrap">stress-ng --aio 40 --cpu 20 &amp;</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>and back in the first terminal:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="nowrap">pmrep kernel.all.load -s 15</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>and our output will show more load this time:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="nowrap">  k.a.load  k.a.load  k.a.load
+  1 minute  5 minute  15 minut
+
+     1.600     0.330     0.110
+     1.600     0.330     0.110
+     1.600     0.330     0.110
+     1.600     0.330     0.110
+     3.080     0.660     0.210
+     3.080     0.660     0.210
+     3.080     0.660     0.210
+     3.080     0.660     0.210
+     3.080     0.660     0.210
+     4.430     0.980     0.320
+     4.430     0.980     0.320
+     4.430     0.980     0.320
+     4.430     0.980     0.320
+     4.430     0.980     0.320
+     5.680     1.300     0.430</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Now in the second terminal, run:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="nowrap">killall -9 stress-ng</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This stops our stress-ng process and will allow the load on the system to return to normal.</p>
+</div>
+<div class="paragraph">
+<p>Also, with pmrep, we can create ini files that allow us to build pcp reports. A pcp report to measure memory utilization would look like:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="nowrap">[mem-util]
+timestamp=yes
+interval=1s
+mem.util.bufmem=
+mem.util.cached=
+mem.util.free=
+mem.util.used=</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This is from the file <code>rhel-use.conf</code> and if we run this report, we will have timestamped data sampled at a 1 second interval that will include the pcp metrics: <code>mem.util.bufmem</code>, <code>mem.util.cached</code>, <code>mem.util.free</code>, <code>mem.util.used</code>. Let&#8217;s use <code>pmrep</code> and rhel-use.conf to sample memory. But first, in our second terminal, let&#8217;s generate some memory load:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="nowrap">stress-ng --vm 20 &amp;</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>and in the first terminal:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="nowrap">pmrep -c rhel-use.conf :mem-util -s 15</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This will print output similar to:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="nowrap">          m.u.bufmem  m.u.cached  m.u.free  m.u.used
+               Kbyte       Kbyte     Kbyte     Kbyte
+20:58:49           0     1589892     89752   1770152
+20:58:50           0     1502764    159928   1699976
+20:58:51           0     1628788     52140   1807764
+20:58:52           0     1587184     57004   1802900
+20:58:53           0     1601804     76884   1783020
+20:58:54           0     1610292     72720   1787184
+20:58:55           0     1555400    120180   1739724
+20:58:56           0     1002124    649464   1210440
+20:58:57           0     1629744     52336   1807568
+20:58:58           0     1621704     52664   1807240
+20:58:59           0     1614144     75640   1784264
+20:59:00           0     1612628     53104   1806800
+20:59:01           0     1584568    105372   1754532
+20:59:02           0     1602292     87688   1772216
+20:59:03           0     1606756     67600   1792304</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Now in our second terminal, let&#8217;s run:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="nowrap">killall -9 stress-ng</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>From this, we can see that pmrep is a powerful tool for reporting on pcp metrics at the command line.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_pmseries_enablement"><a class="anchor" href="#_pmseries_enablement"></a>pmseries enablement</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>pmseries allows pcp to store data in a redis database. This allows for searching historical data at a later time, which can be quite useful during the post mortem of a performance event.</p>
+</div>
+<div class="paragraph">
+<p>To set up pmseries, on node2, please edit /etc/pcp/pmseries/pmseries.conf and make sure the following under <code>[pmproxy]</code> is set:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre># support Redis protocol proxying
+redis.enabled = true</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Then make sure that under <code>[pmseries]</code>, you have the following set:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre># allow REST API queries of fast, scalable time series
+enabled = true</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Once these are both set, save the file and run:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>systemctl restart pmcd pmlogger pmproxy</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>It will take pmseries a few minutes to have data collected, but once this has began, you can run:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>pmseries kernel.all.load</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>and get output similar to:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>fc13f67815676cd1ed1687fe55030c9e8c33b059</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>which verifies that pmseries is storing data in redis. We will view this data in grafana.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_bpftrace_pmda_initial_setup"><a class="anchor" href="#_bpftrace_pmda_initial_setup"></a>bpftrace pmda Initial Setup</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Let&#8217;s install the bpftrace pmda to examine how this works. The rpm is already installed on the system, but we still have to install the pmda into pcp. On node2, run:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>cd /var/lib/pcp/pmdas/bpftrace
+./Install
+pmrep bpftrace.scripts.runqlat.data.usecs -s 5</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This should return 5 samples of run queue latency measured in microseconds:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>  b.s.r.data_bytes
+            byte/s
+               N/A
+           570.033
+           573.032
+           572.621
+           573.303
+           573.271
+           572.550
+           573.998
+           574.196
+           575.521
+           572.610
+           574.096
+           575.030
+           577.681
+           577.983</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Now how did that happen? If we examine the <code>/var/lib/pcp/pmdas/bpftrace/autostart</code> directory, we will see two included bpftrace scripts:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>ls -lah /var/lib/pcp/pmdas/bpftrace/autostart/</pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>total 8.0K
+drwxr-xr-x. 2 root root  45 Aug  6 20:10 .
+drwxr-xr-x. 4 root root 161 Aug 13 21:24 ..
+-rw-r--r--. 1 root root 601 Jun 23 05:21 biolatency.bt
+-rw-r--r--. 1 root root 794 Jun 23 05:21 runqlat.bt</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If we look at runqlat.bt, we will see a line in the code that reads:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>                @usecs = hist((nsecs - $ns) / 1000);</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This pmda has converted this <code>@usecs</code> bpfmap to a pcp metric. To see all pcp metrics from this script, run:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>pminfo | grep bpftrace | grep runqlat</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>and you will see:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>bpftrace.scripts.runqlat.data.usecs
+bpftrace.scripts.runqlat.data_bytes
+bpftrace.scripts.runqlat.code
+bpftrace.scripts.runqlat.probes
+bpftrace.scripts.runqlat.error
+bpftrace.scripts.runqlat.exit_code
+bpftrace.scripts.runqlat.pid
+bpftrace.scripts.runqlat.status</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>As such, any bpftrace script placed in the "autostart" directory will be parsed, run, and made available through pcp in this manner. If you add a bpftrace script, you do need to run <code>Remove</code> followed by <code>Install</code> in the <code>/var/lib/pcp/pmdas/bpftrace/</code> directory for this script to be picked up. This makes for a powerful integration between pcp and bpftrace.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_remote_logging_setup"><a class="anchor" href="#_remote_logging_setup"></a>Remote Logging Setup</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Let&#8217;s use our pcp node2 as a remote logging server and our pcp node3 as a client. To do this, let&#8217;s go to node3 and set up pmlogger as a client:</p>
+</div>
+<div class="paragraph">
+<p>Edit /etc/sysconfig/pmcd and make sure PMCD_LOCAL=0</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre># Behaviour regarding listening on external-facing interfaces;
+# unset PMCD_LOCAL to allow connections from remote hosts.
+# A value of 0 permits remote connections, 1 permits local only.
+
+PMCD_LOCAL=0</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Save this file and then we will need to open some services on the firewall:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>firewall-cmd --add-service=pmproxy --add-service=pmcd --permanent
+firewall-cmd --reload</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Now we need to allow pcp to bind to unreserved ports:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>setsebool -P pcp_bind_all_unreserved_ports on</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Let&#8217;s restart pcp:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>systemctl restart pmcd pmlogger</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Now back on node2, let&#8217;s set up remote logging for node3:</p>
+</div>
+<div class="paragraph">
+<p>Edit /etc/pcp/pmlogger/control.d/remote and add:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>node3 n n PCP_LOG_DIR/pmlogger/node3 -r T24h10m -c config.remote</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Now, let&#8217;s restart pcp:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>systemctl restart pmcd pmlogger</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Let&#8217;s verify that we are now getting logs from node3:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>cd /var/log/pcp/pmlogger/node3
+for i in $(ls *.0); do pmdumplog -L $i; done</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This should generate output similar to:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>Log Label (Log Format Version 2)
+Performance metrics from host node3
+    commencing Thu Aug 13 21:39:06.614021 2020
+    ending     Thu Aug 13 21:39:07.322042 2020
+Archive timezone: CEST-2
+PID for pmlogger: 5595
+Log Label (Log Format Version 2)
+Performance metrics from host node3
+    commencing Thu Aug 13 21:39:15.271834 2020
+    ending     Thu Aug 13 21:39:15.307463 2020
+Archive timezone: CEST-2
+PID for pmlogger: 6842</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If you something like the above, then you have successfully set up remote logging. node2 is now accepting remote logs from node3 and further, metrics for node3 and node2 are being stored in the pmseries redis database!</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_grafana_integration"><a class="anchor" href="#_grafana_integration"></a>Grafana Integration</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Let&#8217;s go ahead and setup Grafana on node2:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>systemctl enable grafana-server
+systemctl start grafana-server
+firewall-cmd --add-service=grafana --add-service=pmproxy --permanent
+firewall-cmd --reload
+firewall-cmd --list-services</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This last command should show both <code>pmproxy</code> and <code>grafana</code> in the open services:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>cockpit dhcpv6-client grafana http https pmproxy ssh</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Now from your browser, go to <a href="http://node2:3000">http://node2:3000</a> and login with the username <code>admin</code> and the password <code>admin</code>. You will be asked to specify a new password for the <code>admin</code> account. Please remember what you set the password to.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../_images/grafana-10-login.png" alt="Login">
+</div>
+</div>
+<div class="paragraph">
+<p>Once you&#8217;ve logged in, click on the configuration cog and select "Plugins":</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../_images/grafana-15-plugins.png" alt="Configure Plugins">
+</div>
+</div>
+<div class="paragraph">
+<p>Now search for "Performance" and click on the "Performance Co-Pilot" plugin:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../_images/grafana-20-pcp-plugin.png" alt="Performance Co-Pilot Grafana Plugin">
+</div>
+</div>
+<div class="paragraph">
+<p>Now click "Enable":</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../_images/grafana-25-pcp-enable.png" alt="Enable Performance Co-Pilot Plugin">
+</div>
+</div>
+<div class="paragraph">
+<p>Now we can click on the configuration cog and select "Data Sources":</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../_images/grafana-30-datasources.png" alt="Data Sources">
+</div>
+</div>
+<div class="paragraph">
+<p>Once this comes up, you&#8217;ll be presented with a button for "Add Data Source":</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../_images/grafana-35-adddatasource.png" alt="Add Data Source">
+</div>
+</div>
+<div class="paragraph">
+<p>Click on "Add Data Source" and then search for "pcp":</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../_images/grafana-40-datasources-pcp.png" alt="Searching for pcp data sources">
+</div>
+</div>
+<div class="paragraph">
+<p>Let&#8217;s start by clicking "Select" next to PCP Redis. This will bring us to the following configuration page, where will specify <code><a href="http://localhost:44322" class="bare">http://localhost:44322</a></code> for the URL:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../_images/grafana-45-pcpredis-config.png" alt="PCP Redis Config">
+</div>
+</div>
+<div class="paragraph">
+<p>Now we&#8217;ll hit "Save &amp; Test":</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../_images/grafana-50-saveandtest.png" alt="Save and Test">
+</div>
+</div>
+<div class="paragraph">
+<p>Now click on the configuration cog and select "Data Sources" again. At this time, we&#8217;ll see that the "Add Data Source" button has moved:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../_images/grafana-55-addagain.png" alt="Add Button has Moved">
+</div>
+</div>
+<div class="paragraph">
+<p>Click on "Add Data Source", search for pcp and repeat the above steps for:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>PCP Vector</p>
+</li>
+<li>
+<p>PCP bpftrace</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Once you have finished this, click on the Dashboards icon and select "Manage":</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../_images/grafana-60-managebutton.png" alt="Manage Button">
+</div>
+</div>
+<div class="paragraph">
+<p>From here you will see a list of dashboards that you can click on:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../_images/grafana-65-managedashboards.png" alt="Manage Dashboards">
+</div>
+</div>
+<div class="paragraph">
+<p>This is what our "PCP Vector Host Overview" Dashboard looks like:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../_images/grafana-70-vectordashboard.png" alt="Vector Dashboard">
+</div>
+</div>
+<div class="paragraph">
+<p>This is what our "PCP Redis Host Overview" Dashboard looks like:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../_images/grafana-75-redisdashboard.png" alt="Redis Dashboard">
+</div>
+</div>
+<div class="paragraph">
+<p>Congratulations, you&#8217;ve set up grafana to work with performance co-pilot!</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_bpftrace_and_grafana_integration"><a class="anchor" href="#_bpftrace_and_grafana_integration"></a>bpftrace and grafana Integration</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>In the last unit, we set up grafana and started to configure bpftrace, but didn&#8217;t do anything with it. This is because this integration gives root level access to a grafana user! We will now explore this integration. Red Hat strongly advises not using this integration in production. The perfect use case for this is to use it in development and when you get your bpftrace scripts solid with you graphs, add those bpftrace scripts to the <code>autostart</code> directory of the bpftrace pmda and then expose the metrics via Vector, which will do in the next unit.</p>
+</div>
+<div class="paragraph">
+<p>Because we do not want to allow anyone to use the bpftrace integration without authentication, we are going to enable a sysadmin user to authenticate from grafana to pcp for the purpose of using the bpftrace pmda.</p>
+</div>
+<div class="paragraph">
+<p>On node2, let&#8217;s look at <code>/etc/sasl/pmcd.conf</code>. We are specifically looking to make sure that <code>digest-md5</code> is in the mech_list and that the sasldb_path is set to <code>/etc/pcp/passwd.db</code>. The file should look like:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre># Enabled authentication mechanisms (space-separated list).
+# You can list many mechanisms at once, then the user can choose
+# by adding e.g. '?authmech=gssapi' to their host specification.
+# For other options, refer to SASL pluginviewer command output.
+#mech_list: plain login digest-md5 gssapi
+mech_list: plain login digest-md5
+
+# If deferring to the SASL auth daemon (runs as root, can do PAM
+# login using regular user accounts, unprivileged daemons cannot).
+#pwcheck_method: saslauthd
+
+# If using plain/digest-md5 for user database, this sets the file
+# containing the passwords.  Use 'saslpasswd2 -a pmcd [username]'
+# to add entries and 'sasldblistusers2 -f $sasldb_path' to browse.
+# Note: must be readable as the PCP daemons user (chown root:pcp).
+sasldb_path: /etc/pcp/passwd.db
+
+# Before using Kerberos via GSSAPI, you need a service principal on
+# the KDC server for pmcd, and that to be exported to the keytab.
+#keytab: /etc/pcp/krb5.tab</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>As we can see, everything is set correctly and there is nothing for us to do here.</p>
+</div>
+<div class="paragraph">
+<p>Now let&#8217;s set up our sysadmin user on node2:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>useradd -r sysadmin
+passwd sysadmin
+saslpasswd2 -a pmcd sysadmin</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You do not have to set the regular password and the sasl password to be the same. That said, you will need the sasl password in a few steps, so remember what you set it to!</p>
+</div>
+<div class="paragraph">
+<p>Now we need to set the correct ownership and permission on the pcp sasl2 database on node2:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>chown root:pcp /etc/pcp/passwd.db
+chmod 640 /etc/pcp/passwd.db</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Now we need to restart pmcd on node2:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>systemctl restart pmcd</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Now on node2, let&#8217;s verify that sasl authentication is working:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>pminfo -f h "pcp://127.0.0.1?username=sysadmin" disk.dev.read</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You will be prompted for your password and if you enter it correctly and sasl is set up correctly, you will see output similar to:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>disk.dev.read
+    inst [0 or "vda"] value 10664</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Now we need to change the bpftrace configuration to allow the sysadmin user access. On node2, edit <code>/var/lib/pcp/pmdas/bpftrace/bpftrace.conf</code> and make sure the following are set under <code>[dynamic_scripts]</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>enabled = true
+allowed_users = root,sysadmin</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Once these changes have been made, run these commands on node2 to re-install the bpftrace pmda:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>cd /var/lib/pcp/pmdas/bpftrace
+./Remove
+./Install
+pminfo | grep bpf</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>On that last pminfo command, you should see bpf metrics showing like:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>bpftrace.scripts.runqlat.data.usecs
+bpftrace.scripts.runqlat.data_bytes
+bpftrace.scripts.runqlat.code
+bpftrace.scripts.runqlat.probes
+bpftrace.scripts.runqlat.error
+bpftrace.scripts.runqlat.exit_code
+bpftrace.scripts.runqlat.pid
+bpftrace.scripts.runqlat.status
+...</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Now back in our Grafana dashboard, click on the Configuration cog and "Data Sources":</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../_images/grafana-30-datasources.png" alt="Data Sources">
+</div>
+</div>
+<div class="paragraph">
+<p>and then click on the "PCP bpftrace" data source. On this page, click the toggle for "Basic auth" under the "Auth" section so that it is on. You will know it is on when you get a "Basic Auth Details" section where you will enter the sasl credentials for the <code>sysadmin</code> user:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../_images/grafana-80-bpftrace-auth.png" alt="bpftrace Auth">
+</div>
+</div>
+<div class="paragraph">
+<p>Click "Save &amp; Test" and you should get the "Data source is working" message. After this, you can click on the Dashboards icon, select "Manage" and pick the "PCP bpftrace System Analysis" dashboard, which looks like this:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../_images/grafana-85-bpftrace-system-analysis.png" alt="bpftrace System Analysis">
+</div>
+</div>
+<div class="paragraph">
+<p>Now let&#8217;s click the Dashboards icon, select "Manage" and pick the "PCP bpftrace Flame Graphs" dashboard, which looks like:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../_images/grafana-90-bpftrace-flame-graphs.png" alt="bpftrace Flame Graphs">
+</div>
+</div>
+<div class="paragraph">
+<p>This let&#8217;s us see live flame graphs of on cpu activity. To read a flame graph, you read from the bottom to the top. At the bottom, you have the process name and pid number. Above that, you will see the stack graphed out by function. The wider a process/function is on the flame graph, the more cpu it is taking. The redder a process/function is on the flame graph, the more cpu cycles it is spinning. Flame graphs provide a great visualization to understand how a CPU is spending its time.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_visualizing_bpftrace_data_without_providing_root_access_to_a_user"><a class="anchor" href="#_visualizing_bpftrace_data_without_providing_root_access_to_a_user"></a>Visualizing bpftrace data without providing root access to a user</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>So while it&#8217;s nice that we can now see bpftrace data visualized in grafana, we&#8217;ve also given this user great power over the system. Let&#8217;s click on the Dashboards icon, select "Manage" and pick the "PCP bpftrace System Analysis" dashboard again. Once there, click on "CPU Usage" and then click "Edit":</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../_images/grafana-95-bpftrace-cpuedit.png" alt="Edit CPU Chart">
+</div>
+</div>
+<div class="paragraph">
+<p>After this, you&#8217;ll be taken to a screen where you can edit and run live bpftrace code on the system. This is the part you don&#8217;t want to have exposed in production!</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../_images/grafana-100-bpftrace-cpuwalkbt.png" alt="Editing cpuwalk.bt in Grafana">
+</div>
+</div>
+<div class="paragraph">
+<p>This is the cpuwalk.bt file and you can make changes to it here and see those changes live in the graph. We are not going to make changes, but we would like to expose this data to our end users without giving them access to run their own bpftrace scripts. Let&#8217;s save the contents of this file out to /root/cpuwalk.bt on our node2 system.</p>
+</div>
+<div class="paragraph">
+<p>Now on node2, run:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>cd /var/lib/pcp/pmdas/bpftrace/autostart
+cp /root/cpuwalk.bt .
+restorecon ./cpuwalk.bt
+ls -lahZ .</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Once you have done the above you should see the file in this directory with these permissions:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>-rw-r--r--. 1 root root unconfined_u:object_r:pcp_var_lib_t:s0 497 Aug 17 17:17 cpuwalk.bt</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Now, we need to remove and re-install the bpftrace pmda:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>cd /var/lib/pcp/pmdas/bpftrace
+./Remove
+./Install
+pminfo | grep bpftrace | grep cpuwalk</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If successful, we should see this output:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>bpftrace.scripts.cpuwalk.data.output
+bpftrace.scripts.cpuwalk.data.cpu
+bpftrace.scripts.cpuwalk.data_bytes
+bpftrace.scripts.cpuwalk.code
+bpftrace.scripts.cpuwalk.probes
+bpftrace.scripts.cpuwalk.error
+bpftrace.scripts.cpuwalk.exit_code
+bpftrace.scripts.cpuwalk.pid
+bpftrace.scripts.cpuwalk.status</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Now, we can access the bpf map named <code>@cpu</code> through the pcp metric <code>bpftrace.scripts.cpuwalk.data.cpu</code>. So let&#8217;s do this in grafana. Click the Dasboard icon, select Manage, and then click the "PCP Vector Host Overview" dashboard. On this dashboard, click "CPU%" and click "Edit":</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../_images/grafana-105-vector-cpuedit.png" alt="Edit CPU% Script">
+</div>
+</div>
+<div class="paragraph">
+<p>Now you will see the following screen:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../_images/grafana-110-vector-cpuquery.png" alt="CPU% Query">
+</div>
+</div>
+<div class="paragraph">
+<p>On this screen, delete the "B" query and change the "A" query to read:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>bpftrace.scripts.cpuwalk.data.cpu</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>When you have done this, your screen will look like:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../_images/grafana-115-vector-cpuedit2.png" alt="Now Using bpf!">
+</div>
+</div>
+<div class="paragraph">
+<p>and you can see the data from the bpftrace script cpuwalk.bt being renedered through PCP Vector without giving the grafana user direct access to eBPF!</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_additional_resources"><a class="anchor" href="#_additional_resources"></a>Additional Resources</h2>
+<div class="sectionbody">
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+You are not required to reference any additional resources for these exercises.  This is informational only.
+</td>
+</tr>
+</table>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="http://www.brendangregg.com/ebpf.html">Linux Extended BPF (eBPF Tracing Tools) - Brendan Gregg</a></p>
+</li>
+<li>
+<p><a href="https://github.com/xdp-project/xdp-tutorial">Upstream XDP Tutorial (eXpress Data Path networking is tech preview in RHEL 8.2.)</a></p>
+</li>
+<li>
+<p><a href="https://developers.redhat.com/blog/tag/ebpf/">eBPF blogs on Red Hat Developer (covering the networking aspect)</a></p>
+</li>
+</ul>
+</div>
+<h2 id="_end_of_unit" class="discrete">End of Unit</h2>
+</div>
+</div>
+</article>
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <a class="rhd-logo" href="https://developers.redhat.com" target="_blank"></div>
+</footer>
+<script src="../../_/js/vendor/clipboard.js"></script>
+<script src="../../_/js/site.js"></script>
+<script async src="../../_/js/vendor/highlight.js"></script>
+  </body>
+</html>
