@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Untitled :: Definitive RHEL9 Workshop (v9.1)</title>
+    <meta name="generator" content="Antora 3.1.7">
+    <link rel="stylesheet" href="../../_/css/site.css">
+<link rel="icon" href="../../_/img/favicon.ico" type="image/x-icon">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="https://developers.redhat.com" target="_blank"><img
+          src="../../_/img/header_logo.png" height="40px" alt="Red Hat Developer Program"></a>
+      <a class="navbar-item" href="../..">Definitive RHEL9 Workshop (v9.1)</a>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <a class="navbar-item" href="#">Books</a>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">CheatSheets</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="#">CheatSheet A</a>
+            <a class="navbar-item" href="#">CheatSheet B</a>
+            <a class="navbar-item" href="#">CheatSheet C</a>
+          </div>
+        </div>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">Upcoming Events</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="#">Event A</a>
+            <a class="navbar-item" href="#">Event B</a>
+            <a class="navbar-item" href="#">Event C</a>
+          </div>
+        </div>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">More Tutorials</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="#">Tutorial A</a>
+            <a class="navbar-item" href="#">Tutorial B</a>
+            <a class="navbar-item" href="#">Tutorial C</a>
+          </div>
+        </div>
+        <div class="navbar-item">
+          <span class="control">
+            <a class="button is-primary" href="#">Download</a>
+          </span>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="modules" data-version="master">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="../index.html" class=" query-params-link">Default Title</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../overview.html">Workshop Overview</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="webconsole.html">Web Console (cockpit)</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="systemd.html">Service Management (systemd)</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="firewalld.html">Firewall Management (firewalld)</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="nftables.html">Firewall Rules (nf-tables)</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="ebpf.html">eBPF Tracing (bcc-tools)</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="podman.html">Containers Management (podman)</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="buildah.html">Containers Dev (buildah)</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="image-builder.html">Image Builder (composer-cli)</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="virtualization.html">Virtualization (kvm,libvirt)</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="tlog.html">Session Logging (tlog)</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="lvm-vdo.html">Data Optimization (lvm,vdo)</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="stratis.html">Storage Management (stratis)</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="kpatch.html">Kernel Live Patching (kpatch)</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="boom-kernel-parms.html">Managing GRUB2 with Boom</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="leapp.html">LEAPP In-Place Upgrades</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">Default Title</span>
+    <span class="version">master</span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <span class="title">Default Title</span>
+      <ul class="versions">
+        <li class="version is-current">
+          <a href="../index.html">master</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="../connection.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+</nav>
+  <div class="edit-this-page"><a href="file:///Users/jmaltin/Development/RHEL9-Workshop-Showroom/content/modules/ROOT/pages/documentation/network-manager.adoc">Edit this Page</a></div>
+</div>
+  <div class="content">
+<article class="doc">
+<div class="sect1">
+<h2 id="_networkmanager_cli"><a class="anchor" href="#_networkmanager_cli"></a>NETWORKMANAGER CLI</h2>
+<div class="sectionbody">
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+This unit is being ported to RHEL9 and is not part of the official workshop content yet.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>RHEL 7 brings new functionality to the command line for NetworkManager, the default network configuration utility. While you can still edit these interfaces by hand, the command line interface, nmcli, is able to provide a consistent, scriptable, frame-work for you to work with.</p>
+</div>
+<div class="paragraph">
+<p>In this part of the lab, we will discuss the general operation and command structure, as well as how to configure a bonded interface, along with the differences between bonding and teaming of NIC devices.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_getting_started"><a class="anchor" href="#_getting_started"></a>Getting Started</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Let&#8217;s get started by logging into the bastion VM as root (if not already logged in) and simply perform the following command to get a quick status of what you have access to:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre># nmcli device status</pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>DEVICE	TYPE		STATE	CONNECTION
+eth0		ethernet	connected	eth0
+eth1		ethernet	disconnected	–
+eth2		ethernet	disconnected	–
+eth3		ethernet	disconnected	--</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>At this point, you should see output similar to the above information. On this system, we have one device that is connected, eth0, and eth[1:3] are disconnected. We will primarily be working with the currently disconnected devices.</p>
+</div>
+<div class="paragraph">
+<p>WARNIING: it is likely that the device names are different (ie: ensX vs. ethX)</p>
+</div>
+<div class="paragraph">
+<p>Notice that the command structure is:</p>
+</div>
+<div class="paragraph">
+<p>nmcli [OPTIONS] OBJECT { COMMAND | help }</p>
+</div>
+<div class="paragraph">
+<p>It&#8217;s also important to mention that the bash-completion package will support nmcli commands, so while some of the commands below will look a bit long, they can be typed more quickly than it may appear.</p>
+</div>
+<div class="paragraph">
+<p>From here, we&#8217;re going to use nmcli to create a new connection on eth1 with a static IP configuration. We&#8217;ll be using a very generic ipv4 network, however ipv6 is supported, and uses similar command structures (ip6/gw6, etc). Not only will this create a static connection for eth1, but it will create a NetworkManager profile, called lab-eth1. To do this, issue the following command:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre># nmcli con add con-name lab-eth1 ifname eth1 type ethernet ip4 192.168.122.100/24 gw4 192.168.122.1</pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>Connection `lab-eth1` (xxxxxx) successfully added.</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Now that we&#8217;ve done this, let&#8217;s take a look at /etc/sysconfig/network-scripts/ifcfg-lab-eth1 to see what configuration variables have been populated.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre># cat /etc/sysconfig/network-scripts/ifcfg-lab-eth1</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>As you can see, more than the standard set of options have been applied and the interface is UP.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre># nmcli device status; ip a</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Let&#8217;s now DOWN the interface</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre># nmcli con down “lab-eth1”
+# nmcli device status; ip a</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You can begin using this interface by bringing up the network with this command:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>nmcli con up “lab-eth1” ifname eth1</pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>Connection successfully activated (D-Bus active path: /org/freedesktop/NetworkManager/Activate Connection/2)</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>In the above command, notice that we still explicitly call out the interface name that we&#8217;re applying that connection profile to. Because we can see from the ifcfg-lab-eth1 script that it&#8217;s already assigned to that interface, we don&#8217;t necessarily need that. (e.g. nmcli con up lab-eth1) We could, however, apply a wild card to that interface name within the profile, which would allow us to apply that connection string to any interface we wish.</p>
+</div>
+<div class="paragraph">
+<p>Let&#8217;s examine the nmcli device status again, this time looking at the newly brought up lab-eth1 connection, assigned to the eth1 device:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre># nmcli device status</pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>DEVICE	TYPE		STATE	CONNECTION
+eth0		ethernet	connected	eth0
+eth1		ethernet	connected	lab-eth1
+eth2		ethernet	disconnected	–
+eth3		ethernet	disconnected	--</pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_network_bonding"><a class="anchor" href="#_network_bonding"></a>Network Bonding</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Next, we&#8217;re going to create a bonded (active/passive; Mode 1) interface, with two slaves. As we can see from above, eth2 and eth3 are available for the bonding.  Get started by using nmcli to create a bond0 profile for us to work with:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre># nmcli con add type bond ifname bond0 mode active-backup</pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>Connection 'bond-bond0' (xxxxxxxx) successfully added.</pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+If you can&#8217;t remember the bonding mode syntax try <code>nmcli con add type bond ifname bond0 mode [tab] [tab]</code> to see the available options
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Examining the /etc/sysconfig/network-scripts/ifcfg-bond-bond0 profile, we can see that it&#8217;s a very basic configuration, and cannot work until we add some slave interfaces, so next let&#8217;s use nmcli to add a pair of slaves:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre># cat /etc/sysconfig/network-scripts/ifcfg-bond-bond0</pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre># nmcli con add type bond-slave ifname eth2 master bond0</pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>Connection 'bond-slave-eth2' (xxxxxxxx) successfully added.</pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre># nmcli con add type bond-slave ifname eth3 master bond0</pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>Connection 'bond-slave-eth3' (xxxxxxxx) successfully added.</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>In order to bring up the bond using nmcli, bring up the slaves first, then the bond:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre># nmcli con up bond-slave-eth2</pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>Connection successfully activated...</pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre># nmcli con up bond-slave-eth3</pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>Connection successfully activated...</pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre># nmcli con up bond-bond0</pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>Connection successfully activated...</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Now that our bond is configured let&#8217;s set another static IPv4 address using the modify command:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre># nmcli con mod bond-bond0 ipv4.addresses 192.168.122.101/24
+# nmcli con mod bond-bond0 ipv4.method manual
+# nmcli con up bond-bond0
+# ip ad sh bond0</pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_network_teaming"><a class="anchor" href="#_network_teaming"></a>Network Teaming</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The next new concept to introduce is Network Teaming. The two main benefits of NIC Teaming are data aggregation and failover, above and beyond the capabilities of network bonding. Another upside is that you can actually convert a bond to a team, which is our next exercise with nmcli. In order to simplify the environment, we will not be changing the name of the bond, as the conversion tool will not update things such as firewalld, or any other scripts or programs outside of the ifcfg files.</p>
+</div>
+<div class="paragraph">
+<p>Network teaming uses libteam to control one instance of the team driver. Ensure that teamd is already installed on your local bastion. We can also see that teamd.service is static, and doesn&#8217;t need to be started or enabled.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre># dnf install -y teamd
+# systemctl list-unit-files | grep teamd</pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>teamd@.service	static</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Next, we need to clean up a few pieces of the former section – run the following to bring down the bond and the slave interfaces, and then remove the configurations, all within nmcli:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre># nmcli con show
+# nmcli con down bond-slave-eth2</pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>Connection 'bond-slave-eth2' successfully deactivated.</pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre># nmcli con down bond-slave-eth3</pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>Connection 'bond-slave-eth3' successfully deactivated.</pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre># nmcli con down bond-bond0</pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>Connection 'bond-bond0' successfully deactivated.</pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre># nmcli con delete bond-slave-eth2
+# nmcli con delete bond-slave-eth3
+# nmcli con delete bond-bond0
+# nmcli con show</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Now, to create the new teaming interface(s), perform the following:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre># nmcli con add type team ifname team0 config '{“runner”:{“name”: “activebackup”}}'</pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>Connection 'team-team0' successfully added.</pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre># nmcli con show team-team0</pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>&lt;output properties for team-team0&gt;</pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre># nmcli con add type team-slave con-name team0-port1 ifname eth2 master team-team0</pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>Connection 'team0-port1' successfully added.</pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre># nmcli con add type team-slave con-name team0-port2 ifname eth3 master team-team0</pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>Connection 'team0-port2' successfully added.</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Notice that the information above seems very similar in nature to the bonding interfaces that we created earlier in the lab. Now, use nmcli to add ip address information, bring up the interfaces, and examine the properties of the connection:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre># nmcli con mod team-team0 ipv4.addresses 192.168.122.101/24
+# nmcli con mod team-team0 ipv4.method manual
+# nmcli con up team0-port1
+# nmcli con up team0-port2
+# nmcli con up team-team0
+# nmcli con sh team-team0
+# nmcli device status; ip a</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Examine the network properties in the output of the last two commands. We see what IP is assigned, which port actually has the address, and how traffic would be flowing (should any be heading across the interface). It also shows the mode (active/backup).</p>
+</div>
+<div class="paragraph">
+<p>If we take down one of the interfaces (the one holding traffic), we can then do another 'show details', and we see that the IP address has moved over to the other interface.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre># nmcli con down team0-port1
+# nmcli con sh team-team0
+# nmcli device status; ip a</pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_additional_resources"><a class="anchor" href="#_additional_resources"></a>Additional Resources</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Red Hat Documentation</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/8-beta/html/installing_identity_management_and_access_control/deploying-session-recording">Deplying Session Recording on Red Hat Enterprise Linux</a></p>
+</li>
+</ul>
+</div>
+<h2 id="_end_of_unit" class="discrete">End of Unit</h2>
+</div>
+</div>
+</article>
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <a class="rhd-logo" href="https://developers.redhat.com" target="_blank"></div>
+</footer>
+<script src="../../_/js/vendor/clipboard.js"></script>
+<script src="../../_/js/site.js"></script>
+<script async src="../../_/js/vendor/highlight.js"></script>
+  </body>
+</html>

@@ -1,0 +1,874 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Untitled :: Definitive RHEL9 Workshop (v9.1)</title>
+    <link rel="prev" href="tlog.html">
+    <link rel="next" href="stratis.html">
+    <meta name="generator" content="Antora 3.1.7">
+    <link rel="stylesheet" href="../../_/css/site.css">
+<link rel="icon" href="../../_/img/favicon.ico" type="image/x-icon">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="https://developers.redhat.com" target="_blank"><img
+          src="../../_/img/header_logo.png" height="40px" alt="Red Hat Developer Program"></a>
+      <a class="navbar-item" href="../..">Definitive RHEL9 Workshop (v9.1)</a>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <a class="navbar-item" href="#">Books</a>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">CheatSheets</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="#">CheatSheet A</a>
+            <a class="navbar-item" href="#">CheatSheet B</a>
+            <a class="navbar-item" href="#">CheatSheet C</a>
+          </div>
+        </div>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">Upcoming Events</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="#">Event A</a>
+            <a class="navbar-item" href="#">Event B</a>
+            <a class="navbar-item" href="#">Event C</a>
+          </div>
+        </div>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">More Tutorials</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="#">Tutorial A</a>
+            <a class="navbar-item" href="#">Tutorial B</a>
+            <a class="navbar-item" href="#">Tutorial C</a>
+          </div>
+        </div>
+        <div class="navbar-item">
+          <span class="control">
+            <a class="button is-primary" href="#">Download</a>
+          </span>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="modules" data-version="master">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="../index.html" class=" query-params-link">Default Title</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../overview.html">Workshop Overview</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="webconsole.html">Web Console (cockpit)</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="systemd.html">Service Management (systemd)</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="firewalld.html">Firewall Management (firewalld)</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="nftables.html">Firewall Rules (nf-tables)</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="ebpf.html">eBPF Tracing (bcc-tools)</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="podman.html">Containers Management (podman)</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="buildah.html">Containers Dev (buildah)</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="image-builder.html">Image Builder (composer-cli)</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="virtualization.html">Virtualization (kvm,libvirt)</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="tlog.html">Session Logging (tlog)</a>
+  </li>
+  <li class="nav-item is-current-page" data-depth="1">
+    <a class="nav-link" href="lvm-vdo.html">Data Optimization (lvm,vdo)</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="stratis.html">Storage Management (stratis)</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="kpatch.html">Kernel Live Patching (kpatch)</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="boom-kernel-parms.html">Managing GRUB2 with Boom</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="leapp.html">LEAPP In-Place Upgrades</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">Default Title</span>
+    <span class="version">master</span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <span class="title">Default Title</span>
+      <ul class="versions">
+        <li class="version is-current">
+          <a href="../index.html">master</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="../connection.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="../index.html">Default Title</a></li>
+    <li><a href="lvm-vdo.html">Data Optimization (lvm,vdo)</a></li>
+  </ul>
+</nav>
+  <div class="edit-this-page"><a href="file:///Users/jmaltin/Development/RHEL9-Workshop-Showroom/content/modules/ROOT/pages/documentation/lvm-vdo.adoc">Edit this Page</a></div>
+</div>
+  <div class="content">
+<article class="doc">
+<div class="sect1">
+<h2 id="_lvm_and_vdo_storage_management_and_data_optimization"><a class="anchor" href="#_lvm_and_vdo_storage_management_and_data_optimization"></a>LVM and VDO : Storage Management and Data Optimization</h2>
+<div class="sectionbody">
+
+</div>
+</div>
+<div class="sect1">
+<h2 id="_overview"><a class="anchor" href="#_overview"></a>Overview</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>A Logical Volume Manager is a software layer on top of physical hard disks and partitions, which creates an abstraction of continuity and ease-of-use for managing the lifecycle of those devices (ie: addition, removal, replacement, repartitioning, backup, etc).</p>
+</div>
+<div class="paragraph">
+<p>Over the years, the role of LVM has expanded greatly to include data redundancy (RAID), compression, deduplication, and more&#8230;&#8203;</p>
+</div>
+<div class="paragraph">
+<p>These exercises will help you get familiar with the basic concepts of LVM and also introduce deduplication with the Virtual Data Optimizer (VDO).</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_getting_started"><a class="anchor" href="#_getting_started"></a>Getting Started</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>For these exercises, you will be using the host <code>node3</code> as user <code>root</code>.</p>
+</div>
+<div class="paragraph">
+<p>From host <code>bastion</code>, ssh to <code>node3</code>.</p>
+</div>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">ssh node3</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Use <code>sudo</code> to elevate your privileges.</p>
+</div>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">[[ "$UID" == 0 ]] || sudo -i</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Verify that you are on the right host for these exercises.</p>
+</div>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">workshop-vdo-checkhost.sh</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You are now ready to proceed with these exercises.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_installation_configuration"><a class="anchor" href="#_installation_configuration"></a>Installation &amp; Configuration</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Install the required packages - this will pull in several related dependencies.</p>
+</div>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">dnf install -y vdo</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>That&#8217;s it!  All LVM components are a standard part of RHEL.  Only the vdo kmod and related utilities need to be installed.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_why_use_logical_volume_management"><a class="anchor" href="#_why_use_logical_volume_management"></a>Why use Logical Volume Management?</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>Flexibility</p>
+</li>
+<li>
+<p>Grow, shrink or relocate your data/filesystems</p>
+</li>
+<li>
+<p>Aggregate or subdivide devices as needed</p>
+</li>
+<li>
+<p>Performance</p>
+</li>
+<li>
+<p>Striping across multiple devices</p>
+</li>
+<li>
+<p>Caching via SSDs</p>
+</li>
+<li>
+<p>Fault Tolerance (redundancy &amp; resiliency)</p>
+</li>
+<li>
+<p>RAID 0, 1, 5, 6, 10</p>
+</li>
+<li>
+<p>Snapshots: Historical Recovery</p>
+</li>
+<li>
+<p>Data Optimization: Compression and De-Duplication</p>
+</li>
+</ul>
+</div>
+<div class="sect2">
+<h3 id="_building_blocks_of_storage_management"><a class="anchor" href="#_building_blocks_of_storage_management"></a>Building Blocks of Storage Management</h3>
+<div class="paragraph">
+<p>From the bottom up, here is a basic explanation of the layered technology stack that comprises modern storage.</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">File-systems</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Formatted LV&#8217;s become filesystems</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Logical Volume</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A virtual storage device that may span multiple physical devices. Allocatable chunks (PEs) are assembled into “Logical Extents” that form the addressable space.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Volume Group</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A collection of Physical Volumes that are divided into discrete allocatable chunks called “physical extents” (PEs).</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Physical Volume</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">An LVM concept that identifies physical devices for LVM use.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Physical Device</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Disks (IDE [hda], SCSI, SATA &amp; SAS [sda], etc&#8230;&#8203;)
+                    Partitions (ex: hda1, sda1, cciss/c0d0p1, etc&#8230;&#8203;)
+                    LUNs (FCOE, SAN, etc&#8230;&#8203;)
+                    loopback</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect2">
+<h3 id="_lvm_cli_toolbox"><a class="anchor" href="#_lvm_cli_toolbox"></a>LVM CLI Toolbox</h3>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 25%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top"></th>
+<th class="tableblock halign-left valign-top">Physical Volumes</th>
+<th class="tableblock halign-left valign-top">Volumes Groups</th>
+<th class="tableblock halign-left valign-top">Logical Volumes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Core Utilities</p></td>
+<td class="tableblock halign-left valign-top"><div class="literal"><pre>pvcreate
+pvdisplay
+pvremove
+pvs
+pvscan
+pvmove</pre></div></td>
+<td class="tableblock halign-left valign-top"><div class="literal"><pre>vgcreate
+vgdisplay
+vgextend
+vgreduce
+vgremove
+vgrename
+vgs
+vgscan
+vgcfgbackup
+vgcfgrestore</pre></div></td>
+<td class="tableblock halign-left valign-top"><div class="literal"><pre>lvconvert
+lvcreate
+lvdisplay
+lvextend
+lvreduce
+lvremove
+lvrename
+lvresize
+lvs
+lvscan</pre></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Other Stuff</p></td>
+<td class="tableblock halign-left valign-top"><div class="literal"><pre>fdisk
+parted
+partprobe
+multipath
+smartd</pre></div></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><div class="literal"><pre>mkfs
+mount
+fsadm</pre></div></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_create_a_linear_volume"><a class="anchor" href="#_create_a_linear_volume"></a>Create a Linear Volume</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_summary"><a class="anchor" href="#_summary"></a>Summary</h3>
+<div class="paragraph">
+<p>In this exercise, you will perform steps to make a new filesystem available to the system using the Logical Volume Management tools.</p>
+</div>
+<div class="paragraph">
+<p>We will begin with a simple linear volume (concatination).</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_clean_up_devices"><a class="anchor" href="#_clean_up_devices"></a>Clean Up Devices</h3>
+<div class="paragraph">
+<p>Since we will be reusing the same resources for many exercises, we will begin by wiping everything clean.  Don&#8217;t worry if you get an error message.</p>
+</div>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">umount /mnt/lab*</code></pre>
+</div>
+</div>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">vgremove -ff vg_lab</code></pre>
+</div>
+</div>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">pvremove /dev/nvme{1..4}n1</code></pre>
+</div>
+</div>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">wipefs -a /dev/nvme{1..4}n1</code></pre>
+</div>
+</div>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">partprobe</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_physical_volume_creation"><a class="anchor" href="#_physical_volume_creation"></a>Physical Volume Creation</h3>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">pvcreate /dev/nvme1n1</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_volume_group_pool_creation"><a class="anchor" href="#_volume_group_pool_creation"></a>Volume Group (Pool) Creation</h3>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">vgcreate vg_lab /dev/nvme1n1</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_logical_volume_creation"><a class="anchor" href="#_logical_volume_creation"></a>Logical Volume Creation</h3>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">lvcreate -y -n lab1 -l 95%FREE vg_lab</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_make_and_mount_filesystem"><a class="anchor" href="#_make_and_mount_filesystem"></a>Make and Mount Filesystem</h3>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">mkfs -t ext4 /dev/vg_lab/lab1</code></pre>
+</div>
+</div>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">mkdir -p /mnt/lab1</code></pre>
+</div>
+</div>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">mount /dev/vg_lab/lab1 /mnt/lab1</code></pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+If this were going to be a persistent filesystem, you would also need to add an entry to <code>/etc/fstab</code>.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_examine_your_work"><a class="anchor" href="#_examine_your_work"></a>Examine Your Work</h3>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">lvs</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="nowrap">  LV   VG     Attr       LSize  Pool Origin Data%  Meta%  Move Log Cpy%Sync Convert
+  lab1 vg_lab -wi-ao---- &lt;4.75g</pre>
+</div>
+</div>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">lvs vg_lab/lab1</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="nowrap">  LV   VG     Attr       LSize  Pool Origin Data%  Meta%  Move Log Cpy%Sync Convert
+  lab1 vg_lab -wi-ao---- &lt;4.75g</pre>
+</div>
+</div>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">lvs -o lv_name,lv_size,lv_attr,segtype,devices vg_lab/lab1</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="nowrap">  LV   LSize  Attr       Type   Devices
+  lab1 &lt;4.75g -wi-ao---- linear /dev/nvme1n1(0)</pre>
+</div>
+</div>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">lvs --units g -o +devices vg_lab/lab1</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="nowrap">  LV   VG     Attr       LSize Pool Origin Data%  Meta%  Move Log Cpy%Sync Convert Devices
+  lab1 vg_lab -wi-ao---- 4.75g                                                     /dev/nvme1n1(0)</pre>
+</div>
+</div>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">df /mnt/lab1</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="nowrap">Filesystem              1K-blocks  Used Available Use% Mounted on
+/dev/mapper/vg_lab-lab1   4832912 19448   4548248   1% /mnt/lab1</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_extend_and_resize_a_linear_volume"><a class="anchor" href="#_extend_and_resize_a_linear_volume"></a>Extend and Resize a Linear Volume</h2>
+<div class="sectionbody">
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">pvcreate /dev/nvme2n1</code></pre>
+</div>
+</div>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">vgextend vg_lab /dev/nvme2n1</code></pre>
+</div>
+</div>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">lvresize -l 95%VG /dev/vg_lab/lab1</code></pre>
+</div>
+</div>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">resize2fs /dev/vg_lab/lab1</code></pre>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_examine_your_work_2"><a class="anchor" href="#_examine_your_work_2"></a>Examine Your Work</h3>
+<div class="paragraph">
+<p>Let us take a look at the logical volume.  Notice a few things:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>we added <code>seg_size</code> to the options to report segment size</p>
+</li>
+<li>
+<p>the logical volume is comprised of 2 devices (vdb, vdc)</p>
+</li>
+<li>
+<p>the first segment is completely used at 5g</p>
+</li>
+<li>
+<p>the second segment is almost used, but has some space remaining</p>
+</li>
+<li>
+<p>Over all, the volume group has approximately 500mb remaining</p>
+</li>
+</ul>
+</div>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">lvs -o vg_name,vg_free,lv_name,lv_size,seg_size,segtype,devices vg_lab/lab1</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="nowrap">  VG     VFree   LV   LSize  SSize  Type   Devices
+  vg_lab 508.00m lab1 &lt;9.50g &lt;5.00g linear /dev/nvme1n1(0)
+  vg_lab 508.00m lab1 &lt;9.50g  4.50g linear /dev/nvme2n1(0)</pre>
+</div>
+</div>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">df /mnt/lab1</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="nowrap">Filesystem              1K-blocks  Used Available Use% Mounted on
+/dev/mapper/vg_lab-lab1   9735476 21840   9249360   1% /mnt/lab1</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>It is not always optimal to allocate 100% of volume group to the logical volumes.  For example, the unused space in the volume group could be used for a temporary snapshot.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_create_a_raid_10_volume_with_virtual_data_optimizer_vdo"><a class="anchor" href="#_create_a_raid_10_volume_with_virtual_data_optimizer_vdo"></a>Create a RAID-10 Volume with Virtual Data Optimizer (VDO)</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>We will be leveraging devices /dev/nvme{1..4}n1.  As before, we will cleanup up prior work and start fresh.</p>
+</div>
+<div class="sect2">
+<h3 id="_clean_up_devices_2"><a class="anchor" href="#_clean_up_devices_2"></a>Clean Up Devices</h3>
+<div class="paragraph">
+<p>Since we will be reusing the same resources for many exercises, we will begin by wiping everything clean.  Don&#8217;t worry if you get an error message.</p>
+</div>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">umount /mnt/lab*</code></pre>
+</div>
+</div>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">vgremove -ff vg_lab</code></pre>
+</div>
+</div>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">pvremove /dev/nvme{1..4}n1</code></pre>
+</div>
+</div>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">wipefs -a /dev/nvme{1..4}n1</code></pre>
+</div>
+</div>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">partprobe</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_physical_volume_creation_2"><a class="anchor" href="#_physical_volume_creation_2"></a>Physical Volume Creation</h3>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">pvcreate /dev/nvme{1..4}n1</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="nowrap">  Physical volume "/dev/nvme1n1" successfully created.
+  Physical volume "/dev/nvme2n1" successfully created.
+  Physical volume "/dev/nvme3n1" successfully created.
+  Physical volume "/dev/nvme4n1" successfully created.</pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_volume_group_creation"><a class="anchor" href="#_volume_group_creation"></a>Volume Group Creation</h3>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">vgcreate vg_lab /dev/nvme{1..4}n1</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="nowrap">Volume group "vg_lab" successfully created</pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_logical_volume_creation_2"><a class="anchor" href="#_logical_volume_creation_2"></a>Logical Volume Creation</h3>
+<div class="paragraph">
+<p>This time, we are going to use all four disks to create a mirrored set of striped disks.  Otherwise known as RAID10</p>
+</div>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">lvcreate -y --type raid10 -m1 -i 2 -n lv_raid10 -l 95%FREE vg_lab</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_add_vdo_deduplication"><a class="anchor" href="#_add_vdo_deduplication"></a>Add VDO Deduplication</h3>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">lvconvert --type vdo-pool --name=lab2 -V 30G vg_lab/lv_raid10 -y</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Once executed, you will be prompted to confirm the task.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="nowrap">  WARNING: Converting logical volume vg_lab/lv_raid10 to VDO pool volume with formating.
+  THIS WILL DESTROY CONTENT OF LOGICAL VOLUME (filesystem etc.)
+    The VDO volume can address 6 GB in 3 data slabs, each 2 GB.
+    It can grow to address at most 16 TB of physical storage in 8192 slabs.
+    If a larger maximum size might be needed, use bigger slabs.
+  Logical volume "lab2" created.
+  Converted vg_lab/lv_raid10 to VDO pool volume and created virtual vg_lab/lab2 VDO volume.</pre>
+</div>
+</div>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">mkfs.xfs -K /dev/mapper/vg_lab-lab2</code></pre>
+</div>
+</div>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">mkdir /mnt/lab2</code></pre>
+</div>
+</div>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">mount /dev/mapper/vg_lab-lab2 /mnt/lab2</code></pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+To make the mount persistent across reboots, you would still need to either add a systemd unit to mount the filesystem, or add an entry to /etc/fstab.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_create_sample_data"><a class="anchor" href="#_create_sample_data"></a>Create Sample Data</h3>
+<div class="paragraph">
+<p>Let us now populate the filesystem with some content.  Create a bunch of random subdirectories in our new filesystems with the following command.</p>
+</div>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">for i in {1..10} ; do mktemp -d /mnt/lab2/XXXXXX ; done</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Now we will copy the same content into each of the folders as follows.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+This could take a few minutes.
+</td>
+</tr>
+</table>
+</div>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">for i in /mnt/lab2/* ; do echo "${i}" ; cp -rf /usr/share/locale $i ; done</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The prevoius command should have copied approximately 100MB in 10 folders yielding about 1G of traditional fielsystem consumption.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_examine_your_work_3"><a class="anchor" href="#_examine_your_work_3"></a>Examine Your Work</h3>
+<div class="paragraph">
+<p>Let us now check some statistics.</p>
+</div>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">du -sh /mnt/lab2</code></pre>
+</div>
+</div>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">df /mnt/lab2</code></pre>
+</div>
+</div>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">vdostats --human-readable</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="nowrap">Device                      Size      Used Available Use% Space saving%
+vg_lab-lv_raid10-vpool      9.5G      3.6G      5.9G  38%           86%</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>So in summary, we built a 30GB filesystem that only has 10GB of actual physical disk capacity.  We then copied 10GB of data into the filesystem, but after deduplication <code>vdostats --human-readable</code> should reflect something near 5.5GB of available plysical space and a savings around 98%.</p>
+</div>
+<div class="paragraph">
+<p>A few additional high-level things to know about VDO.</p>
+</div>
+<div class="paragraph">
+<p>VDO uses a high-performance deduplication index called UDS to detect duplicate blocks of data as they are being stored. The deduplication window is the number of previously written blocks which the index remembers. The size of the deduplication window is configurable.  The index will require a specific amount of RAM and a specific amount of disk space.</p>
+</div>
+<div class="paragraph">
+<p>Red Hat generally recommends using a "sparse" UDS index for all production use cases. This indexing data structure requires approximately one-tenth of a byte of DRAM (memory) per block in its deduplication window. On disk, it requires approximately 72 bytes of disk space per block.</p>
+</div>
+<div class="paragraph">
+<p>The default configuration of the index is to use a "dense" index. This index is considerably less efficient (by a factor of 10) in DRAM, but it has much lower (also by a factor of 10) minimum required disk space, making it more convenient for evaluation in constrained environments.</p>
+</div>
+<div class="paragraph">
+<p>Please refer to the Red Hat Storage Administration Guide further information on provisioning and managing your data with VDO:</p>
+</div>
+<div class="paragraph">
+<p>Red Hat Enterprise Linux Storage Administration Guide (VDO)</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_conclusion"><a class="anchor" href="#_conclusion"></a>Conclusion</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>This concludes the exercises related to lvm and vdo.</p>
+</div>
+<div class="paragraph">
+<p>Time to finish this unit and return the shell to it&#8217;s home position.</p>
+</div>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">workshop-finish-exercise.sh</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_additional_resources"><a class="anchor" href="#_additional_resources"></a>Additional Resources</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://www.redhat.com/en/blog/look-vdo-new-linux-compression-layer">A Look At VDO (BLOG)</a></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Red Hat Documentation</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/9/html/managing_storage_devices/index">Managing Storage Devices</a></p>
+</li>
+<li>
+<p><a href="https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/9/html/configuring_and_managing_logical_volumes/index">Managing Logical Volumes</a></p>
+</li>
+<li>
+<p><a href="https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/9/html/deduplicating_and_compressing_logical_volumes_on_rhel/index">Deduplication and Compressing LVs</a></p>
+</li>
+</ul>
+</div>
+<h2 id="_end_of_unit" class="discrete">End of Unit</h2>
+</div>
+</div>
+<nav class="pagination">
+  <span class="prev"><a href="tlog.html" class="query-params-link">Session Logging (tlog)</a></span>
+  <span class="next"><a href="stratis.html" class="query-params-link">Storage Management (stratis)</a></span>
+</nav>
+</article>
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <a class="rhd-logo" href="https://developers.redhat.com" target="_blank"></div>
+</footer>
+<script src="../../_/js/vendor/clipboard.js"></script>
+<script src="../../_/js/site.js"></script>
+<script async src="../../_/js/vendor/highlight.js"></script>
+  </body>
+</html>

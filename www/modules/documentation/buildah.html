@@ -1,0 +1,1018 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Untitled :: Definitive RHEL9 Workshop (v9.1)</title>
+    <link rel="prev" href="podman.html">
+    <link rel="next" href="image-builder.html">
+    <meta name="generator" content="Antora 3.1.7">
+    <link rel="stylesheet" href="../../_/css/site.css">
+<link rel="icon" href="../../_/img/favicon.ico" type="image/x-icon">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="https://developers.redhat.com" target="_blank"><img
+          src="../../_/img/header_logo.png" height="40px" alt="Red Hat Developer Program"></a>
+      <a class="navbar-item" href="../..">Definitive RHEL9 Workshop (v9.1)</a>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <a class="navbar-item" href="#">Books</a>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">CheatSheets</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="#">CheatSheet A</a>
+            <a class="navbar-item" href="#">CheatSheet B</a>
+            <a class="navbar-item" href="#">CheatSheet C</a>
+          </div>
+        </div>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">Upcoming Events</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="#">Event A</a>
+            <a class="navbar-item" href="#">Event B</a>
+            <a class="navbar-item" href="#">Event C</a>
+          </div>
+        </div>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">More Tutorials</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="#">Tutorial A</a>
+            <a class="navbar-item" href="#">Tutorial B</a>
+            <a class="navbar-item" href="#">Tutorial C</a>
+          </div>
+        </div>
+        <div class="navbar-item">
+          <span class="control">
+            <a class="button is-primary" href="#">Download</a>
+          </span>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="modules" data-version="master">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="../index.html" class=" query-params-link">Default Title</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../overview.html">Workshop Overview</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="webconsole.html">Web Console (cockpit)</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="systemd.html">Service Management (systemd)</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="firewalld.html">Firewall Management (firewalld)</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="nftables.html">Firewall Rules (nf-tables)</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="ebpf.html">eBPF Tracing (bcc-tools)</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="podman.html">Containers Management (podman)</a>
+  </li>
+  <li class="nav-item is-current-page" data-depth="1">
+    <a class="nav-link" href="buildah.html">Containers Dev (buildah)</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="image-builder.html">Image Builder (composer-cli)</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="virtualization.html">Virtualization (kvm,libvirt)</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="tlog.html">Session Logging (tlog)</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="lvm-vdo.html">Data Optimization (lvm,vdo)</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="stratis.html">Storage Management (stratis)</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="kpatch.html">Kernel Live Patching (kpatch)</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="boom-kernel-parms.html">Managing GRUB2 with Boom</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="leapp.html">LEAPP In-Place Upgrades</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">Default Title</span>
+    <span class="version">master</span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <span class="title">Default Title</span>
+      <ul class="versions">
+        <li class="version is-current">
+          <a href="../index.html">master</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="../connection.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="../index.html">Default Title</a></li>
+    <li><a href="buildah.html">Containers Dev (buildah)</a></li>
+  </ul>
+</nav>
+  <div class="edit-this-page"><a href="file:///Users/jmaltin/Development/RHEL9-Workshop-Showroom/content/modules/ROOT/pages/documentation/buildah.adoc">Edit this Page</a></div>
+</div>
+  <div class="content">
+<article class="doc">
+<div class="sect1">
+<h2 id="_container_dev_with_buildah_and_skopeo"><a class="anchor" href="#_container_dev_with_buildah_and_skopeo"></a>Container Dev with Buildah and Skopeo</h2>
+<div class="sectionbody">
+
+</div>
+</div>
+<div class="sect1">
+<h2 id="_overview"><a class="anchor" href="#_overview"></a>Overview</h2>
+<div class="sectionbody">
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+These exercises are an extension of the <code>podman</code> unit and although not required, it is strongly encourage that you complete that unit first.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>In this unit, we will continue to work with containers and get familiar with <code>Buildah</code> and <code>Skopeo</code>.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_getting_started"><a class="anchor" href="#_getting_started"></a>Getting Started</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>For these exercises, you will be using the host <code>node3</code> as user <code>root</code>.</p>
+</div>
+<div class="paragraph">
+<p>From host <code>bastion</code>, ssh to <code>node3</code>.</p>
+</div>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">ssh node3</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Use <code>sudo</code> to elevate your privileges.</p>
+</div>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">[[ "$UID" == 0 ]] || sudo -i</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Verify that you are on the right host for these exercises.</p>
+</div>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">workshop-buildah-checkhost.sh</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You are now ready to proceed with these exercises.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_create_a_container_image_with_buildah"><a class="anchor" href="#_create_a_container_image_with_buildah"></a>Create a Container Image With Buildah</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>In the previous lab on <code>podman</code>, we pulled down the ubi image and used an OCIFile to build a "webserver" container image. That process used <code>buildah</code> under the hood, but in this lab we are going to use <code>buildah</code> directly to create a similar image manually, step by step.</p>
+</div>
+<div class="sect2">
+<h3 id="_start_a_fresh_build"><a class="anchor" href="#_start_a_fresh_build"></a>Start a Fresh Build</h3>
+<div class="paragraph">
+<p>Let&#8217;s get started by creating a new working container based off of the ubi image.</p>
+</div>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">buildah from ubi9/ubi</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="nowrap">Resolved "ubi9/ubi" as an alias (/etc/containers/registries.conf.d/000-shortnames.conf)
+Trying to pull registry.access.redhat.com/ubi9/ubi:latest...
+Getting image source signatures
+Checking if image destination supports signatures
+Copying blob bf30f05a2532 done
+Copying blob c6e5292cfd5f done
+Copying config 168c58a383 done
+Writing manifest to image destination
+Storing signatures
+ubi-working-container</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This gives us the name of the "working container" and it is this container image that we will modify with buildah.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_add_a_custom_file"><a class="anchor" href="#_add_a_custom_file"></a>Add a Custom File</h3>
+<div class="paragraph">
+<p>Let&#8217;s run:</p>
+</div>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">buildah copy ubi-working-container /var/tmp/buildah-dan-cries.txt /var/www/html/dan-cries.txt</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="nowrap">34f1621a22ffd90a2ebbd58eba315089dc2704ac69a3d33d60362422e4ec26a1</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>At this point, you have copied your local <code>dan-cries.txt</code> into the the ubi-working-container image.</p>
+</div>
+<div class="paragraph">
+<p>The steps you performed above is equivalent to the following OCIFile (or Dockerfile):</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="nowrap">FROM ubi9/ubi
+COPY /root/dan-cries.txt /var/www/html/</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>So it&#8217;s nice that we can do that with buildah, manually.</p>
+</div>
+<div class="paragraph">
+<p>But wait there&#8217;s more!!!</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_install_additional_packages"><a class="anchor" href="#_install_additional_packages"></a>Install Additional Packages</h3>
+<div class="paragraph">
+<p>We need to install an httpd server in our image, and what better way to do that than a simple <code>dnf install</code>.</p>
+</div>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">buildah run ubi-working-container dnf --disablerepo=* --enablerepo=ubi-9-baseos-rpms --enablerepo=ubi-9-appstream-rpms install -y httpd</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="nowrap">...SNIP...
+Installed:
+  apr-1.7.0-11.el9.x86_64               apr-util-1.6.1-20.el9.x86_64   apr-util-bdb-1.6.1-20.el9.x86_64
+  apr-util-openssl-1.6.1-20.el9.x86_64  httpd-2.4.51-7.el9_0.x86_64    httpd-filesystem-2.4.51-7.el9_0.noarch
+  httpd-tools-2.4.51-7.el9_0.x86_64     libbrotli-1.0.9-6.el9.x86_64   mailcap-2.1.49-5.el9.noarch
+  mod_http2-1.15.19-2.el9.x86_64        mod_lua-2.4.51-7.el9_0.x86_64  redhat-logos-httpd-90.4-1.el9.noarch</pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_configure_the_entry_point"><a class="anchor" href="#_configure_the_entry_point"></a>Configure the Entry Point</h3>
+<div class="paragraph">
+<p>Next we set the entry point (command) so when the image deploys it knows what process to launch.</p>
+</div>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">buildah config --cmd "/usr/sbin/httpd -D FOREGROUND" ubi-working-container</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_validate_the_container_image"><a class="anchor" href="#_validate_the_container_image"></a>Validate the Container Image</h3>
+<div class="paragraph">
+<p>Now let us take a peek at our image and validate some of our changes.</p>
+</div>
+<div class="paragraph">
+<p>Proceed to mount the root filesystem of your container with:</p>
+</div>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">buildah mount ubi-working-container</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="nowrap">/var/lib/containers/storage/overlay/3456a159b5b3c9e3056d14b97bde1f0e770500dd1cdd6168c894a52a3b3f12ee/merged</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Using the long path provided by your mount command, change directories.</p>
+</div>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">cd $( buildah mount ubi-working-container )</code></pre>
+</div>
+</div>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">ls -lah ./var/www/html</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="nowrap">total 16K
+drwxr-xr-x. 2 root root 4.0K Apr 12 21:12 .
+drwxr-xr-x. 3 root root 4.0K Apr 12 21:12 ..
+-rw-r--r--. 1 root root   58 Apr 12 21:12 dan-cries.txt</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>There is our <code>dan-cries.txt</code>! Let&#8217;s add an additional file:</p>
+</div>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">cp /var/tmp/buildah-index.html ./var/www/html/index.html</code></pre>
+</div>
+</div>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">cat ./var/www/html/index.html</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="nowrap">&lt;html&gt;
+&lt;title&gt;Stop Disabling SELinux&lt;/title&gt;
+&lt;body&gt;
+&lt;p&gt;
+Seriously, stop disabling SELinux. Learn how to use it before you blindly shut it off.
+&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Let us just double check contents of the httpd docroot one last time:</p>
+</div>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">ls -lahZ ./var/www/html/</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="nowrap">total 20K
+drwxr-xr-x. 2 root root system_u:object_r:container_file_t:s0:c60,c544 4.0K Apr 12 21:25 .
+drwxr-xr-x. 3 root root system_u:object_r:container_file_t:s0:c60,c544 4.0K Apr 12 21:12 ..
+-rw-r--r--. 1 root root system_u:object_r:container_file_t:s0:c60,c544   58 Apr 12 21:12 dan-cries.txt
+-rw-r--r--. 1 root root system_u:object_r:container_file_t:s0:c60,c544  164 Apr 12 21:24 index.html</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>When you are done making direct changes to the root filesystem of your container, you can run:</p>
+</div>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">cd /root
+buildah unmount ubi-working-container</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="nowrap">e918debcaabb5820997b1a4969fbd45284adc0a2869d1f22a1bce78f703ff3c6</pre>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_commit_changes_to_new_image"><a class="anchor" href="#_commit_changes_to_new_image"></a>Commit Changes to New Image</h4>
+<div class="paragraph">
+<p>At this point, we&#8217;ve used buildah to run commands and create a container image similar to those in the OCIFile used in the <code>podman</code> unit.  Go ahead and commit the working container in to an actual container image:</p>
+</div>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">buildah commit ubi-working-container webserver2</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="nowrap">Getting image source signatures
+Copying blob d3ada5af5602 skipped: already exists
+Copying blob 668db11eda93 skipped: already exists
+Copying blob 0f75b7e04ec6 done
+Copying config a831badcea done
+Writing manifest to image destination
+Storing signatures
+a831badcea41e924fd4a37f98431702142c17a64d06bd5444ac4471c1285be50</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Let&#8217;s look at our images:</p>
+</div>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">podman images</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="nowrap">REPOSITORY                            TAG      IMAGE ID       CREATED          SIZE
+localhost/webserver2                  latest   a831badcea41   25 seconds ago   240 MB
+registry.access.redhat.com/ubi9/ubi   latest   8121a9f5303b   12 days ago      240 MB</pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_deploy"><a class="anchor" href="#_deploy"></a>Deploy</h4>
+<div class="paragraph">
+<p>Now let&#8217;s run that webserver:</p>
+</div>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">podman run -d -p 8080:80 webserver2</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_validate"><a class="anchor" href="#_validate"></a>Validate</h4>
+<div class="paragraph">
+<p>Finally let&#8217;s test our new webserver:</p>
+</div>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">curl http://localhost:8080/</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="nowrap">&lt;html&gt;
+&lt;title&gt;Stop Disabling SELinux&lt;/title&gt;
+&lt;body&gt;
+&lt;p&gt;
+Seriously, stop disabling SELinux. Learn how to use it before you blindly shut it off.
+&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>and:</p>
+</div>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">curl http://localhost:8080/dan-cries.txt</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="nowrap">Every time you run setenforce 0, you make Dan Walsh weep.</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>As you can see, all of the changes we made with buildah are active and working in this new container image!</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_inspecting_images_with_skopeo"><a class="anchor" href="#_inspecting_images_with_skopeo"></a>Inspecting Images with Skopeo</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Let&#8217;s take a look at the webserver2:latest container that we just built:</p>
+</div>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">skopeo inspect containers-storage:localhost/webserver2:latest</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="nowrap">INFO[0000] Not using native diff for overlay, this may cause degraded performance for building images: kernel has CONFIG_OVERLAY_FS_RED
+IRECT_DIR enabled
+{
+    "Name": "localhost/webserver2",
+    "Digest": "sha256:f4cb24c088e6a795802766ea078585b3791563a23b92350ac6ddd162d596f9c3",
+    "RepoTags": [],
+    "Created": "2023-09-25T22:28:02.376092312Z",
+    "DockerVersion": "",
+    "Labels": {
+        "architecture": "x86_64",
+        "build-date": "2023-09-05T09:00:57",
+        "com.redhat.component": "ubi9-container",
+        "com.redhat.license_terms": "https://www.redhat.com/en/about/red-hat-end-user-license-agreements#UBI",
+        "description": "The Universal Base Image is designed and engineered to be the base layer for all of your containerized applicat
+ions, middleware and utilities. This base image is freely redistributable, but Red Hat only supports Red Hat technologies through subsc
+riptions for Red Hat products. This image is maintained by Red Hat and updated regularly.",
+        "distribution-scope": "public",
+        "io.buildah.version": "1.29.1",
+        "io.k8s.description": "The Universal Base Image is designed and engineered to be the base layer for all of your containerized a
+pplications, middleware and utilities. This base image is freely redistributable, but Red Hat only supports Red Hat technologies throug
+h subscriptions for Red Hat products. This image is maintained by Red Hat and updated regularly.",
+        "io.k8s.display-name": "Red Hat Universal Base Image 9",
+        "io.openshift.expose-services": "",
+        "io.openshift.tags": "base rhel9",
+        "maintainer": "Red Hat, Inc.",
+        "name": "ubi9",
+        "release": "755",
+        "summary": "Provides the latest release of Red Hat Universal Base Image 9.",
+        "url": "https://access.redhat.com/containers/#/registry.access.redhat.com/ubi9/images/9.2-755",
+        "vcs-ref": "6b5892a11894993e819f9a93ee1d7aaa80dc3a17",
+        "vcs-type": "git",
+        "vendor": "Red Hat, Inc.",
+        "version": "9.2"
+    },
+    "Architecture": "amd64",
+    "Os": "linux",
+    "Layers": [
+        "sha256:c662a0c6991747541797792a373ef4ed463b66b1c64d91e1495d68bc22e1a12a",
+        "sha256:158a73cf9d7dc54fc7050a36c9e9dd2bc1a03f8393a7bb965a2d6fd48b49c272"
+    ],
+    "LayersData": [
+        {
+            "MIMEType": "application/vnd.oci.image.layer.v1.tar",
+            "Digest": "sha256:c662a0c6991747541797792a373ef4ed463b66b1c64d91e1495d68bc22e1a12a",
+            "Size": 216972288,
+            "Annotations": null
+        },
+        {
+            "MIMEType": "application/vnd.oci.image.layer.v1.tar",
+            "Digest": "sha256:158a73cf9d7dc54fc7050a36c9e9dd2bc1a03f8393a7bb965a2d6fd48b49c272",
+            "Size": 28838912,
+            "Annotations": null
+        }
+    ],
+    "Env": [
+        "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+        "container=oci"
+    ]
+}</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>We will see that this container is based on the Red Hat UBI image.</p>
+</div>
+<div class="paragraph">
+<p>Let&#8217;s look at the ubi9/ubi container that we built this off of and compare the layers section:</p>
+</div>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">skopeo inspect containers-storage:registry.access.redhat.com/ubi9/ubi:latest</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="nowrap">INFO[0000] Not using native diff for overlay, this may cause degraded performance for building images: kernel has CONFIG_OVERLAY_FS_RED
+IRECT_DIR enabled
+{
+    "Name": "registry.access.redhat.com/ubi9/ubi",
+    "Digest": "sha256:bd30f546dfb78ef0fb7789376afd22671319007af473f03370dafab34302c857",
+    "RepoTags": [],
+    "Created": "2023-09-05T09:13:03.335564293Z",
+    "DockerVersion": "",
+    "Labels": {
+        "architecture": "x86_64",
+        "build-date": "2023-09-05T09:00:57",
+        "com.redhat.component": "ubi9-container",
+        "com.redhat.license_terms": "https://www.redhat.com/en/about/red-hat-end-user-license-agreements#UBI",
+        "description": "The Universal Base Image is designed and engineered to be the base layer for all of your containerized applicat
+ions, middleware and utilities. This base image is freely redistributable, but Red Hat only supports Red Hat technologies through subsc
+riptions for Red Hat products. This image is maintained by Red Hat and updated regularly.",
+        "distribution-scope": "public",
+        "io.buildah.version": "1.29.0",
+        "io.k8s.description": "The Universal Base Image is designed and engineered to be the base layer for all of your containerized a
+pplications, middleware and utilities. This base image is freely redistributable, but Red Hat only supports Red Hat technologies throug
+h subscriptions for Red Hat products. This image is maintained by Red Hat and updated regularly.",
+        "io.k8s.display-name": "Red Hat Universal Base Image 9",
+        "io.openshift.expose-services": "",
+        "io.openshift.tags": "base rhel9",
+        "maintainer": "Red Hat, Inc.",
+        "name": "ubi9",
+        "release": "755",
+        "summary": "Provides the latest release of Red Hat Universal Base Image 9.",
+        "url": "https://access.redhat.com/containers/#/registry.access.redhat.com/ubi9/images/9.2-755",
+        "vcs-ref": "6b5892a11894993e819f9a93ee1d7aaa80dc3a17",
+        "vcs-type": "git",
+        "vendor": "Red Hat, Inc.",
+        "version": "9.2"
+    },
+    "Architecture": "amd64",
+    "Os": "linux",
+    "Layers": [
+        "sha256:3b7adf049118244599c2f433c32bb40ea46462b457d9ca01ab066462c5f38561"
+    ],
+    "LayersData": [
+        {
+            "MIMEType": "application/vnd.docker.image.rootfs.diff.tar.gzip",
+            "Digest": "sha256:3b7adf049118244599c2f433c32bb40ea46462b457d9ca01ab066462c5f38561",
+            "Size": 78045460,
+            "Annotations": null
+        }
+    ],
+    "Env": [
+        "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+        "container=oci"
+    ]
+}</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Comparing the layers section, we can see that our container has 3 layers whereas the original container only has 2 layers. In this, we can tell that there are differences between these containers.</p>
+</div>
+<div class="paragraph">
+<p>Pretty neat that we can look inside local containers, but what about containers that are in registries? Skopeo can inspect containers on remote registries without the need to pull the image locally. Let&#8217;s give that a test:</p>
+</div>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">skopeo inspect docker://registry.access.redhat.com/ubi9/ubi-minimal:latest</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="nowrap">{
+    "Name": "registry.access.redhat.com/ubi9/ubi-minimal",
+    "Digest": "sha256:0dfa71a7ec2caf445e7ac6b7422ae67f3518960bd6dbf62a7b77fa7a6cfc02b1",
+    "RepoTags": [
+        "9.0.0-1471-source",
+        "9.0.0-1608-source",
+        "9.0.0-1575-source",
+        "9.0.0-1580",
+        "9.0.0-1471.1655190711",
+        "9.0.0-1580-source",
+        "9.0.0-1471.1655190711-source",
+        "9.0.0-1575",
+        "9.0.0-1608",
+        "9.0.0-1471",
+        "9.1.0-1656.1669627757",
+        "9.1.0-1656-source",
+        "9.1.0-1656.1669627757-source",
+        "9.0.0-1644-source",
+        "9.0.0-1687",
+        "9.0.0-1644.1666621587-source",
+        "9.0.0-1700-source",
+        "9.0.0-1700",
+        "9.0.0",
+        "9.0.0-1687-source",
+        "9.0.0-1644.1666621587",
+        "9.0.0-1644",
+        "9.1.0-1656",
+        "9.1.0-1829-source",
+        "9.2-484-source",
+        "9.1",
+        "9.1.0-1760",
+        "9.1.0-1793",
+        "9.1.0",
+        "9.2-484",
+        "9.1.0-1829",
+        "9.1.0-1760-source",
+        "9.1.0-1793-source",
+        "9.1.0-1760.1675784957-source",
+        "9.1.0-1760.1675784957",
+        "9.2-691",
+        "9.2-691-source",
+        "9.2-717",
+        "9.2-717-source",
+        "latest",
+        "9.2-750",
+        "9.2",
+        "9.2-750-source"
+    ],
+    "Created": "2023-09-05T09:12:47.138881118Z",
+    "DockerVersion": "",
+    "Labels": {
+        "architecture": "x86_64",
+        "build-date": "2023-09-05T09:00:56",
+        "com.redhat.component": "ubi9-minimal-container",
+        "com.redhat.license_terms": "https://www.redhat.com/en/about/red-hat-end-user-license-agreements#UBI",
+        "description": "The Universal Base Image Minimal is a stripped down image that uses microdnf as a package manager. This base image is freely redistributable, but Red Hat only supports Red Hat technologies through subscriptions for Red H
+at products. This image is maintained by Red Hat and updated regularly.",
+        "distribution-scope": "public",
+        "io.buildah.version": "1.29.0",
+        "io.k8s.description": "The Universal Base Image Minimal is a stripped down image that uses microdnf as a package manager. This base image is freely redistributable, but Red Hat only supports Red Hat technologies through subscriptions fo
+r Red Hat products. This image is maintained by Red Hat and updated regularly.",
+        "io.k8s.display-name": "Red Hat Universal Base Image 9 Minimal",
+        "io.openshift.expose-services": "",
+        "io.openshift.tags": "minimal rhel9",
+        "maintainer": "Red Hat, Inc.",
+        "name": "ubi9-minimal",
+        "release": "750",
+        "summary": "Provides the latest release of the minimal Red Hat Universal Base Image 9.",
+        "url": "https://access.redhat.com/containers/#/registry.access.redhat.com/ubi9-minimal/images/9.2-750",
+        "vcs-ref": "7ef59505f75bf0c11c8d3addefebee5ceaaf4c41",
+        "vcs-type": "git",
+        "vendor": "Red Hat, Inc.",
+        "version": "9.2"
+    },
+    "Architecture": "amd64",
+    "Os": "linux",
+    "Layers": [
+        "sha256:35e8d0567610305e5133f45eac553d3f57e4f33e2f764a1f16bab4f3bf24ad86"
+    ],
+    "LayersData": [
+        {
+            "MIMEType": "application/vnd.docker.image.rootfs.diff.tar.gzip",
+            "Digest": "sha256:35e8d0567610305e5133f45eac553d3f57e4f33e2f764a1f16bab4f3bf24ad86",
+            "Size": 37869610,
+            "Annotations": null
+        }
+    ],
+    "Env": [
+        "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+        "container=oci"
+    ]
+}</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The above allows us to look at the registry&#8217;s copy of ubi9/ubi.</p>
+</div>
+<div class="paragraph">
+<p>Next let&#8217;s run:</p>
+</div>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">podman images</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="nowrap">REPOSITORY                           TAG         IMAGE ID      CREATED        SIZE
+localhost/webserver2                 latest      9d94a33540a1  3 minutes ago  246 MB
+registry.access.redhat.com/ubi9/ubi  latest      9f43f297e77b  2 weeks ago    217 MB</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Notice that ubi9/ubi-minimal is not local to our registry. Skopeo provided that inspection completely remotely.</p>
+</div>
+<div class="sect2">
+<h3 id="_obtaining_tarballs_of_containers_in_remote_registries_for_further_inspection"><a class="anchor" href="#_obtaining_tarballs_of_containers_in_remote_registries_for_further_inspection"></a>Obtaining tarballs of containers in remote registries for further inspection</h3>
+<div class="paragraph">
+<p>Let&#8217;s run:</p>
+</div>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">mkdir /root/ubi-tarball</code></pre>
+</div>
+</div>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">skopeo copy docker://registry.access.redhat.com/ubi9/ubi-minimal:latest dir:/root/ubi-tarball</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="nowrap">Getting image source signatures
+Checking if image destination supports signatures
+Copying blob 35e8d0567610 done
+Copying config 088f0967f6 done
+Writing manifest to image destination
+Storing signatures</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>and now we can do:</p>
+</div>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">cd /root/ubi-tarball
+ls -l</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="nowrap">total 37024
+-rw-r--r--. 1 root root     6242 Sep 25 22:32 088f0967f6b5742f78966cbaa7012fd7f5091a9b9d547a5c31ddde64a9581595
+-rw-r--r--. 1 root root 37869610 Sep 25 22:32 35e8d0567610305e5133f45eac553d3f57e4f33e2f764a1f16bab4f3bf24ad86
+-rw-r--r--. 1 root root      429 Sep 25 22:32 manifest.json
+-rw-r--r--. 1 root root      869 Sep 25 22:32 signature-1
+-rw-r--r--. 1 root root      872 Sep 25 22:32 signature-2
+-rw-r--r--. 1 root root      871 Sep 25 22:32 signature-3
+-rw-r--r--. 1 root root      860 Sep 25 22:32 signature-4
+-rw-r--r--. 1 root root      864 Sep 25 22:32 signature-5
+-rw-r--r--. 1 root root      864 Sep 25 22:32 signature-6
+-rw-r--r--. 1 root root       33 Sep 25 22:32 version</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Inspecting the images with the <code>file</code> command, we discover that these a couple of text file along with a couple of zipped (compressed) tar files.</p>
+</div>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">file *</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="nowrap">088f0967f6b5742f78966cbaa7012fd7f5091a9b9d547a5c31ddde64a9581595: JSON data
+35e8d0567610305e5133f45eac553d3f57e4f33e2f764a1f16bab4f3bf24ad86: gzip compressed data, original size modulo 2^32 9740134
+4
+manifest.json:                                                    JSON data
+signature-1:                                                      data
+signature-2:                                                      data
+signature-3:                                                      data
+signature-4:                                                      data
+signature-5:                                                      data
+signature-6:                                                      data
+version:                                                          ASCII text</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Let&#8217;s take a test view of the contents of the largest gzip file (examine "original size"):</p>
+</div>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">tar ztvf $(ls --sort=size | head -1)</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="nowrap">dr-xr-xr-x root/root         0 2022-08-02 21:53 ./
+drwxr-xr-x root/root         0 2022-08-02 21:53 ./run/
+drwxr-xr-x root/root         0 2022-08-02 21:53 ./run/lock/
+drwxrwxrwt root/root         0 2022-08-02 21:52 ./tmp/
+drwxr-xr-x root/root         0 2022-08-02 21:53 ./etc/
+drwxr-xr-x root/root         0 2021-08-10 16:16 ./etc/motd.d/
+drwxr-xr-x root/root         0 2022-04-06 15:03 ./etc/issue.d/
+drwxr-xr-x root/root         0 2022-08-02 21:53 ./etc/sysctl.d/
+lrwxrwxrwx root/root         0 2022-04-07 14:01 ./etc/sysctl.d/99-sysctl.conf -&gt; ../sysctl.conf
+drwxr-xr-x root/root         0 2022-08-02 21:53 ./etc/gss/
+drwxr-xr-x root/root         0 2022-03-18 08:56 ./etc/gss/mech.d/
+-rw-r--r-- root/root        28 2021-08-02 12:28 ./etc/ld.so.conf
+lrwxrwxrwx root/root         0 2022-04-06 15:03 ./etc/system-release -&gt; redhat-release
+-rw-r--r-- root/root       943 2020-06-23 06:11 ./etc/inputrc
+-rw-r--r-- root/root      3019 2020-06-23 06:11 ./etc/bashrc
+-rw-r--r-- root/root      7778 2021-12-03 08:36 ./etc/login.defs
+-rw-r--r-- root/root        44 2022-04-06 15:03 ./etc/redhat-release
+... SNIP...</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The output is going to scroll by rather quickly, but just note that this is a complete filesystem for the container image.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+If you are more curious and would like to inspect the details a little further you could pipe the output to <code>more</code> or <code>less</code> and page through the archive contents.  <code>tar ztvf $(ls --sort=size | head -1) | less</code>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>The other two numeric files provided in the image download are:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>a copy of the metadata in text</p>
+</li>
+<li>
+<p>an additional tarball of any container secrets</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Lastly, a couple of ASCII text files:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>oci config info used to build the container</p>
+</li>
+<li>
+<p>version info</p>
+</li>
+<li>
+<p>manifest info</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_other_uses_of_skopeo"><a class="anchor" href="#_other_uses_of_skopeo"></a>Other Uses of Skopeo</h3>
+<div class="paragraph">
+<p>Skopeo can also do the following things:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Copy an image (manifest, filesystem layers, signatures) from one location to another. It can convert between manifest types in doing this (oci, v2s1, v2s2)</p>
+</li>
+<li>
+<p>Delete images from registries that you have admin rights to.</p>
+</li>
+<li>
+<p>Push images to registries that you have push rights to.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Examples of how to do these things are available in 'man skopeo'</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_cleanup"><a class="anchor" href="#_cleanup"></a>Cleanup</h3>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">podman stop --all
+podman rm --all
+
+buildah rm --all
+
+podman rmi --all
+buildah rmi --all</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_conclusion"><a class="anchor" href="#_conclusion"></a>Conclusion</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>This concludes the exercises related to buildah and skopeo.</p>
+</div>
+<div class="paragraph">
+<p>Time to finish this unit and return the shell to it&#8217;s home position.</p>
+</div>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">workshop-finish-exercise.sh</code></pre>
+</div>
+</div>
+<h2 id="_additional_reference_materials" class="discrete">Additional Reference Materials</h2>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+You are not required to reference any additional resources for these exercises.  This is informational only.
+</td>
+</tr>
+</table>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://www.redhat.com/en/blog/introducing-red-hat-universal-base-image?sc_cid=701f2000000txokAAA&amp;utm_source=bambu&amp;utm_medium=social&amp;utm_campaign=abm">Introducing the Red Hat Universal Base Image - Scott McCarty</a></p>
+</li>
+<li>
+<p><a href="https://linuxhandbook.com/buildah-basics/">Getting Started with Buildah - Servesha</a></p>
+</li>
+</ul>
+</div>
+<h2 id="_end_of_unit" class="discrete">End of Unit</h2>
+</div>
+</div>
+<nav class="pagination">
+  <span class="prev"><a href="podman.html" class="query-params-link">Containers Management (podman)</a></span>
+  <span class="next"><a href="image-builder.html" class="query-params-link">Image Builder (composer-cli)</a></span>
+</nav>
+</article>
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <a class="rhd-logo" href="https://developers.redhat.com" target="_blank"></div>
+</footer>
+<script src="../../_/js/vendor/clipboard.js"></script>
+<script src="../../_/js/site.js"></script>
+<script async src="../../_/js/vendor/highlight.js"></script>
+  </body>
+</html>

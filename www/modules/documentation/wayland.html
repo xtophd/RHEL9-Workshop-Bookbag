@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Untitled :: Definitive RHEL9 Workshop (v9.1)</title>
+    <meta name="generator" content="Antora 3.1.7">
+    <link rel="stylesheet" href="../../_/css/site.css">
+<link rel="icon" href="../../_/img/favicon.ico" type="image/x-icon">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="https://developers.redhat.com" target="_blank"><img
+          src="../../_/img/header_logo.png" height="40px" alt="Red Hat Developer Program"></a>
+      <a class="navbar-item" href="../..">Definitive RHEL9 Workshop (v9.1)</a>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <a class="navbar-item" href="#">Books</a>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">CheatSheets</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="#">CheatSheet A</a>
+            <a class="navbar-item" href="#">CheatSheet B</a>
+            <a class="navbar-item" href="#">CheatSheet C</a>
+          </div>
+        </div>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">Upcoming Events</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="#">Event A</a>
+            <a class="navbar-item" href="#">Event B</a>
+            <a class="navbar-item" href="#">Event C</a>
+          </div>
+        </div>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">More Tutorials</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="#">Tutorial A</a>
+            <a class="navbar-item" href="#">Tutorial B</a>
+            <a class="navbar-item" href="#">Tutorial C</a>
+          </div>
+        </div>
+        <div class="navbar-item">
+          <span class="control">
+            <a class="button is-primary" href="#">Download</a>
+          </span>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="modules" data-version="master">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="../index.html" class=" query-params-link">Default Title</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../overview.html">Workshop Overview</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="webconsole.html">Web Console (cockpit)</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="systemd.html">Service Management (systemd)</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="firewalld.html">Firewall Management (firewalld)</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="nftables.html">Firewall Rules (nf-tables)</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="ebpf.html">eBPF Tracing (bcc-tools)</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="podman.html">Containers Management (podman)</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="buildah.html">Containers Dev (buildah)</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="image-builder.html">Image Builder (composer-cli)</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="virtualization.html">Virtualization (kvm,libvirt)</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="tlog.html">Session Logging (tlog)</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="lvm-vdo.html">Data Optimization (lvm,vdo)</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="stratis.html">Storage Management (stratis)</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="kpatch.html">Kernel Live Patching (kpatch)</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="boom-kernel-parms.html">Managing GRUB2 with Boom</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="leapp.html">LEAPP In-Place Upgrades</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">Default Title</span>
+    <span class="version">master</span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <span class="title">Default Title</span>
+      <ul class="versions">
+        <li class="version is-current">
+          <a href="../index.html">master</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="../connection.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+</nav>
+  <div class="edit-this-page"><a href="file:///Users/jmaltin/Development/RHEL9-Workshop-Showroom/content/modules/ROOT/pages/documentation/wayland.adoc">Edit this Page</a></div>
+</div>
+  <div class="content">
+<article class="doc">
+<div class="sect1">
+<h2 id="_wayland"><a class="anchor" href="#_wayland"></a>Wayland</h2>
+<div class="sectionbody">
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>The graphical desktop is disabled by default to improve the overall performance of this workshop in the public cloud.  If you have access to the console, as the root user you can switch-on the graphical desktop with 'systemctl isolate'.  Make the change permanent with 'systemctl set-default' option.</p>
+</div>
+<div class="paragraph">
+<p><em>Enable the Graphical Desktop</em></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>systemctl isolate graphical.target
+
+systemctl set-default graphical.target</pre>
+</div>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_about_wayland"><a class="anchor" href="#_about_wayland"></a>About Wayland</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Wayland is a compositor protocol and library implementation of that protocol.  Wayland replaces the legacy X11 protocol with the primary benefit being that it is easier to develop and maintain.  Meaning, Wayland drops many of the X11 specifications that are no longer in use.</p>
+</div>
+<div class="paragraph">
+<p>That said, Wayland also enables features that are hard or impossible to support under X:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>input transformation</p>
+</li>
+<li>
+<p>transparent hardware overlays</p>
+</li>
+<li>
+<p>direct rendering</p>
+</li>
+<li>
+<p>isolating clients (sandboxing)</p>
+</li>
+<li>
+<p>&#8230;&#8203; and plenty more ( <a href="https://wiki.gnome.org/Initiatives/Wayland">GNOME Wiki Wayland</a> )</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Wayland was born and raised in the X community, and has strong support.</p>
+</div>
+<div class="paragraph">
+<p>First introduced to the Fedora community back in version 25, Wayland has been under development for several years before it&#8217;s introduction in RHEL 8.   Wayland is the new standard in graphical desktop environments.</p>
+</div>
+<div class="paragraph">
+<p>For more information, see the resources listed below.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+X11 is still shipped with RHEL 8, but requires manual installation as it is not the default installed compositor protocol
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_installation_configuration"><a class="anchor" href="#_installation_configuration"></a>Installation &amp; Configuration</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_packages_and_services"><a class="anchor" href="#_packages_and_services"></a>Packages and Services</h3>
+<div class="paragraph">
+<p>The graphical desktop is included by default in a "Workstation" installation of RHEL 8, but this is not the case in a "Server" installation.</p>
+</div>
+<div class="paragraph">
+<p>For today’s lab this has already been done for you. In the event you installed a text based RHEL 8 host on your own, you can load and enable Wayland with the following simple steps:</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p><em>Native command(s) to install Wayland</em></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>dnf groupinstall Workstation
+
+systemctl set-default graphical
+
+reboot</pre>
+</div>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Please proceed to log into the GUI console of <strong>bastion.example.com</strong> as the user <strong>student</strong>.  The password should be provided by your instructor.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_customizing_the_desktop"><a class="anchor" href="#_customizing_the_desktop"></a>Customizing the Desktop</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>After successfully signing in as <strong>student</strong>, you should notice that you have an amazingly clean desktop as shown below.</p>
+</div>
+<div class="paragraph">
+<p>Let us begin our exploration of Wayland by customizing a few things.</p>
+</div>
+<div class="paragraph">
+<p>First, we will configure your desktop to have a menu system.</p>
+</div>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph">
+<p>Click &#8594; “Activities”</p>
+</div>
+</blockquote>
+</div>
+<div class="exampleblock">
+<div class="content">
+<div class="imageblock">
+<div class="content">
+<img src="../_images/wayland-10-desktop.png" alt="Wayland Desktop">
+</div>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Shown below is the <strong>Activities Overview</strong> page.</p>
+</div>
+<div class="exampleblock">
+<div class="content">
+<div class="imageblock">
+<div class="content">
+<img src="../_images/wayland-20-activities.png" alt="Activities">
+</div>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Now enter a search string for the utlity we want.</p>
+</div>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph">
+<p>Select the Search Bar near the top center, and enter the following:</p>
+</div>
+<div class="hdlist">
+<table>
+<tr>
+<td class="hdlist1">
+<strong>Search</strong>
+</td>
+<td class="hdlist2">
+<p>gnome-tweaks</p>
+</td>
+</tr>
+</table>
+</div>
+</blockquote>
+</div>
+<div class="exampleblock">
+<div class="content">
+<div class="imageblock">
+<div class="content">
+<img src="../_images/wayland-80-tweaks-search.png" alt="Tweaks Search">
+</div>
+</div>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+the package gnome-tweaks was pre-installed during the workshop preparation scripts
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Now launch the tool so we can make a few changes to the desktop functionality and appearance.</p>
+</div>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph">
+<p>Click &#8594; <code>Tweaks</code></p>
+</div>
+</blockquote>
+</div>
+<div class="paragraph">
+<p>Enable a more traditional cascading applications menu in the top bar.</p>
+</div>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph">
+<p>Click &#8594; <code>Extensions</code> on the left</p>
+</div>
+<div class="paragraph">
+<p>Enable &#8594; <code>Applications Menu</code> on the right</p>
+</div>
+</blockquote>
+</div>
+<div class="exampleblock">
+<div class="content">
+<div class="imageblock">
+<div class="content">
+<img src="../_images/wayland-90-tweaks-extensions.png" alt="Tweaks Extensions">
+</div>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Now activate the Title Bar Maximize and Minimize buttons for all windows.</p>
+</div>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph">
+<p>Click &#8594; <code>Windows</code> on the left</p>
+</div>
+<div class="paragraph">
+<p>Enable &#8594; <code>Maximize</code> on the right</p>
+</div>
+<div class="paragraph">
+<p>Enable &#8594; <code>Minimize</code> on the right</p>
+</div>
+</blockquote>
+</div>
+<div class="exampleblock">
+<div class="content">
+<div class="imageblock">
+<div class="content">
+<img src="../_images/wayland-100-tweaks-windows.png" alt="Tweaks Windows">
+</div>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Close the the Tweaks interface by clicking on the X in the upper right hand corner</p>
+</div>
+<div class="paragraph">
+<p>Now you have an Applications menu system in Gnome!</p>
+</div>
+<div class="exampleblock">
+<div class="content">
+<div class="imageblock">
+<div class="content">
+<img src="../_images/wayland-110-tweaks-appmenu.png" alt="Tweaks AppMenu">
+</div>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Launch the calculator utility to verify that windows have maximize and minimize buttons in the title bar.</p>
+</div>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph">
+<p>Click &#8594; Applications</p>
+</div>
+<div class="paragraph">
+<p>Click &#8594; Accessories</p>
+</div>
+<div class="paragraph">
+<p>Click &#8594; Calculator</p>
+</div>
+</blockquote>
+</div>
+<div class="exampleblock">
+<div class="content">
+<div class="imageblock">
+<div class="content">
+<img src="../_images/wayland-120-calculator.png" alt="Calculator">
+</div>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Notice that apps now have a maximize and minimize button.</p>
+</div>
+<div class="paragraph">
+<p>You can close the Calculator.</p>
+</div>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph">
+<p>Click &#8594; X in the title bar</p>
+</div>
+</blockquote>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_adding_packages"><a class="anchor" href="#_adding_packages"></a>Adding Packages</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Next we will install a package using the Package Manager.  Start on the desktop as shown below.</p>
+</div>
+<div class="exampleblock">
+<div class="content">
+<div class="imageblock">
+<div class="content">
+<img src="../_images/wayland-130-desktop-appmenu.png" alt="Desktop with AppMenu">
+</div>
+</div>
+</div>
+</div>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph">
+<p>Click &#8594; <code>Activities</code> near the top left corner</p>
+</div>
+<div class="paragraph">
+<p>Click &#8594; <code>Activities Overview</code> near the bottom left</p>
+</div>
+</blockquote>
+</div>
+<div class="exampleblock">
+<div class="content">
+<div class="imageblock">
+<div class="content">
+<img src="../_images/wayland-110-tweaks-appmenu.png" alt="Application Menu">
+</div>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Now that we are back on the <strong>Activities Overview</strong> page, we search for a package.</p>
+</div>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph">
+<p>In the <strong>Search Bar</strong> near the top center, enter the following:</p>
+</div>
+<div class="hdlist">
+<table>
+<tr>
+<td class="hdlist1">
+<strong>Search</strong>
+</td>
+<td class="hdlist2">
+<p>firewall</p>
+</td>
+</tr>
+</table>
+</div>
+</blockquote>
+</div>
+<div class="paragraph">
+<p>The search will result in a link to the package installer.</p>
+</div>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph">
+<p>Click &#8594; <code>Firewall Configuration</code></p>
+</div>
+</blockquote>
+</div>
+<div class="exampleblock">
+<div class="content">
+<div class="imageblock">
+<div class="content">
+<img src="../_images/wayland-30-firewall-search.png" alt="Firewall Search">
+</div>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>This will bring up the Gnome Software package installation GUI along with a description of the utility.  Now let us proceed with installation.</p>
+</div>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph">
+<p>Click &#8594; <code>Firewall</code></p>
+</div>
+</blockquote>
+</div>
+<div class="exampleblock">
+<div class="content">
+<div class="imageblock">
+<div class="content">
+<img src="../_images/wayland-40-firewall-description.png" alt="Firewall Description">
+</div>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Now you are on the details page of the utlity.  You can scroll down and read more about the tool, see reviews and ratings.  Time to install the Firewall Configuration tool.</p>
+</div>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph">
+<p>Click &#8594; <code>Install</code></p>
+</div>
+</blockquote>
+</div>
+<div class="exampleblock">
+<div class="content">
+<div class="imageblock">
+<div class="content">
+<img src="../_images/wayland-50-firewall-install.png" alt="Firewall Install">
+</div>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Now that it is installed, proceed to launch the tool and explore the firewall configuration.</p>
+</div>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph">
+<p>Click &#8594; <code>Launch</code></p>
+</div>
+</blockquote>
+</div>
+<div class="exampleblock">
+<div class="content">
+<div class="imageblock">
+<div class="content">
+<img src="../_images/wayland-60-firewall-launch.png" alt="Firewall Install">
+</div>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>You’ll be prompted for the password for student - enter the password.  Because the user <strong>student</strong> is a member of the <strong>wheel</strong> group, you will be able to perform most administrator tasks.</p>
+</div>
+<div class="exampleblock">
+<div class="content">
+<div class="imageblock">
+<div class="content">
+<img src="../_images/wayland-70-firewall-password.png" alt="Firewall Install">
+</div>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Feel free to browse the interface but don’t make any changes.  When you are done exploring close the Firewall Configuration tool</p>
+</div>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph">
+<p>Click &#8594; X in the titlebar</p>
+</div>
+</blockquote>
+</div>
+<div class="paragraph">
+<p>That is all for this quick first time introduction to Wayland.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_additional_resources"><a class="anchor" href="#_additional_resources"></a>Additional Resources</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Red Hat Documentation</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/8/html-single/using_the_desktop_environment_in_rhel_8/index">Using the Desktop Environment in RHEL 8</a></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Wayland Related Sites</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://wayland.freedesktop.org/">Wayland Project</a></p>
+</li>
+<li>
+<p><a href="https://wiki.gnome.org/Initiatives/Wayland">GNOME Wiki Wayland</a></p>
+</li>
+<li>
+<p><a href="https://en.wikipedia.org/wiki/Wayland_(display_server_protocol)">Wayland Architecture Wikipedia</a></p>
+</li>
+</ul>
+</div>
+<h2 id="_end_of_unit" class="discrete">End of Unit</h2>
+</div>
+</div>
+</article>
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <a class="rhd-logo" href="https://developers.redhat.com" target="_blank"></div>
+</footer>
+<script src="../../_/js/vendor/clipboard.js"></script>
+<script src="../../_/js/site.js"></script>
+<script async src="../../_/js/vendor/highlight.js"></script>
+  </body>
+</html>

@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Untitled :: Definitive RHEL9 Workshop (v9.1)</title>
+    <link rel="prev" href="lvm-vdo.html">
+    <link rel="next" href="kpatch.html">
+    <meta name="generator" content="Antora 3.1.7">
+    <link rel="stylesheet" href="../../_/css/site.css">
+<link rel="icon" href="../../_/img/favicon.ico" type="image/x-icon">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="https://developers.redhat.com" target="_blank"><img
+          src="../../_/img/header_logo.png" height="40px" alt="Red Hat Developer Program"></a>
+      <a class="navbar-item" href="../..">Definitive RHEL9 Workshop (v9.1)</a>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <a class="navbar-item" href="#">Books</a>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">CheatSheets</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="#">CheatSheet A</a>
+            <a class="navbar-item" href="#">CheatSheet B</a>
+            <a class="navbar-item" href="#">CheatSheet C</a>
+          </div>
+        </div>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">Upcoming Events</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="#">Event A</a>
+            <a class="navbar-item" href="#">Event B</a>
+            <a class="navbar-item" href="#">Event C</a>
+          </div>
+        </div>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">More Tutorials</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="#">Tutorial A</a>
+            <a class="navbar-item" href="#">Tutorial B</a>
+            <a class="navbar-item" href="#">Tutorial C</a>
+          </div>
+        </div>
+        <div class="navbar-item">
+          <span class="control">
+            <a class="button is-primary" href="#">Download</a>
+          </span>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="modules" data-version="master">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="../index.html" class=" query-params-link">Default Title</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../overview.html">Workshop Overview</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="webconsole.html">Web Console (cockpit)</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="systemd.html">Service Management (systemd)</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="firewalld.html">Firewall Management (firewalld)</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="nftables.html">Firewall Rules (nf-tables)</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="ebpf.html">eBPF Tracing (bcc-tools)</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="podman.html">Containers Management (podman)</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="buildah.html">Containers Dev (buildah)</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="image-builder.html">Image Builder (composer-cli)</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="virtualization.html">Virtualization (kvm,libvirt)</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="tlog.html">Session Logging (tlog)</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="lvm-vdo.html">Data Optimization (lvm,vdo)</a>
+  </li>
+  <li class="nav-item is-current-page" data-depth="1">
+    <a class="nav-link" href="stratis.html">Storage Management (stratis)</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="kpatch.html">Kernel Live Patching (kpatch)</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="boom-kernel-parms.html">Managing GRUB2 with Boom</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="leapp.html">LEAPP In-Place Upgrades</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">Default Title</span>
+    <span class="version">master</span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <span class="title">Default Title</span>
+      <ul class="versions">
+        <li class="version is-current">
+          <a href="../index.html">master</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="../connection.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="../index.html">Default Title</a></li>
+    <li><a href="stratis.html">Storage Management (stratis)</a></li>
+  </ul>
+</nav>
+  <div class="edit-this-page"><a href="file:///Users/jmaltin/Development/RHEL9-Workshop-Showroom/content/modules/ROOT/pages/documentation/stratis.adoc">Edit this Page</a></div>
+</div>
+  <div class="content">
+<article class="doc">
+<div class="sect1">
+<h2 id="_stratis_storage_management_made_easy"><a class="anchor" href="#_stratis_storage_management_made_easy"></a>Stratis : Storage Management Made Easy</h2>
+<div class="sectionbody">
+
+</div>
+</div>
+<div class="sect1">
+<h2 id="_overview"><a class="anchor" href="#_overview"></a>Overview</h2>
+<div class="sectionbody">
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+Stratis is considered <strong>Technology Preview</strong> and is not intended for production use.  For information on Red Hat scope of support for Technology Preview features, see: <a href="https://access.redhat.com/support/offerings/techpreview/">Technology Preview Features Support Scope</a>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Stratis is a command-line tool to create, modify, and destroy Stratis pools, and the filesystems allocated from the pool.  Stratis creates a pool from one or more block devices (blockdevs), and then enables multiple filesystems to be created from the pool.</p>
+</div>
+<div class="paragraph">
+<p>Instead of an entirely in-kernel approach like ZFS or Btrfs, Stratis uses a hybrid user/kernel approach that builds upon existing block capabilities like device-mapper, existing filesystem capabilities like XFS, and a user space daemon for monitoring and control.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_getting_started"><a class="anchor" href="#_getting_started"></a>Getting Started</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>For these exercises, you will be using the host <code>node2</code> as user <code>root</code>.</p>
+</div>
+<div class="paragraph">
+<p>From host <code>bastion</code>, ssh to <code>node2</code>.</p>
+</div>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">ssh node2</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Use <code>sudo</code> to elevate your privileges.</p>
+</div>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">[[ "$UID" == 0 ]] || sudo -i</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Verify that you are on the right host for these exercises.</p>
+</div>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">workshop-stratis-checkhost.sh</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You are now ready to proceed with these exercises.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_installation_configuration"><a class="anchor" href="#_installation_configuration"></a>Installation &amp; Configuration</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Install the required packages - this will pull in several Python related dependencies.</p>
+</div>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">dnf install -y stratisd stratis-cli</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Next we need to enable the <code>stratisd</code> service</p>
+</div>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">systemctl enable --now stratisd</code></pre>
+</div>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+The "enable --now" syntax is new in RHEL 8.  It allows for permanently enabling as well as immediately starting services in a single command.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Finally check the service status.</p>
+</div>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">systemctl --no-pager status stratisd</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="nowrap">● stratisd.service - Stratis daemon
+     Loaded: loaded (/usr/lib/systemd/system/stratisd.service; enabled; vendor preset: enabled)
+     Active: active (running) since Mon 2022-08-01 21:56:27 UTC; 8min ago
+       Docs: man:stratisd(8)
+   Main PID: 43554 (stratisd)
+      Tasks: 6 (limit: 23122)
+     Memory: 1.6M
+        CPU: 257ms
+     CGroup: /system.slice/stratisd.service
+             └─43554 /usr/libexec/stratisd --log-level debug
+
+Aug 01 21:56:27 node2.qdq89.internal stratisd[43554]: [2022-08-01T21:56:27Z INFO  libstratis::stratis::run&gt;
+Aug 01 21:56:27 node2.qdq89.internal stratisd[43554]: [2022-08-01T21:56:27Z INFO  libstratis::engine::stra&gt;
+Aug 01 21:56:27 node2.qdq89.internal stratisd[43554]: [2022-08-01T21:56:27Z DEBUG libstratis::stratis::run&gt;
+Aug 01 21:56:27 node2.qdq89.internal stratisd[43554]: [2022-08-01T21:56:27Z DEBUG libstratis::stratis::run&gt;
+Aug 01 21:56:27 node2.qdq89.internal stratisd[43554]: [2022-08-01T21:56:27Z INFO  libstratis::stratis::ipc&gt;
+Aug 01 21:56:27 node2.qdq89.internal stratisd[43554]: [2022-08-01T21:56:27Z DEBUG libstratis::stratis::run&gt;
+Aug 01 21:56:27 node2.qdq89.internal stratisd[43554]: [2022-08-01T21:56:27Z DEBUG libstratis::stratis::run&gt;
+Aug 01 21:56:27 node2.qdq89.internal systemd[1]: Started Stratis daemon.
+Aug 01 21:56:37 node2.qdq89.internal stratisd[43554]: [2022-08-01T21:56:37Z DEBUG libstratis::stratis::run&gt;
+Aug 01 22:04:42 node2.qdq89.internal systemd[1]: Started Stratis daemon.</pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_create_storage_pool"><a class="anchor" href="#_create_storage_pool"></a>Create Storage Pool</h2>
+<div class="sectionbody">
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+/dev/nvme0n1 is the system disk, DO NOT use it in any of the stratis commands or the vm will become unusable.
+</td>
+</tr>
+</table>
+</div>
+<div class="sect2">
+<h3 id="_clean_up_devices"><a class="anchor" href="#_clean_up_devices"></a>Clean Up Devices</h3>
+<div class="paragraph">
+<p>Since we will be reusing the same resources for many exercises, we will begin by wiping everything clean.  Don&#8217;t worry if you get an error message.</p>
+</div>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">umount /mnt/lab*</code></pre>
+</div>
+</div>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">umount /summitdir</code></pre>
+</div>
+</div>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">stratis fs destroy summitpool summitfs</code></pre>
+</div>
+</div>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">stratis pool destroy summitpool summitfs</code></pre>
+</div>
+</div>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">wipefs -a /dev/nvme{1..4}n1</code></pre>
+</div>
+</div>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">partprobe</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_identify_available_block_devices"><a class="anchor" href="#_identify_available_block_devices"></a>Identify Available Block Devices</h3>
+<div class="paragraph">
+<p>See what disks/block devices are present.  Remeber that /dev/nvme0n1 is used by the operating system and should NOT be specified for any of these exercises.</p>
+</div>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">sfdisk -s</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="nowrap">/dev/nvme0n1:  31457280
+/dev/nvme1n1:   5242880
+/dev/nvme2n1:   5242880
+/dev/nvme3n1:   5242880
+/dev/nvme4n1:   5242880
+total: 52428800 blocks</pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_create_the_pool"><a class="anchor" href="#_create_the_pool"></a>Create the Pool</h3>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+REMEMBER - DON&#8217;T USE /dev/nvme0n1!!!
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Create a storage pool using a pair of the available disks.</p>
+</div>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">stratis pool create summitpool /dev/nvme1n1 /dev/nvme2n1</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Verify your work and confirm the existence of the new storage pool with the combined available capacity.</p>
+</div>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">stratis pool list</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="nowrap">Name                        Total Physical   Properties           UUID
+summitpool   10 GiB / 41.63 MiB / 9.96 GiB      ~Ca,~Cr   4b86ce9b-...</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The output should show a total of 10 GiB, with 41MiB used and 9.96GiB available.  The Properties indicate whether or not the pool has a cache (Ca) and/or is encrypted (Cr).  The "~" character is used to indicate negative, so your output is showing no cache and not encrypted.</p>
+</div>
+<div class="paragraph">
+<p>Check the status of the block devices</p>
+</div>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">stratis blockdev list</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="nowrap">Pool Name    Device Node    Physical Size   Tier
+summitpool  /dev/nvme1n1                 5 GiB   Data
+summitpool  /dev/nvme2n1                 5 GiB   Data</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_create_filesystem"><a class="anchor" href="#_create_filesystem"></a>Create Filesystem</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Now create a filesystem, a directory mount point, and mount the filesystem:
+(note that “fs” can optionally be written out as “filesystem”)</p>
+</div>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">stratis fs create summitpool summitfs</code></pre>
+</div>
+</div>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">stratis fs list</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="nowrap">Pool Name   Name      Used     Created            Device                            UUID
+summitpool  summitfs  546 MiB  Apr 18 2020 09:15  /dev/stratis/summitpool/summitfs  095fb4891a5743d0a589217071ff71dc</pre>
+</div>
+</div>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">mkdir /summitdir</code></pre>
+</div>
+</div>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">mount /dev/stratis/summitpool/summitfs /summitdir</code></pre>
+</div>
+</div>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">df -h</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="nowrap">Filesystem                                 Size  Used Avail Use% Mounted on
+devtmpfs                                   1.9G     0  1.9G   0% /dev
+tmpfs                                      1.9G     0  1.9G   0% /dev/shm
+tmpfs                                      1.9G   17M  1.9G   1% /run
+tmpfs                                      1.9G     0  1.9G   0% /sys/fs/cgroup
+/dev/vda1                                  30G  2.4G   28G   8% /
+tmpfs                                      379M     0  379M   0% /run/user/1000
+/dev/mapper/stratis-1-3e8e[<em>truncated</em>]71dc  1.0T  7.2G 1017G   1% /summitdir</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The actual space used by a filesystem can be shown using the <code>stratis fs list</code> command as shown above.  Notice how the summitdir filesystem has a virtual size of 1T.  If the data in a filesystem actually approaches its virtual size, Stratis will automatically grow the filesystem.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_create_permanent_mount"><a class="anchor" href="#_create_permanent_mount"></a>Create Permanent Mount</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Now make sure the filesystem will mount at boot time by adjusting the systems fstab.  You&#8217;ve been provided a simple script to perform this edit, but the maunal steps are also outlined below in the 'Native command(s)' note.</p>
+</div>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">workshop-stratis-fstab.sh</code></pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p><em>Native command(s) to amend /etc/fstab</em></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>UUID=`lsblk -n -o uuid /dev/stratis/summitpool/summitfs`
+echo "UUID=${UUID} /summitdir xfs defaults 0 0" &gt;&gt; /etc/fstab</pre>
+</div>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Verify that the /etc/fstab entry is correct by unmounting and mounting the filesystem one last time.</p>
+</div>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">umount /summitdir</code></pre>
+</div>
+</div>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">mount /summitdir</code></pre>
+</div>
+</div>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">df -h</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="nowrap">Filesystem                                 Size  Used Avail Use% Mounted on
+devtmpfs                                   1.9G     0  1.9G   0% /dev
+tmpfs                                      1.9G     0  1.9G   0% /dev/shm
+tmpfs                                      1.9G   17M  1.9G   1% /run
+tmpfs                                      1.9G     0  1.9G   0% /sys/fs/cgroup
+/dev/vda1                                  30G  2.4G   28G   8% /
+tmpfs                                      379M     0  379M   0% /run/user/1000
+/dev/mapper/stratis-1-3e8e[<em>truncated</em>]71dc  1.0T  7.2G 1017G   1% /summitdir</pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_grow_storage_pool"><a class="anchor" href="#_grow_storage_pool"></a>Grow Storage Pool</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Stratis also makes it easy to add space to a pool.  Suppose the “summitfs” filesystem is growing close to the physical space in “summitpool”.  Adding an additional disk/block device is done using:</p>
+</div>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">stratis pool add-data summitpool /dev/nvme3n1</code></pre>
+</div>
+</div>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">stratis blockdev</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="nowrap">Pool Name    Device Node    Physical Size   Tier
+summitpool   /dev/nvme1n1                5 GiB   Data
+summitpool   /dev/nvme2n1                5 GiB   Data
+summitpool   /dev/nvme3n1                5 GiB   Data</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Verify that the pool shows the additional space, and that the amount used is now in a safe range.</p>
+</div>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">stratis pool</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="nowrap">Name                          Total Physical   Properties          UUID
+summitpool   15 GiB / 590.65 MiB / 14.42 GiB      <sub>Ca,</sub>Cr   4b86ce9b...</pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_add_cache_device"><a class="anchor" href="#_add_cache_device"></a>Add Cache Device</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Stratis also makes it easy to add cache devices.  For example, say the filesystem we just created runs into some I/O performance issues.  You bought an SSD (solid state disk) and need to configure it into the system to act as a high speed cache.  Use the following commands to add the drive /dev/nvme4n1 and check its status:</p>
+</div>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">stratis pool init-cache summitpool  /dev/nvme4n1</code></pre>
+</div>
+</div>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">stratis blockdev</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="nowrap">Pool Name    Device Node    Physical Size   Tier
+summitpool   /dev/nvme1n1                5 GiB   Data
+summitpool   /dev/nvme2n1                5 GiB   Data
+summitpool   /dev/nvme3n1                5 GiB   Data
+summitpool   /dev/nvme4n1                5 GiB  Cache</pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_conclusion"><a class="anchor" href="#_conclusion"></a>Conclusion</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>This concludes the exercises related to stratis.</p>
+</div>
+<div class="paragraph">
+<p>Time to finish this unit and return the shell to it&#8217;s home position.</p>
+</div>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">workshop-finish-exercise.sh</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_additional_resources"><a class="anchor" href="#_additional_resources"></a>Additional Resources</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Red Hat Documentation</p>
+</div>
+<div class="paragraph">
+<p>This lab does not get into more advanced topics like encryption or snapshots.  For more information on these and more details on Stratis in general, see the official Red Hat documentation here:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/9/html/managing_file_systems/setting-up-stratis-file-systems_managing-file-systems">Managing Filesystems: Chapter 39. Setting Up Stratis File Systems</a></p>
+</li>
+</ul>
+</div>
+<h2 id="_end_of_unit" class="discrete">End of Unit</h2>
+</div>
+</div>
+<nav class="pagination">
+  <span class="prev"><a href="lvm-vdo.html" class="query-params-link">Data Optimization (lvm,vdo)</a></span>
+  <span class="next"><a href="kpatch.html" class="query-params-link">Kernel Live Patching (kpatch)</a></span>
+</nav>
+</article>
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <a class="rhd-logo" href="https://developers.redhat.com" target="_blank"></div>
+</footer>
+<script src="../../_/js/vendor/clipboard.js"></script>
+<script src="../../_/js/site.js"></script>
+<script async src="../../_/js/vendor/highlight.js"></script>
+  </body>
+</html>
