@@ -37,10 +37,10 @@ Source for this workshop: http://github.com/xtophd/RHEL9-Workshop
 Exercises in this workshop require either:
 
   * shell access (via ssh)
-  * shell access (via bookbag)
+  * shell access (via showroom)
   * web gui access (via web console)
 
-You can use the convenient shell provided to the right of these instructions (bookbag), or if you prefer you can use your preferred ssh client with the same connectivity info.  Your choice...
+You can use the convenient shell provided to the right of these instructions (showroom), or if you prefer you can use your preferred ssh client with the same connectivity info.  Your choice...
 
 Activities in this workshop are performed on virtual machines running in a public cloud.  Each attendee has received their own unique environment and will be provided administrator priviledges when needed.
 

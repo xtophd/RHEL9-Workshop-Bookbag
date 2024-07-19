@@ -2,7 +2,7 @@ WARNING:  Executing these setup tasks is a requirement before proceeding with th
 
 == Workshop Setup
 
-These steps should be easy to click-through if you are using the bookbag terminal.
+These steps should be easy to click-through if you are using the showroom terminal.
 
 Connect to target host (bastion) via ssh:
 
