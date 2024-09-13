@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Untitled :: Definitive RHEL9 Workshop (v9.1)</title>
+    <link rel="prev" href="index.html">
+    <link rel="next" href="documentation/webconsole.html">
+    <meta name="generator" content="Antora 3.1.7">
+    <link rel="stylesheet" href="../_/css/site.css">
+<link rel="icon" href="../_/img/favicon.ico" type="image/x-icon">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="https://developers.redhat.com" target="_blank"><img
+          src="../_/img/header_logo.png" height="40px" alt="Red Hat Developer Program"></a>
+      <a class="navbar-item" href="..">Definitive RHEL9 Workshop (v9.1)</a>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <a class="navbar-item" href="#">Books</a>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">CheatSheets</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="#">CheatSheet A</a>
+            <a class="navbar-item" href="#">CheatSheet B</a>
+            <a class="navbar-item" href="#">CheatSheet C</a>
+          </div>
+        </div>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">Upcoming Events</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="#">Event A</a>
+            <a class="navbar-item" href="#">Event B</a>
+            <a class="navbar-item" href="#">Event C</a>
+          </div>
+        </div>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">More Tutorials</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="#">Tutorial A</a>
+            <a class="navbar-item" href="#">Tutorial B</a>
+            <a class="navbar-item" href="#">Tutorial C</a>
+          </div>
+        </div>
+        <div class="navbar-item">
+          <span class="control">
+            <a class="button is-primary" href="#">Download</a>
+          </span>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="modules" data-version="master">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="index.html" class=" query-params-link">Default Title</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item is-current-page" data-depth="1">
+    <a class="nav-link" href="overview.html">Workshop Overview</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="documentation/webconsole.html">Web Console (cockpit)</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="documentation/systemd.html">Service Management (systemd)</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="documentation/firewalld.html">Firewall Management (firewalld)</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="documentation/nftables.html">Firewall Rules (nf-tables)</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="documentation/ebpf.html">eBPF Tracing (bcc-tools)</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="documentation/podman.html">Containers Management (podman)</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="documentation/buildah.html">Containers Dev (buildah)</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="documentation/image-builder.html">Image Builder (composer-cli)</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="documentation/virtualization.html">Virtualization (kvm,libvirt)</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="documentation/tlog.html">Session Logging (tlog)</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="documentation/lvm-vdo.html">Data Optimization (lvm,vdo)</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="documentation/stratis.html">Storage Management (stratis)</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="documentation/kpatch.html">Kernel Live Patching (kpatch)</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="documentation/boom-kernel-parms.html">Managing GRUB2 with Boom</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="documentation/leapp.html">LEAPP In-Place Upgrades</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">Default Title</span>
+    <span class="version">master</span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <span class="title">Default Title</span>
+      <ul class="versions">
+        <li class="version is-current">
+          <a href="index.html">master</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="connection.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="index.html">Default Title</a></li>
+    <li><a href="overview.html">Workshop Overview</a></li>
+  </ul>
+</nav>
+  <div class="edit-this-page"><a href="file:///Users/jmaltin/Development/RHEL9-Workshop-Showroom/content/modules/ROOT/pages/overview.adoc">Edit this Page</a></div>
+</div>
+  <div class="content">
+<article class="doc">
+<h2 id="_presented_by" class="discrete">Presented By</h2>
+<div class="ulist">
+<ul>
+<li>
+<p>Christoph Doerbeck</p>
+</li>
+<li>
+<p>Eddie Chen</p>
+</li>
+<li>
+<p>Gordon Keegan</p>
+</li>
+<li>
+<p>Matt St. Onge</p>
+</li>
+<li>
+<p>Lynn Dixon</p>
+</li>
+</ul>
+</div>
+<div class="sect1">
+<h2 id="_overview"><a class="anchor" href="#_overview"></a>Overview</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>First of all, THANK YOU for registering and participating in <strong>The Definitive Red Hat Enterprise Linux 9 Hands-on Lab</strong>.
+This hands-on lab will lead you through a mix of self-paced and proctored exercises covering core and updated capabilities of RHEL 9.
+The lab team has worked very hard to assemble a series of exercises to introduce many of the new features and capabilities
+found in this release.  We hope you enjoy this experience and please don&#8217;t hesitate to ask questions.</p>
+</div>
+<div class="sect2">
+<h3 id="_words_of_caution"><a class="anchor" href="#_words_of_caution"></a>Words of Caution</h3>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+As an administrator, you are capable of ruining your environment.  We strongly encourage you
+to stick to the exercises as prescribed.  Recovery of your environment is unlikely due to limited time and resources.
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+We only test with Firefox and/or Google Chrome.  Your mileage will vary using MacOS Safari or Windows Explorer.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_workshop_feedback"><a class="anchor" href="#_workshop_feedback"></a>Workshop Feedback</h3>
+<div class="paragraph">
+<p>Please don&#8217;t forget to review this session at the completion of this lab.  Your reviews and feedback help keep labs like these as top attractions for the Red Hat Summit.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_workshop_source"><a class="anchor" href="#_workshop_source"></a>Workshop Source</h3>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+This whole effort is done using official Red Hat software and although things can likely be set up to work with upstream software components (Fedora, CentOS, etc&#8230;&#8203;), alternate derivatives of RHEL are not tested or validated with these exercises.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Source for this workshop: <a href="http://github.com/xtophd/RHEL9-Workshop" class="bare">http://github.com/xtophd/RHEL9-Workshop</a></p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_environment_description"><a class="anchor" href="#_environment_description"></a>Environment Description</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Exercises in this workshop require either:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>shell access (via ssh)</p>
+</li>
+<li>
+<p>shell access (via bookbag)</p>
+</li>
+<li>
+<p>web gui access (via web console)</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>You can use the convenient shell provided to the right of these instructions (bookbag), or if you prefer you can use your preferred ssh client with the same connectivity info.  Your choice&#8230;&#8203;</p>
+</div>
+<div class="paragraph">
+<p>Activities in this workshop are performed on virtual machines running in a public cloud.  Each attendee has received their own unique environment and will be provided administrator priviledges when needed.</p>
+</div>
+<div class="paragraph">
+<p>There are 5 systems:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>bastion - primary system and launch point to other hosts</p>
+</li>
+<li>
+<p>node1</p>
+</li>
+<li>
+<p>node2</p>
+</li>
+<li>
+<p>node3</p>
+</li>
+<li>
+<p>leapp</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The network domain is likely <code>example.com</code> but not necessarily so.  We expect most exercises and envionments will work by using the short hostnames.  So when asked to use <code>node1</code> for a unit:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>first <code>ssh bastion</code> using the provided connection and credential info</p>
+</li>
+<li>
+<p>and then <code>ssh node1</code></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<nav class="pagination">
+  <span class="prev"><a href="index.html" class="query-params-link">Default Title</a></span>
+  <span class="next"><a href="documentation/webconsole.html" class="query-params-link">Web Console (cockpit)</a></span>
+</nav>
+</article>
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <a class="rhd-logo" href="https://developers.redhat.com" target="_blank"></div>
+</footer>
+<script src="../_/js/vendor/clipboard.js"></script>
+<script src="../_/js/site.js"></script>
+<script async src="../_/js/vendor/highlight.js"></script>
+  </body>
+</html>

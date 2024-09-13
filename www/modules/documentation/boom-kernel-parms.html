@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Untitled :: Definitive RHEL9 Workshop (v9.1)</title>
+    <link rel="prev" href="kpatch.html">
+    <link rel="next" href="leapp.html">
+    <meta name="generator" content="Antora 3.1.7">
+    <link rel="stylesheet" href="../../_/css/site.css">
+<link rel="icon" href="../../_/img/favicon.ico" type="image/x-icon">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="https://developers.redhat.com" target="_blank"><img
+          src="../../_/img/header_logo.png" height="40px" alt="Red Hat Developer Program"></a>
+      <a class="navbar-item" href="../..">Definitive RHEL9 Workshop (v9.1)</a>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <a class="navbar-item" href="#">Books</a>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">CheatSheets</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="#">CheatSheet A</a>
+            <a class="navbar-item" href="#">CheatSheet B</a>
+            <a class="navbar-item" href="#">CheatSheet C</a>
+          </div>
+        </div>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">Upcoming Events</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="#">Event A</a>
+            <a class="navbar-item" href="#">Event B</a>
+            <a class="navbar-item" href="#">Event C</a>
+          </div>
+        </div>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">More Tutorials</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="#">Tutorial A</a>
+            <a class="navbar-item" href="#">Tutorial B</a>
+            <a class="navbar-item" href="#">Tutorial C</a>
+          </div>
+        </div>
+        <div class="navbar-item">
+          <span class="control">
+            <a class="button is-primary" href="#">Download</a>
+          </span>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="modules" data-version="master">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="../index.html" class=" query-params-link">Default Title</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../overview.html">Workshop Overview</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="webconsole.html">Web Console (cockpit)</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="systemd.html">Service Management (systemd)</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="firewalld.html">Firewall Management (firewalld)</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="nftables.html">Firewall Rules (nf-tables)</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="ebpf.html">eBPF Tracing (bcc-tools)</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="podman.html">Containers Management (podman)</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="buildah.html">Containers Dev (buildah)</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="image-builder.html">Image Builder (composer-cli)</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="virtualization.html">Virtualization (kvm,libvirt)</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="tlog.html">Session Logging (tlog)</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="lvm-vdo.html">Data Optimization (lvm,vdo)</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="stratis.html">Storage Management (stratis)</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="kpatch.html">Kernel Live Patching (kpatch)</a>
+  </li>
+  <li class="nav-item is-current-page" data-depth="1">
+    <a class="nav-link" href="boom-kernel-parms.html">Managing GRUB2 with Boom</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="leapp.html">LEAPP In-Place Upgrades</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">Default Title</span>
+    <span class="version">master</span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <span class="title">Default Title</span>
+      <ul class="versions">
+        <li class="version is-current">
+          <a href="../index.html">master</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="../connection.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="../index.html">Default Title</a></li>
+    <li><a href="boom-kernel-parms.html">Managing GRUB2 with Boom</a></li>
+  </ul>
+</nav>
+  <div class="edit-this-page"><a href="file:///Users/jmaltin/Development/RHEL9-Workshop-Showroom/content/modules/ROOT/pages/documentation/boom-kernel-parms.adoc">Edit this Page</a></div>
+</div>
+  <div class="content">
+<article class="doc">
+<div class="sect1">
+<h2 id="_boom_with_kernel_parameters"><a class="anchor" href="#_boom_with_kernel_parameters"></a>Boom (with kernel parameters)</h2>
+<div class="sectionbody">
+
+</div>
+</div>
+<div class="sect1">
+<h2 id="_overview"><a class="anchor" href="#_overview"></a>Overview</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Boom is a boot manager for Linux systems that support the 'BootLoader Specification' (BLS).</p>
+</div>
+<div class="paragraph">
+<p>In short, boom:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>simplifies creation of new or modified boot entries</p>
+</li>
+<li>
+<p>includes a set of Python libraries and a command line tool</p>
+</li>
+<li>
+<p>does not modify the existing boot loader configuration</p>
+</li>
+<li>
+<p><strong>only inserts</strong> additional entries</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The objectives of this exercise are quite simple:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>familiarize yourself with the basics of creating and mangaging boot entries</p>
+</li>
+<li>
+<p>create an customized alternative boot entry to load a detectable kernel parameter</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_getting_started"><a class="anchor" href="#_getting_started"></a>Getting Started</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>For these exercises, you will be using the host <code>node3</code> as user <code>root</code>.</p>
+</div>
+<div class="paragraph">
+<p>From host <code>bastion</code>, ssh to <code>node3</code>.</p>
+</div>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">ssh node3</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Use <code>sudo</code> to elevate your privileges.</p>
+</div>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">[[ "$UID" == 0 ]] || sudo -i</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Verify that you are on the right host for these exercises.</p>
+</div>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">workshop-boom-checkhost.sh</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You are now ready to proceed with these exercises.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_core_concepts"><a class="anchor" href="#_core_concepts"></a>Core Concepts</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The Boom system uses a concept of "profiles" and "entries" to allow templated configurations to be cloned and modified.  This minimizes the need for the user to input complex boot parameters manually for each iteration of the configuration.</p>
+</div>
+<div class="paragraph">
+<p>So we begin with the management of boom profiles.</p>
+</div>
+<div class="sect2">
+<h3 id="_profile"><a class="anchor" href="#_profile"></a>Profile</h3>
+<div class="sect3">
+<h4 id="_list_show"><a class="anchor" href="#_list_show"></a>List / Show</h4>
+<div class="paragraph">
+<p>Just for reference, let&#8217;s take a look at this systems existing profiles.  There could be many, or in some cases none.</p>
+</div>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">boom profile list</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="nowrap">sID    Name                            OsVersion</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>For a more detailed view, you can use the <code>profile show</code> sub-command.</p>
+</div>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">boom profile show</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_create"><a class="anchor" href="#_create"></a>Create</h4>
+<div class="paragraph">
+<p>Creating a profile is handled by a simple command.  However determining all of th various parameters
+can be challeging and are outside the scope of this lab.  Thus we have prepared a simple script to do the hard work.</p>
+</div>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">workshop-boom-mkprofile.sh</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">Determining root device...
+Creating default BOOM profile
+
+Created profile with os_id 52f9e46:
+  OS ID: "52f9e46e9c9bfe3066102f23d6dafa819978b375",
+  Name: "Red Hat Enterprise Linux", Short name: "rhel",
+  Version: "9.2 (Plow)", Version ID: "9.2",
+  Kernel pattern: "/vmlinuz-%{version}", Initramfs pattern: "/initramfs-%{version}.img",
+  Root options (LVM2): "rd.lvm.lv=%{lvm_root_lv}",
+  Root options (BTRFS): "rootflags=%{btrfs_subvolume}",
+  Options: "root=%{root_device} ro %{root_opts}",
+  Title: "%{os_name} %{os_version_id} (%{version})",
+  Optional keys: "grub_users grub_arg grub_class id", UTS release pattern: "el9"</code></pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+In this example, the root disk is identified by a UUID.  As a result, <code>boom</code> will incorrectly identify the paths to the kernel and initiramfs when creating the grub entry.  To avoid this current problem (bug?), we tweak the boom profile to add <code>/boot</code> to the paths.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_inspect"><a class="anchor" href="#_inspect"></a>Inspect</h4>
+<div class="paragraph">
+<p>Verify that the boom profile was created by the previous command:</p>
+</div>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">boom profile list --osversion "9.2 (Plow)"</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="nowrap">OsID    Name                     OsVersion
+52f9e46 Red Hat Enterprise Linux 9.2 (Plow)</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>And for a more detailed view:</p>
+</div>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">boom profile show --osversion "9.2 (Plow)"</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">OS Profile (os_id=52f9e46)
+  OS ID: "52f9e46e9c9bfe3066102f23d6dafa819978b375",
+  Name: "Red Hat Enterprise Linux", Short name: "rhel",
+  Version: "9.2 (Plow)", Version ID: "9.2",
+  Kernel pattern: "/vmlinuz-%{version}", Initramfs pattern: "/initramfs-%{version}.img",
+  Root options (LVM2): "rd.lvm.lv=%{lvm_root_lv}",
+  Root options (BTRFS): "rootflags=%{btrfs_subvolume}",
+  Options: "root=%{root_device} ro %{root_opts}",
+  Title: "%{os_name} %{os_version_id} (%{version})",
+  Optional keys: "grub_users grub_arg grub_class id", UTS release pattern: "el9"</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_boot_entry"><a class="anchor" href="#_boot_entry"></a>Boot Entry</h3>
+<div class="paragraph">
+<p>Now it is time to create a boot entry for grub which utilizes the same
+boot environment as the current system, but with a few added kernel parameters.</p>
+</div>
+<div class="sect3">
+<h4 id="_list_show_2"><a class="anchor" href="#_list_show_2"></a>List / Show</h4>
+<div class="paragraph">
+<p>Before we do any work, let&#8217;s take a quick look at what exists already.</p>
+</div>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">boom entry list</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="nowrap">BootID  Version                      Name                     RootDevice
+a482bbd 5.14.0-284.30.1.el9_2.x86_64 Red Hat Enterprise Linux UUID=016e7284-31f6-4c28-bbb1-98c5b25fcdbf</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>And for a more detailed view</p>
+</div>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">boom entry show</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="nowrap">Boot Entry (boot_id=a482bbd)
+  title Red Hat Enterprise Linux (5.14.0-284.30.1.el9_2.x86_64) 9.2 (Plow)
+  version 5.14.0-284.30.1.el9_2.x86_64
+  linux /vmlinuz-5.14.0-284.30.1.el9_2.x86_64
+  initrd /initramfs-5.14.0-284.30.1.el9_2.x86_64.img $tuned_initrd
+  options root=UUID=016e7284-31f6-4c28-bbb1-98c5b25fcdbf console=ttyS0,115200n8 console=tty0 net.ifnames=0 rd.blacklist=nouveau nvme_core.io_timeout=4294967295 crashkernel=1G-4G:192M,4G-64G:256M,64G-:512M $tuned_params
+  grub_users $grub_users
+  grub_arg --unrestricted
+  grub_class rhel</pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_create_2"><a class="anchor" href="#_create_2"></a>Create</h4>
+<div class="paragraph">
+<p>First we need to determine the root device.  We can do this by inspecting the current kernel&#8217;s boot commandline.</p>
+</div>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">cat /proc/cmdline</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="nowrap">BOOT_IMAGE=(hd0,gpt3)/vmlinuz-5.14.0-284.30.1.el9_2.x86_64 root=UUID=016e7284-31f6-4c28-bbb1-98c5b25fcdbf console=ttyS0,115200n8 console=tty0 net.ifnames=0 rd.blacklist=nouveau nvme_core.io_timeout=4294967295 crashkernel=1G-4G:192M,4G-64G:256M,64G-:512M</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>We can further isolate the undesired parameters with a simple grep.</p>
+</div>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">grep -o '\broot=[^ ]*' /proc/cmdline</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="nowrap">root=UUID=016e7284-31f6-4c28-bbb1-98c5b25fcdbf</pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+In this scenario, the boot device is listed by a UUID.  Depending on the lab environment, you could see a logical volume name or a physcial device path.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Now we need to get to the actual device (or lvm) path.  Although this logic is not complicated, it&#8217;s not really the focus of this exercise, so you&#8217;ve been provided another workshop-script.</p>
+</div>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">workshop-boom-mkentry.sh</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="nowrap">Determining root device...
+UUID reduction if necessary...
+Creating GRUB2 entry...
+
+DEBUG: boom create --title 'RHEL 9 Workshop' --root-device /dev/nvme0n1p4
+
+Created entry with boot_id 4b36f16:
+  title RHEL 9 Workshop
+  machine-id ec2486de3bb2e99bbb39853600f8317b
+  version 5.14.0-284.30.1.el9_2.x86_64
+  linux /vmlinuz-5.14.0-284.30.1.el9_2.x86_64
+  initrd /initramfs-5.14.0-284.30.1.el9_2.x86_64.img
+  options root=/dev/nvme0n1p4 ro
+  grub_users $grub_users
+  grub_arg --unrestricted
+  grub_class kernel</pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_inspect_2"><a class="anchor" href="#_inspect_2"></a>Inspect</h4>
+<div class="paragraph">
+<p>Take a look at currently configured boom-boot entries.</p>
+</div>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">boom entry list</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="nowrap">BootID  Version                      Name                     RootDevice
+a482bbd 5.14.0-284.30.1.el9_2.x86_64 Red Hat Enterprise Linux UUID=016e7284-31f6-4c28-bbb1-98c5b25fcdbf
+4b36f16 5.14.0-284.30.1.el9_2.x86_64 Red Hat Enterprise Linux /dev/nvme0n1p4</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Show details about our boom-boot entry.</p>
+</div>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">export BOOM_BOOTID=$(boom entry list --title "RHEL 9 Workshop" -o bootid,title | grep -m 1 Workshop | awk '{print $1}')
+boom entry show $BOOM_BOOTID</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="nowrap">Boot Entry (boot_id=4b36f16)
+  title RHEL 9 Workshop
+  machine-id ec2486de3bb2e99bbb39853600f8317b
+  version 5.14.0-284.30.1.el9_2.x86_64
+  linux /vmlinuz-5.14.0-284.30.1.el9_2.x86_64
+  initrd /initramfs-5.14.0-284.30.1.el9_2.x86_64.img
+  options root=/dev/nvme0n1p4 ro
+  grub_users $grub_users
+  grub_arg --unrestricted
+  grub_class kernel</pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_delete"><a class="anchor" href="#_delete"></a>Delete</h4>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">export BOOM_BOOTID=$(boom entry list --title "RHEL 9 Workshop" -o bootid,title | grep -m 1 Workshop | awk '{print $1}')
+boom entry delete $BOOM_BOOTID</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_exercise_custom_kernel_options"><a class="anchor" href="#_exercise_custom_kernel_options"></a>Exercise: Custom Kernel Options</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_profile_2"><a class="anchor" href="#_profile_2"></a>Profile</h3>
+<div class="paragraph">
+<p>The profile we will use was created during the Core Concepts exercise above.
+Let&#8217;s take a look at the details to confirm everthing is in order.</p>
+</div>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">boom profile show --osversion "9.2 (Plow)"</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">OS Profile (os_id=52f9e46)
+  OS ID: "52f9e46e9c9bfe3066102f23d6dafa819978b375",
+  Name: "Red Hat Enterprise Linux", Short name: "rhel",
+  Version: "9.2 (Plow)", Version ID: "9.2",
+  Kernel pattern: "/vmlinuz-%{version}", Initramfs pattern: "/initramfs-%{version}.img",
+  Root options (LVM2): "rd.lvm.lv=%{lvm_root_lv}",
+  Root options (BTRFS): "rootflags=%{btrfs_subvolume}",
+  Options: "root=%{root_device} ro %{root_opts}",
+  Title: "%{os_name} %{os_version_id} (%{version})",
+  Optional keys: "grub_users grub_arg grub_class id", UTS release pattern: "el9"</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_boot_entry_2"><a class="anchor" href="#_boot_entry_2"></a>Boot Entry</h3>
+<div class="paragraph">
+<p>Again, to avoid some of the complexities considered outside the scope this lab we will
+run a prepared script to configure the boot entry.</p>
+</div>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">workshop-boom-mkentry-custom.sh</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="nowrap">Determining root device...
+UUID reduction if necessary...
+Creating GRUB2 entry...
+
+DEBUG: boom create --title 'RHEL 9 Workshop' --root-device /dev/nvme0n1p4 -a custom_value=true
+
+Created entry with boot_id ffe2f1e:
+  title RHEL 9 Workshop
+  machine-id ec2486de3bb2e99bbb39853600f8317b
+  version 5.14.0-284.30.1.el9_2.x86_64
+  linux /vmlinuz-5.14.0-284.30.1.el9_2.x86_64
+  initrd /initramfs-5.14.0-284.30.1.el9_2.x86_64.img
+  options root=/dev/nvme0n1p4 ro custom_value=true
+  grub_users $grub_users
+  grub_arg --unrestricted
+  grub_class kernel</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Notice in the options that we slipped in the <code>custom_value=true</code>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_grub_set_default_entry"><a class="anchor" href="#_grub_set_default_entry"></a>GRUB: Set Default Entry</h3>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+If possible, bring up the virtual machine console for node3 before proceeding.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Before reboot, there are 2 options to invoke the right loader at restart:
+  . enter the GRUB menu at startup and select at boot time
+  . use grub-set-default to pre-select which one to load by default</p>
+</div>
+<div class="paragraph">
+<p>We are going to opt for pre-select since it&#8217;s easier to script.  Use the following workshop to inspect
+the currently configured GRUB menu options.</p>
+</div>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">workshop-boom-grublist.sh</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="nowrap">     0  title="Red Hat Enterprise Linux (5.14.0-284.30.1.el9_2.x86_64) 9.2 (Plow)"
+     1  title="RHEL 9 Workshop"</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Let us now inspect the GRUB configuration for <code>RHEL 9 Workshop</code>.  The following
+complicated command figures out the index on your system.</p>
+</div>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">grubby --info=$(workshop-boom-grublist.sh | grep -m1 "Workshop" | awk '{print $1}')</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="nowrap">index=1
+kernel="/boot/vmlinuz-5.14.0-284.30.1.el9_2.x86_64"
+args="ro custom_value=true"
+root="/dev/nvme0n1p4"
+initrd="/boot/initramfs-5.14.0-284.30.1.el9_2.x86_64.img"
+title="RHEL 9 Workshop"
+id="ec2486de3bb2e99bbb39853600f8317b-ffe2f1e-5.14.0-284.30.1.el9_2.x86_64"</pre>
+</div>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+<strong>DO NOT PROCEED</strong> unless both <code>kernel=</code> and <code>initrd=</code> include the path <code>/boot/&lt;filename&gt;</code>.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>We want to reboot to our "RHEL 9 Workshop", so we need to isolate and use the "index" from above.</p>
+</div>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">eval $(grubby --info=$(workshop-boom-grublist.sh | grep -m1 "Workshop" | awk '{print $1}')| grep index)
+grub2-set-default $index</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_inspect_3"><a class="anchor" href="#_inspect_3"></a>Inspect</h3>
+<div class="paragraph">
+<p>Verify that the parameters stuck.  Notice that "saved_entry=1", that&#8217;s what we want.</p>
+</div>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">grub2-editenv list</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="nowrap">saved_entry=1
+boot_success=1</pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_reboot"><a class="anchor" href="#_reboot"></a>Reboot</h3>
+<div class="paragraph">
+<p>We will now reset our host and boot with the alternate kernel arguments.</p>
+</div>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">reboot</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_validate"><a class="anchor" href="#_validate"></a>Validate</h3>
+<div class="paragraph">
+<p>Once the host is back online, ssh to back to <code>node3</code> and verify that the alternate kernel parameters are active.</p>
+</div>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">ssh node3</code></pre>
+</div>
+</div>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">cat /proc/cmdline</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="nowrap">BOOT_IMAGE=(hd0,gpt3)/vmlinuz-5.14.0-70.13.1.el9_0.x86_64 root=/dev/nvme0n1p4 ro custom_value=true</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Confirm that the custom key-value is now part of the kernel boot options.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_conclusion"><a class="anchor" href="#_conclusion"></a>Conclusion</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Wahoo! You are done.  If you have any questions, please ask.</p>
+</div>
+<div class="paragraph">
+<p>Time to finish this unit and return the shell to it&#8217;s home position.</p>
+</div>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">workshop-finish-exercise.sh</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_additional_resources"><a class="anchor" href="#_additional_resources"></a>Additional Resources</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://github.com/bmr-cymru/boom">Boom project page</a></p>
+</li>
+<li>
+<p><a href="https://github.com/bmr-cymru/snapshot-boot-docs">Boot to snapshot documentation</a></p>
+</li>
+<li>
+<p><a href="https://systemd.io/BOOT_LOADER_SPECIFICATION">BootLoader Specification</a></p>
+</li>
+<li>
+<p><a href="https://www.sourceware.org/lvm2/">LVM2 resource page</a></p>
+</li>
+<li>
+<p><a href="http://sources.redhat.com/dm/">Device-mapper resource page</a></p>
+</li>
+</ul>
+</div>
+<h2 id="_end_of_unit" class="discrete">End of Unit</h2>
+</div>
+</div>
+<nav class="pagination">
+  <span class="prev"><a href="kpatch.html" class="query-params-link">Kernel Live Patching (kpatch)</a></span>
+  <span class="next"><a href="leapp.html" class="query-params-link">LEAPP In-Place Upgrades</a></span>
+</nav>
+</article>
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <a class="rhd-logo" href="https://developers.redhat.com" target="_blank"></div>
+</footer>
+<script src="../../_/js/vendor/clipboard.js"></script>
+<script src="../../_/js/site.js"></script>
+<script async src="../../_/js/vendor/highlight.js"></script>
+  </body>
+</html>

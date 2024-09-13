@@ -1,1 +1,0 @@
-# RHEL9-Workshop-Bookbag

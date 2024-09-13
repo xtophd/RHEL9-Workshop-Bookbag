@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Untitled :: Definitive RHEL9 Workshop (v9.1)</title>
+    <link rel="prev" href="../overview.html">
+    <link rel="next" href="systemd.html">
+    <meta name="generator" content="Antora 3.1.7">
+    <link rel="stylesheet" href="../../_/css/site.css">
+<link rel="icon" href="../../_/img/favicon.ico" type="image/x-icon">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="https://developers.redhat.com" target="_blank"><img
+          src="../../_/img/header_logo.png" height="40px" alt="Red Hat Developer Program"></a>
+      <a class="navbar-item" href="../..">Definitive RHEL9 Workshop (v9.1)</a>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <a class="navbar-item" href="#">Books</a>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">CheatSheets</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="#">CheatSheet A</a>
+            <a class="navbar-item" href="#">CheatSheet B</a>
+            <a class="navbar-item" href="#">CheatSheet C</a>
+          </div>
+        </div>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">Upcoming Events</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="#">Event A</a>
+            <a class="navbar-item" href="#">Event B</a>
+            <a class="navbar-item" href="#">Event C</a>
+          </div>
+        </div>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">More Tutorials</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="#">Tutorial A</a>
+            <a class="navbar-item" href="#">Tutorial B</a>
+            <a class="navbar-item" href="#">Tutorial C</a>
+          </div>
+        </div>
+        <div class="navbar-item">
+          <span class="control">
+            <a class="button is-primary" href="#">Download</a>
+          </span>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="modules" data-version="master">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="../index.html" class=" query-params-link">Default Title</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../overview.html">Workshop Overview</a>
+  </li>
+  <li class="nav-item is-current-page" data-depth="1">
+    <a class="nav-link" href="webconsole.html">Web Console (cockpit)</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="systemd.html">Service Management (systemd)</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="firewalld.html">Firewall Management (firewalld)</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="nftables.html">Firewall Rules (nf-tables)</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="ebpf.html">eBPF Tracing (bcc-tools)</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="podman.html">Containers Management (podman)</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="buildah.html">Containers Dev (buildah)</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="image-builder.html">Image Builder (composer-cli)</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="virtualization.html">Virtualization (kvm,libvirt)</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="tlog.html">Session Logging (tlog)</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="lvm-vdo.html">Data Optimization (lvm,vdo)</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="stratis.html">Storage Management (stratis)</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="kpatch.html">Kernel Live Patching (kpatch)</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="boom-kernel-parms.html">Managing GRUB2 with Boom</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="leapp.html">LEAPP In-Place Upgrades</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">Default Title</span>
+    <span class="version">master</span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <span class="title">Default Title</span>
+      <ul class="versions">
+        <li class="version is-current">
+          <a href="../index.html">master</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="../connection.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="../index.html">Default Title</a></li>
+    <li><a href="webconsole.html">Web Console (cockpit)</a></li>
+  </ul>
+</nav>
+  <div class="edit-this-page"><a href="file:///Users/jmaltin/Development/RHEL9-Workshop-Showroom/content/modules/ROOT/pages/documentation/webconsole.adoc">Edit this Page</a></div>
+</div>
+  <div class="content">
+<article class="doc">
+<div class="sect1">
+<h2 id="_web_console"><a class="anchor" href="#_web_console"></a>Web Console</h2>
+<div class="sectionbody">
+
+</div>
+</div>
+<div class="sect1">
+<h2 id="_overview"><a class="anchor" href="#_overview"></a>Overview</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Web Console is a Red Hat Enterprise Linux 9 web-based graphical user interface designed for managing and monitoring your local system.  The Web Console can also be extended to manage multiple servers located in your network.</p>
+</div>
+<div class="paragraph">
+<p>Features of the Web Console include:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Managing user accounts</p>
+</li>
+<li>
+<p>Managing and monitoring system services</p>
+</li>
+<li>
+<p>Configuring network interfaces</p>
+</li>
+<li>
+<p>Configuring firewall rules</p>
+</li>
+<li>
+<p>Reviewing system logs</p>
+</li>
+<li>
+<p>Managing virtual machines</p>
+</li>
+<li>
+<p>Creating diagnostic reports</p>
+</li>
+<li>
+<p>Setting kernel dump configuration</p>
+</li>
+<li>
+<p>Configuring SELinux</p>
+</li>
+<li>
+<p>Installing and Updating software</p>
+</li>
+<li>
+<p>Managing System Subscriptions</p>
+</li>
+<li>
+<p>more&#8230;&#8203;</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The following exercises will cover some of the capabilities of the Web Console on RHEL 9, as well as basic installation and set up.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_getting_started"><a class="anchor" href="#_getting_started"></a>Getting Started</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The following instructions to install and configure the webconsole are only provided as informational.  All of the exercises will actually be performed using a dedicated web broswer.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_installation_and_configuration"><a class="anchor" href="#_installation_and_configuration"></a>Installation and Configuration</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>For your convenience, the webconsole has already been installed and configured on <strong>bastion</strong> host.  The steps for installation and setup are pretty simple and outlined below.  Remember that this is provided as reference only.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p><em>Native command(s) to install and enable the Web Console</em></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="nowrap">dnf install -y cockpit firewalld tuned
+systemctl enable --now cockpit.socket
+firewall-cmd --add-service=cockpit --permanent
+firewall-cmd --reload</pre>
+</div>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>That completes the installation and configuration of the Web Console.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_webconsole_login"><a class="anchor" href="#_webconsole_login"></a>Webconsole Login</h2>
+<div class="sectionbody">
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Please note that by default, the webconsole is configured to use port 9090.  Thus you would normally add :9090 to the end of the URL.  However for the purposes of this lab and to provide the greatest degree of internet compatability the webconsole has been additionally enabled on port 443.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Your instructors (or workshop portal) may provide you with a unique link and special instructions to access the web-console on the <strong>bastion</strong>. It is PREFERRED that you use your local web browser.</p>
+</div>
+<div class="paragraph">
+<p>Accept the various notifications about insecure ceritificates, and then login in.</p>
+</div>
+<div class="paragraph">
+<p>Use the following URL:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://sample_targethost/" class="bare">https://sample_targethost/</a></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>And the following UserID and Password:</p>
+</div>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">%ssh_username%</code></pre>
+</div>
+</div>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">%ssh_password%</code></pre>
+</div>
+</div>
+<div class="exampleblock">
+<div class="content">
+<div class="imageblock">
+<div class="content">
+<img src="../_images/cockpit-rhel92/Slide1.PNG" alt="Cockpit Login">
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_webconsole_overview"><a class="anchor" href="#_webconsole_overview"></a>Webconsole Overview</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>After you successfully sign-on, you will land on the overview page which presents various artifacts about your system including:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>CPU utilization</p>
+</li>
+<li>
+<p>Memory Utilization</p>
+</li>
+<li>
+<p>Disk I/O</p>
+</li>
+<li>
+<p>Network traffic</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Also make note that your userid needs "Administrative Access", and since the userid is configured on the host as part of the "wheel" security group you are presented with the option to turn administrative access on.</p>
+</div>
+<div class="exampleblock">
+<div class="content">
+<div class="imageblock">
+<div class="content">
+<img src="../_images/cockpit-rhel92/Slide2.PNG" alt="Cockpit Overview">
+</div>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Please proceed to enable administrative access and then verify.</p>
+</div>
+<div class="exampleblock">
+<div class="content">
+<div class="imageblock">
+<div class="content">
+<img src="../_images/cockpit-rhel92/Slide3.PNG" alt="Cockpit Overview">
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_enable_persistent_metrics"><a class="anchor" href="#_enable_persistent_metrics"></a>Enable Persistent Metrics</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>It&#8217;s nice that certain statistics about your system are available for inspection, but by default the webconsole does NOT store statistics long term.  For this, you need to install “Performance Co-pilot (pcp)”, the cockpit-pcp plugin and lastly enable "persistent metrics collection" in the webconsole.</p>
+</div>
+<div class="paragraph">
+<p>Start by clicking on the link "View details and history" on the "Usage" tile.</p>
+</div>
+<div class="exampleblock">
+<div class="content">
+<div class="imageblock">
+<div class="content">
+<img src="../_images/cockpit-rhel92/Slide4.PNG" alt="View details and history">
+</div>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Next, we need to enable the collection of metrics data.</p>
+</div>
+<div class="exampleblock">
+<div class="content">
+<div class="imageblock">
+<div class="content">
+<img src="../_images/cockpit-rhel92/Slide5.PNG" alt="Metrics Settings">
+</div>
+</div>
+</div>
+</div>
+<div class="exampleblock">
+<div class="content">
+<div class="imageblock">
+<div class="content">
+<img src="../_images/cockpit-rhel92/Slide6.PNG" alt="Enable Metrics">
+</div>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>If your system has not already had the Performance Copilot packages installed, a dialog box should have appeared to confirm the automatic install.  In our case, the software is already installed and you can proceed to view some performance data.</p>
+</div>
+<div class="paragraph">
+<p>Take a moment to review the available performance information.  Since the workshop likely has not be up for very long, there is probably nothing interesting to see yet.  Towards the end of the workshop, return to this page and see your performance data.</p>
+</div>
+<div class="exampleblock">
+<div class="content">
+<div class="imageblock">
+<div class="content">
+<img src="../_images/cockpit-rhel92/Slide7.PNG" alt="Performance Charts">
+</div>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>To configure and enable stored metrics by hand, you can use follow the commands below.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p><em>Native command(s) to enable stored metrics</em></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="nowrap">dnf install -y cockpit-pcp
+systemctl restart cockpit.socket</pre>
+</div>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_change_performance_profile"><a class="anchor" href="#_change_performance_profile"></a>Change Performance Profile</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>RHEL 9 comes with several pre-canned performance tuning profiles from Tuned. Since this is a virtual machine, the default profile “virtual-guest” was selected. You can easily switch profile via the Web Console web UI. In this exercise, we will change the profile to “throughput-performance”</p>
+</div>
+<div class="exampleblock">
+<div class="content">
+<div class="imageblock">
+<div class="content">
+<img src="../_images/cockpit-rhel92/Slide8.PNG" alt="Cockpit Perf Profile">
+</div>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>A dialog box will appear.  Scroll and find "throughput-performance" and select.</p>
+</div>
+<div class="exampleblock">
+<div class="content">
+<div class="imageblock">
+<div class="content">
+<img src="../_images/cockpit-rhel92/Slide9.PNG" alt="Cockpit Perf Throughout">
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_view_logs"><a class="anchor" href="#_view_logs"></a>View Logs</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Under the log section, you can inspect the system&#8217;s logs.</p>
+</div>
+<div class="exampleblock">
+<div class="content">
+<div class="imageblock">
+<div class="content">
+<img src="../_images/cockpit-rhel92/Slide10.PNG" alt="Cockpit Logs">
+</div>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Have a look at the search capabilities and notice that you can set criteria by:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Date</p>
+</li>
+<li>
+<p>Severity</p>
+</li>
+<li>
+<p>Service</p>
+</li>
+</ul>
+</div>
+<div class="exampleblock">
+<div class="content">
+<div class="imageblock">
+<div class="content">
+<img src="../_images/cockpit-rhel92/Slide11.PNG" alt="Cockpit Logs Criteria">
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_network_management"><a class="anchor" href="#_network_management"></a>Network Management</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Under the networking section, you can monitor and manage current networking activities and devices. You can create a network bond, team, bridge, and vlan all driven by the webconsle GUI.</p>
+</div>
+<div class="paragraph">
+<p>Due to the nature of workshops, we refrain from making and saving changes to the network at this time but feel free to explore.</p>
+</div>
+<div class="exampleblock">
+<div class="content">
+<div class="imageblock">
+<div class="content">
+<img src="../_images/cockpit-rhel92/Slide12.PNG" alt="Cockpit Network">
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_firewall_management"><a class="anchor" href="#_firewall_management"></a>Firewall Management</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Also under the networking section, you can configure your firewall rules.</p>
+</div>
+<div class="paragraph">
+<p>For the next exercise, let&#8217;s enable a rule for NTP (Network Time Protocol).  Begin by selecting the Networking category and "Edit rules and zones".</p>
+</div>
+<div class="exampleblock">
+<div class="content">
+<div class="imageblock">
+<div class="content">
+<img src="../_images/cockpit-rhel92/Slide13.PNG" alt="Cockpit Firewall">
+</div>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Now you should see a list of active services and ports.  Proceed to select "Add services"</p>
+</div>
+<div class="exampleblock">
+<div class="content">
+<div class="imageblock">
+<div class="content">
+<img src="../_images/cockpit-rhel92/Slide14.PNG" alt="Cockpit Firewall Service">
+</div>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>In the dialog box enter 'ntp' as the filter, select 'ntp' and hit "Add services".</p>
+</div>
+<div class="exampleblock">
+<div class="content">
+<div class="imageblock">
+<div class="content">
+<img src="../_images/cockpit-rhel92/Slide15.PNG" alt="Cockpit Firewall Dialog">
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_service_management"><a class="anchor" href="#_service_management"></a>Service Management</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Now that you enabled a NTP firewall rule, let’s make sure an NTP service provider is enabled and running under the Web Console Services section.</p>
+</div>
+<div class="paragraph">
+<p>Remember that RHEL 9 uses a provider called 'chrony' for ntp.  So you can search for either 'chrony' or 'ntp'.</p>
+</div>
+<div class="exampleblock">
+<div class="content">
+<div class="imageblock">
+<div class="content">
+<img src="../_images/cockpit-rhel92/Slide16.PNG" alt="Cockpit Services">
+</div>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Turns out, chronyd is already enabled and active.  Nothing to do here&#8230;&#8203;</p>
+</div>
+<div class="exampleblock">
+<div class="content">
+<div class="imageblock">
+<div class="content">
+<img src="../_images/cockpit-rhel92/Slide17.PNG" alt="Cockpit Services">
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_remote_node_management"><a class="anchor" href="#_remote_node_management"></a>Remote Node Management</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The core functionality of being able to manage multiple nodes from a single interface has been intergrated into the webconsole base.  Now adding additional nodes and selecting one to manage is simple and intuitive.</p>
+</div>
+<div class="paragraph">
+<p>We begin by selecting the pull-down in the top-left corner.</p>
+</div>
+<div class="exampleblock">
+<div class="content">
+<div class="imageblock">
+<div class="content">
+<img src="../_images/cockpit-rhel92/Slide18.PNG" alt="Cockpit Services">
+</div>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Now it is only a matter of selecting 'Add new host' and entering a few data points.</p>
+</div>
+<div class="exampleblock">
+<div class="content">
+<div class="imageblock">
+<div class="content">
+<img src="../_images/cockpit-rhel92/Slide19.PNG" alt="Cockpit Services">
+</div>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Add the additional systems from your workshop cluster.</p>
+</div>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs"><strong>node1.sample_subdomain</strong></code></pre>
+</div>
+</div>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs"><strong>node2.sample_subdomain</strong></code></pre>
+</div>
+</div>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs"><strong>node3.sample_subdomain</strong></code></pre>
+</div>
+</div>
+<div class="exampleblock">
+<div class="content">
+<div class="imageblock">
+<div class="content">
+<img src="../_images/cockpit-rhel92/Slide20.PNG" alt="Cockpit Add Nodes">
+</div>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Now when you hit the pull-down, you have complete access and managibility of the additional nodes.</p>
+</div>
+<div class="exampleblock">
+<div class="content">
+<div class="imageblock">
+<div class="content">
+<img src="../_images/cockpit-rhel92/Slide21.PNG" alt="Cockpit Remote Nodes">
+</div>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Go ahead and select node1 and then access a terminal session. Very handy!</p>
+</div>
+<div class="exampleblock">
+<div class="content">
+<div class="imageblock">
+<div class="content">
+<img src="../_images/cockpit-rhel92/Slide22.PNG" alt="Cockpit Remote Terminal">
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_conclusion"><a class="anchor" href="#_conclusion"></a>Conclusion</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>This concludes a short exercise with Web Console. Feel free to click through and explore other sections:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Under <strong>Accounts</strong> section, you can manage user accounts on your RHEL 9 server</p>
+</li>
+<li>
+<p><strong>Diagnostic Reports</strong> allows you to create sosreport for Red Hat support</p>
+</li>
+<li>
+<p>Under <strong>Kernel Dump</strong>, you can enable/disable kdump</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>You will get an opportunity to manager Virtual Machines and Build System Images in later exercises.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_additional_resources"><a class="anchor" href="#_additional_resources"></a>Additional Resources</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>You can find more information:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/9/html/managing_systems_using_the_rhel_9_web_console/index">Managing Systems Using the Web Console</a></p>
+</li>
+</ul>
+</div>
+<h2 id="_end_of_unit" class="discrete">End of Unit</h2>
+</div>
+</div>
+<nav class="pagination">
+  <span class="prev"><a href="../overview.html" class="query-params-link">Workshop Overview</a></span>
+  <span class="next"><a href="systemd.html" class="query-params-link">Service Management (systemd)</a></span>
+</nav>
+</article>
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <a class="rhd-logo" href="https://developers.redhat.com" target="_blank"></div>
+</footer>
+<script src="../../_/js/vendor/clipboard.js"></script>
+<script src="../../_/js/site.js"></script>
+<script async src="../../_/js/vendor/highlight.js"></script>
+  </body>
+</html>

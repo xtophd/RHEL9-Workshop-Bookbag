@@ -1,0 +1,1139 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Untitled :: Definitive RHEL9 Workshop (v9.1)</title>
+    <link rel="prev" href="ebpf.html">
+    <link rel="next" href="buildah.html">
+    <meta name="generator" content="Antora 3.1.7">
+    <link rel="stylesheet" href="../../_/css/site.css">
+<link rel="icon" href="../../_/img/favicon.ico" type="image/x-icon">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="https://developers.redhat.com" target="_blank"><img
+          src="../../_/img/header_logo.png" height="40px" alt="Red Hat Developer Program"></a>
+      <a class="navbar-item" href="../..">Definitive RHEL9 Workshop (v9.1)</a>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <a class="navbar-item" href="#">Books</a>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">CheatSheets</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="#">CheatSheet A</a>
+            <a class="navbar-item" href="#">CheatSheet B</a>
+            <a class="navbar-item" href="#">CheatSheet C</a>
+          </div>
+        </div>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">Upcoming Events</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="#">Event A</a>
+            <a class="navbar-item" href="#">Event B</a>
+            <a class="navbar-item" href="#">Event C</a>
+          </div>
+        </div>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">More Tutorials</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="#">Tutorial A</a>
+            <a class="navbar-item" href="#">Tutorial B</a>
+            <a class="navbar-item" href="#">Tutorial C</a>
+          </div>
+        </div>
+        <div class="navbar-item">
+          <span class="control">
+            <a class="button is-primary" href="#">Download</a>
+          </span>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="modules" data-version="master">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="../index.html" class=" query-params-link">Default Title</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../overview.html">Workshop Overview</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="webconsole.html">Web Console (cockpit)</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="systemd.html">Service Management (systemd)</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="firewalld.html">Firewall Management (firewalld)</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="nftables.html">Firewall Rules (nf-tables)</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="ebpf.html">eBPF Tracing (bcc-tools)</a>
+  </li>
+  <li class="nav-item is-current-page" data-depth="1">
+    <a class="nav-link" href="podman.html">Containers Management (podman)</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="buildah.html">Containers Dev (buildah)</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="image-builder.html">Image Builder (composer-cli)</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="virtualization.html">Virtualization (kvm,libvirt)</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="tlog.html">Session Logging (tlog)</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="lvm-vdo.html">Data Optimization (lvm,vdo)</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="stratis.html">Storage Management (stratis)</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="kpatch.html">Kernel Live Patching (kpatch)</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="boom-kernel-parms.html">Managing GRUB2 with Boom</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="leapp.html">LEAPP In-Place Upgrades</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">Default Title</span>
+    <span class="version">master</span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <span class="title">Default Title</span>
+      <ul class="versions">
+        <li class="version is-current">
+          <a href="../index.html">master</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="../connection.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="../index.html">Default Title</a></li>
+    <li><a href="podman.html">Containers Management (podman)</a></li>
+  </ul>
+</nav>
+  <div class="edit-this-page"><a href="file:///Users/jmaltin/Development/RHEL9-Workshop-Showroom/content/modules/ROOT/pages/documentation/podman.adoc">Edit this Page</a></div>
+</div>
+  <div class="content">
+<article class="doc">
+<div class="sect1">
+<h2 id="_podman_container_fundamentals"><a class="anchor" href="#_podman_container_fundamentals"></a>Podman Container Fundamentals</h2>
+<div class="sectionbody">
+
+</div>
+</div>
+<div class="sect1">
+<h2 id="_overview"><a class="anchor" href="#_overview"></a>Overview</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Podman (the POD manager) is a tool for developing, managing, and running containers on your Linux systems.</p>
+</div>
+<div class="paragraph">
+<p>In this unit, we will get familiar with application containers and the podman CLI.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_getting_started"><a class="anchor" href="#_getting_started"></a>Getting Started</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>For these exercises, you will be using the host <code>node3</code> as user <code>root</code>.</p>
+</div>
+<div class="paragraph">
+<p>From host <code>bastion</code>, ssh to <code>node3</code>.</p>
+</div>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">ssh node3</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Use <code>sudo</code> to elevate your privileges.</p>
+</div>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">[[ "$UID" == 0 ]] || sudo -i</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Verify that you are on the right host for these exercises.</p>
+</div>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">workshop-podman-checkhost.sh</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You are now ready to proceed with these exercises.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_core_concepts"><a class="anchor" href="#_core_concepts"></a>Core Concepts</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Linux containers are technologies (plural) that allow you to package and isolate applications as lightweight, portable entities. When compared to a traditional virtual machine (as containers often are), Linux containers:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>improve resource utlitization over virtual machines</p>
+</li>
+<li>
+<p>improve performance over virtual machines</p>
+</li>
+<li>
+<p>improve flexibilty over virtual machines</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Because container images include only the content needed to run an application, a container is more efficient
+requires less to run.  Likewise, since the container is not running the entirty of a complete operating system,
+it will typically run faster than an application that carries with it the overhead of a whole new virtual
+machine.  Lastly with an application’s run time requirements included in the image itself, a container is
+far more capable of being run in multiple environments (without modification).</p>
+</div>
+<div class="paragraph">
+<p>That said, let&#8217;s begin to explore the capabilities of podman.</p>
+</div>
+<div class="sect2">
+<h3 id="_essential_container_commands"><a class="anchor" href="#_essential_container_commands"></a>Essential Container Commands</h3>
+<div class="paragraph">
+<p>Here is a list of the fundamental podman commands and their purpose:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>podman images</strong> - list images</p>
+</li>
+<li>
+<p><strong>podman ps</strong> - lists running containers</p>
+</li>
+<li>
+<p><strong>podman pull</strong> - pulls (copies) container image from repository (ie: redhat and/or docker hub)</p>
+</li>
+<li>
+<p><strong>podman run</strong> - run a container</p>
+</li>
+<li>
+<p><strong>podman inspect</strong> - view facts about a container</p>
+</li>
+<li>
+<p><strong>podman logs</strong> - display logs of a container (can be used with --follow)</p>
+</li>
+<li>
+<p><strong>podman rm</strong> - remove one or more containers</p>
+</li>
+<li>
+<p><strong>podman rmi</strong> - remove one or more images</p>
+</li>
+<li>
+<p><strong>podman stop</strong> - stops one or more containers</p>
+</li>
+<li>
+<p><strong>podman kill $(podman ps -q)</strong> - kill all running containers</p>
+</li>
+<li>
+<p><strong>podman rm $(podman ps -a -q)</strong> - deletes all stopped containers</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_exercise_basic_information"><a class="anchor" href="#_exercise_basic_information"></a>Exercise: Basic Information</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Now have a look at the general container information.</p>
+</div>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">podman info</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="nowrap">host:
+  arch: amd64
+  buildahVersion: 1.24.1
+  cgroupControllers:
+  - cpuset
+  - cpu
+  - io
+  - memory
+  - hugetlb
+  - pids
+  - rdma
+  - misc
+  cgroupManager: systemd
+  cgroupVersion: v2
+  conmon:
+...&lt;SNIP&gt;...</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>There is obviously a lot of information here, but we are just trying to point out
+how to get to that info when you need it.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_exercise_container_image_management"><a class="anchor" href="#_exercise_container_image_management"></a>Exercise: Container Image Management</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_list_current_images"><a class="anchor" href="#_list_current_images"></a>List Current Images</h3>
+<div class="paragraph">
+<p>Now have a look at the general container information.</p>
+</div>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">podman images</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Your results should have come back empty and that&#8217;s because we have not imported, loaded or pulled any containers on to our platform.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_pull_new_images"><a class="anchor" href="#_pull_new_images"></a>Pull New Images</h3>
+<div class="paragraph">
+<p>Time to pull a container from our local repository.</p>
+</div>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">podman pull ubi9/ubi</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="nowrap">Resolved "ubi9/ubi" as an alias (/etc/containers/registries.conf.d/001-rhel-shortnames.conf)
+Trying to pull registry.access.redhat.com/ubi9/ubi:latest...
+Getting image source signatures
+Checking if image destination supports signatures
+Copying blob 3b7adf049118 done
+Copying config 9f43f297e7 done
+Writing manifest to image destination
+Storing signatures
+9f43f297e77bc6937de12d4e90ed5dc679bd3b9c7a481068d2a840f5244d4197</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Have a look at the image list now.</p>
+</div>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">podman images</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="nowrap">REPOSITORY                           TAG         IMAGE ID      CREATED      SIZE
+registry.access.redhat.com/ubi9/ubi  latest      9f43f297e77b  2 weeks ago  217 MB</pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+if you are a subscriber to Red Hat Enterprise Linux, you can pull authentic Red Hat certified images directly from Red Hat&#8217;s repository.  For example: <code>podman pull rhel7.5 --creds 'username:password'</code>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Pull a few more container images.</p>
+</div>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">podman pull ubi9/ubi-minimal
+podman pull ubi9/ubi-init</code></pre>
+</div>
+</div>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">podman images</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="nowrap">REPOSITORY                                   TAG         IMAGE ID      CREATED      SIZE
+registry.access.redhat.com/ubi9/ubi-init     latest      a45c5d18b941  2 weeks ago  235 MB
+registry.access.redhat.com/ubi9/ubi          latest      9f43f297e77b  2 weeks ago  217 MB
+registry.access.redhat.com/ubi9/ubi-minimal  latest      088f0967f6b5  2 weeks ago  97.4 MB</pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_tag_images"><a class="anchor" href="#_tag_images"></a>Tag Images</h3>
+<div class="paragraph">
+<p>Container images can also be tagged with convenient (ie:custom names).  This could make it more intuitive to understand what they
+contain, especially after an image has been customized.</p>
+</div>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">podman tag registry.access.redhat.com/ubi9/ubi myfavorite</code></pre>
+</div>
+</div>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">podman images</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="nowrap">REPOSITORY                                   TAG         IMAGE ID      CREATED      SIZE
+registry.access.redhat.com/ubi9/ubi-init     latest      a45c5d18b941  2 weeks ago  235 MB
+registry.access.redhat.com/ubi9/ubi          latest      9f43f297e77b  2 weeks ago  217 MB
+localhost/myfavorite                         latest      9f43f297e77b  2 weeks ago  217 MB
+registry.access.redhat.com/ubi9/ubi-minimal  latest      088f0967f6b5  2 weeks ago  97.4 MB</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Notice how the image-id for "ubi" and "myfavorite" are identical.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The <a href="https://access.redhat.com/containers">Red Hat Container Catalog</a> (RHCC) provides a convenient service to locate certified container images built and supported by Red Hat.  You can also view the "security evaluation" for each image.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_delete_images"><a class="anchor" href="#_delete_images"></a>Delete Images</h3>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">podman images</code></pre>
+</div>
+</div>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">podman rmi ubi-init</code></pre>
+</div>
+</div>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">podman images</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="nowrap">REPOSITORY                                   TAG         IMAGE ID      CREATED      SIZE
+registry.access.redhat.com/ubi9/ubi          latest      9f43f297e77b  2 weeks ago  217 MB
+localhost/myfavorite                         latest      9f43f297e77b  2 weeks ago  217 MB
+registry.access.redhat.com/ubi9/ubi-minimal  latest      088f0967f6b5  2 weeks ago  97.4 MB</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_exercise_run_a_container"><a class="anchor" href="#_exercise_run_a_container"></a>Exercise: Run a Container</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_hello_world"><a class="anchor" href="#_hello_world"></a>Hello World</h3>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">podman run ubi echo "hello world"</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="nowrap">hello world</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Well that was really boring!! What did we learn from this?  For starters, you should have noticed how fast the container launched and then concluded.  Compare that with traditional virtualization where:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>you power up,</p>
+</li>
+<li>
+<p>wait for bios,</p>
+</li>
+<li>
+<p>wait for grub,</p>
+</li>
+<li>
+<p>wait for the kernel to boot and initialize resources,</p>
+</li>
+<li>
+<p>pivot root,</p>
+</li>
+<li>
+<p>launch all the services, and then finally</p>
+</li>
+<li>
+<p>run the application</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Let us run a few more commands to see what else we can glean.</p>
+</div>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">podman ps -a</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="nowrap">CONTAINER ID  IMAGE                                       COMMAND           CREATED         STATUS                     PORTS       NAMES
+fc07b3e29378  registry.access.redhat.com/ubi9/ubi:latest  echo hello world  35 seconds ago  Exited (0) 35 seconds ago              amazing_payne</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Now let us run the exact same command as before to print "hello world".</p>
+</div>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">podman run ubi echo "hello world"</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="nowrap">hello world</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Check out 'podman info' one more time and you should notice a few changes.</p>
+</div>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">podman info</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="nowrap">host:
+  arch: amd64
+  buildahVersion: 1.24.1
+  cgroupControllers:
+  - cpuset
+  - cpu
+  - io
+  - memory
+  - hugetlb
+  - pids
+  - rdma
+  - misc
+  cgroupManager: systemd
+  cgroupVersion: v2
+  conmon:
+...&lt;SNIP&gt;...</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Again, there is a lot of information here.  But if you dig into it, you should notice that
+the number of containers (ContainerStore) has incremented to 2, and that the number of
+ImageStore(s) has grown.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_cleanup"><a class="anchor" href="#_cleanup"></a>Cleanup</h3>
+<div class="paragraph">
+<p>Run 'podman ps -a' to the IDs of the exited containers.</p>
+</div>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">podman ps -a</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="nowrap">CONTAINER ID  IMAGE                                       COMMAND           CREATED             STATUS                         PORTS       NAMES
+fc07b3e29378  registry.access.redhat.com/ubi9/ubi:latest  echo hello world  3 minutes ago       Exited (0) 3 minutes ago                   amazing_payne
+eb8556004620  registry.access.redhat.com/ubi9/ubi:latest  echo hello world  About a minute ago  Exited (0) About a minute ago              peaceful_sutherland</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Using the container UIDs from the above output, you could clean up the 'exited' containers individually using <code>podman rm &lt;CONTAINER-ID&gt; &lt;CONTAINER-ID&gt;</code>,
+but we are lazy and will cleanup up the containers with a single command:</p>
+</div>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">podman rm --all</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Now you should be able to run 'podman ps -a' again, and the results should come back empty.</p>
+</div>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">podman ps -a</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_exercise_exploring_container_namespaces"><a class="anchor" href="#_exercise_exploring_container_namespaces"></a>Exercise: Exploring Container Namespaces</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_uts_hostname"><a class="anchor" href="#_uts_hostname"></a>UTS / Hostname</h3>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">podman run ubi cat /proc/sys/kernel/hostname</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="nowrap">a3f3e99082ca</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>So what we have learned here is that the hostname in the container&#8217;s namespace is NOT the same as the host platform (node3.example.com).  It is unique and is by default identical to the container&#8217;s ID.  You can verify this with 'podman ps -a'.</p>
+</div>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">podman ps -a</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="nowrap">CONTAINER ID  IMAGE                                       COMMAND               CREATED         STATUS                     PORTS       NAMES
+a3f3e99082ca  registry.access.redhat.com/ubi9/ubi:latest  cat /proc/sys/ker...  42 seconds ago  Exited (0) 42 seconds ago              dreamy_driscoll</pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_process_id"><a class="anchor" href="#_process_id"></a>Process ID</h3>
+<div class="paragraph">
+<p>Let us have a look at the process table from with-in the container&#8217;s namespace.</p>
+</div>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">podman run ubi ps -ef</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="nowrap">Error: crun: executable file 'ps' not found in $PATH: No such file or directory: OCI runtime attempted to invoke a command that was not found</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>What just happened?</p>
+</div>
+<div class="paragraph">
+<p>For the most part, containers are not meant for interactive (user) sessions.  In this instance, the image that we are using (ie: ubi) does not have the traditional commandline utilities a user might expect.  Common tools to configure network interfaces like 'ip' simply aren&#8217;t there.</p>
+</div>
+<div class="paragraph">
+<p>So for this exercise, we leverage something called a 'bind mount' to effectively mirror a portion of the host&#8217;s filesystem into the container&#8217;s namespace.  Bind mounts are declared using the '-v' option.  In the example below, /usr/bin from the host will be exposed and accessible to the containers namespace mounted at '/usr/bin' (ie: /usr/bin:/usr/bin).</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Using bind mounts is generally suitable for debugging, but not a good practice as a design decision for enterprise container strategies.  After all, creating dependencies between applications and host operating systems is what we are trying to get away from.
+</td>
+</tr>
+</table>
+</div>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">podman run -v /usr/bin:/usr/bin -v /usr/lib64:/usr/lib64 ubi /bin/ps -ef</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="nowrap">UID          PID    PPID  C STIME TTY          TIME CMD
+root           1       0  0 17:23 ?        00:00:00 /bin/ps -ef</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Notice that all the process belonging to host itself are absent.  The programs running in the container&#8217;s namespace are isolated from the rest of the host.  From the container&#8217;s perspective, the process in the container is the only process running.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_network"><a class="anchor" href="#_network"></a>Network</h3>
+<div class="paragraph">
+<p>Now let us run a command to report the network configuration from within the a container&#8217;s namespace.</p>
+</div>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">podman run -v /usr/sbin:/usr/sbin -v /usr/lib64:/usr/lib64  ubi /usr/sbin/ip addr show eth0</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="nowrap">2: eth0@if9: &lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt; mtu 1500 qdisc noqueue state UP group default
+    link/ether ea:c8:d5:af:ff:19 brd ff:ff:ff:ff:ff:ff link-netnsid 0
+    inet 10.88.0.7/16 brd 10.88.255.255 scope global eth0
+       valid_lft forever preferred_lft forever
+    inet6 fe80::e8c8:d5ff:feaf:ff19/64 scope link tentative
+       valid_lft forever preferred_lft forever</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>A couple more commands to understand the network setup.</p>
+</div>
+<div class="paragraph">
+<p>Let us begin by examining the '/etc/hosts' file.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Note that we introduce the '--rm' flag to our podman command.  This tells podman to automatically cleanup after the container exists
+</td>
+</tr>
+</table>
+</div>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">podman run --rm ubi cat /etc/hosts</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="nowrap">::1        localhost localhost.localdomain localhost6 localhost6.localdomain6
+10.88.0.9  02e3c6ddc1b3 youthful_margulis
+10.88.0.1  host.containers.internal</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>How does the container resolve hostnames (ie: DNS)?</p>
+</div>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">podman run --rm ubi cat /etc/resolv.conf</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="nowrap">nameserver 192.168.100.34</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Take a look at the routing table.
+Pay attention now, the route command is in '/usr/sbin'.  Take a look at the routing table for the container namespace.</p>
+</div>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">podman run -v /usr/sbin:/usr/sbin --rm ubi route -n</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="nowrap">Kernel IP routing table
+Destination     Gateway         Genmask         Flags Metric Ref    Use Iface
+0.0.0.0         10.88.0.1       0.0.0.0         UG    0      0        0 eth0
+10.88.0.0       0.0.0.0         255.255.0.0     U     0      0        0 eth0</pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_filesystem"><a class="anchor" href="#_filesystem"></a>Filesystem</h3>
+<div class="paragraph">
+<p>Finally, look at the filesystem(S) in the container&#8217;s namespace.</p>
+</div>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">podman run ubi df -h</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="nowrap">Filesystem      Size  Used Avail Use% Mounted on
+overlay          25G  1.9G   22G   8% /
+tmpfs            64M     0   64M   0% /dev
+tmpfs           725M  8.9M  716M   2% /etc/hosts
+shm              63M     0   63M   0% /dev/shm
+devtmpfs        1.8G     0  1.8G   0% /proc/keys</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You were introduced to Bind-Mounts in the previous section.  Let us examine what the filesystems looks like with an active Bind-Mount.</p>
+</div>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">podman run -v /usr/bin:/usr/bin ubi df -h</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="nowrap">Filesystem                Size  Used Avail Use% Mounted on
+overlay                    25G  1.9G   22G   8% /
+tmpfs                      64M     0   64M   0% /dev
+tmpfs                     725M  9.0M  716M   2% /etc/hosts
+/dev/mapper/vg_rhel-root   25G  1.9G   22G   8% /usr/bin
+shm                        63M     0   63M   0% /dev/shm
+devtmpfs                  1.8G     0  1.8G   0% /proc/keys</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Notice above how there is now a dedicated mount point for /usr/bin.  Bind-Mounts can be a very powerful tool (primarily for diagnostics) to termporarily inject tools and files that are not normally part of a container image.  Remember, using bind mounts as a design decision for enterprise container strategies is folly.</p>
+</div>
+<div class="paragraph">
+<p>Let us clean up your environment before proceeding</p>
+</div>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">podman kill --all
+podman rm --all</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_exercise_containerized_application_from_scratch"><a class="anchor" href="#_exercise_containerized_application_from_scratch"></a>Exercise: Containerized Application from Scratch</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_setup"><a class="anchor" href="#_setup"></a>Setup</h3>
+<div class="paragraph">
+<p>A configuration file for a podman build has already been supplied for your system.  Have a look at the contents of that config.</p>
+</div>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">cat /root/custom_image.OCIFile</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="nowrap">FROM ubi9/ubi
+
+RUN dnf --disablerepo=* --enablerepo=ubi-9-baseos-rpms --enablerepo=ubi-9-appstream-rpms install -y httpd
+RUN dnf clean all
+
+RUN echo "The Web Server is Running" &gt; /var/www/html/index.html
+
+EXPOSE 80
+
+CMD ["-D", "FOREGROUND"]
+ENTRYPOINT ["/usr/sbin/httpd"]</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Notice a few things about the configuration:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>that our image is based on <code>ubi8/ubi</code></p>
+</li>
+<li>
+<p>the build process will install an additional package <code>httpd</code> along with it&#8217;s dependencies</p>
+</li>
+<li>
+<p>httpd is configured by default to run on port 80, so that is the port we will expose</p>
+</li>
+<li>
+<p>the build will create a file <code>/var/www/html/index.html</code> with the contents "The Web Server is Running".</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_build"><a class="anchor" href="#_build"></a>Build</h3>
+<div class="paragraph">
+<p>Now it&#8217;s time to build the new container image.</p>
+</div>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">podman build -t custom_image --file custom_image.OCIFile</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Once this completes, run:</p>
+</div>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">podman images</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="nowrap">REPOSITORY                                   TAG         IMAGE ID      CREATED        SIZE
+localhost/custom_image                       latest      d6271d64c93e  2 seconds ago  246 MB
+registry.access.redhat.com/ubi9/ubi          latest      9f43f297e77b  2 weeks ago    217 MB
+localhost/myfavorite                         latest      9f43f297e77b  2 weeks ago    217 MB
+registry.access.redhat.com/ubi9/ubi-minimal  latest      088f0967f6b5  2 weeks ago    97.4 MB</pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_deploy"><a class="anchor" href="#_deploy"></a>Deploy</h3>
+<div class="paragraph">
+<p>Time to deploy the image.  A few things to note here:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>we are going to name the deployment "webserver"</p>
+</li>
+<li>
+<p>we are connecting localhost port 8080 to port 80 of the deployed container</p>
+</li>
+<li>
+<p>the deployment is using 'detached' mode</p>
+</li>
+</ul>
+</div>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">podman run -d --name="webserver" -p 8080:80 custom_image</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_inspect"><a class="anchor" href="#_inspect"></a>Inspect</h3>
+<div class="paragraph">
+<p>To view some facts about the running container, you use 'podman inspect'.</p>
+</div>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">podman inspect webserver</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This reveals quite a bit of information which you can drill in to using additional format arguments.  For example, let us locate the IP address for the container.</p>
+</div>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">podman inspect --format '{{ .NetworkSettings.IPAddress }}' webserver</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You can see the IP address that was assigned to the container.</p>
+</div>
+<div class="paragraph">
+<p>We can apply the same filter to any value in the json output. Try a few different ones.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_validation"><a class="anchor" href="#_validation"></a>Validation</h3>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">curl http://localhost:8080/</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="nowrap">The Web Server is Running</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Let us look at the processes running on the host.</p>
+</div>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">pgrep -laf httpd</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="nowrap">48787 /usr/sbin/httpd -D FOREGROUND
+48789 /usr/sbin/httpd -D FOREGROUND
+48790 /usr/sbin/httpd -D FOREGROUND
+48791 /usr/sbin/httpd -D FOREGROUND
+48792 /usr/sbin/httpd -D FOREGROUND</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>And finally let&#8217;s look at some networking info.</p>
+</div>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">netstat -utlpn | grep 8080</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="nowrap">tcp        0      0 0.0.0.0:8080            0.0.0.0:*               LISTEN      48784/conmon</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Now let&#8217;s introduce a commandline utility 'lsns' to check out the namespaces.</p>
+</div>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">lsns</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="nowrap">        NS TYPE   NPROCS   PID USER   COMMAND
+4026531834 time      107     1 root   /usr/lib/systemd/systemd nofb --switched-root --system --deserialize 18
+4026531835 cgroup    102     1 root   /usr/lib/systemd/systemd nofb --switched-root --system --deserialize 18
+4026531836 pid       102     1 root   /usr/lib/systemd/systemd nofb --switched-root --system --deserialize 18
+4026531837 user      107     1 root   /usr/lib/systemd/systemd nofb --switched-root --system --deserialize 18
+4026531838 uts       100     1 root   /usr/lib/systemd/systemd nofb --switched-root --system --deserialize 18
+4026531839 ipc       102     1 root   /usr/lib/systemd/systemd nofb --switched-root --system --deserialize 18
+4026531840 mnt        92     1 root   /usr/lib/systemd/systemd nofb --switched-root --system --deserialize 18
+4026531860 mnt         1    24 root   kdevtmpfs
+4026531992 net       102     1 root   /usr/lib/systemd/systemd nofb --switched-root --system --deserialize 18
+4026532252 mnt         1   640 root   /usr/lib/systemd/systemd-udevd
+4026532253 uts         1   640 root   /usr/lib/systemd/systemd-udevd
+4026532308 mnt         2   745 root   /sbin/auditd
+4026532309 mnt         1   792 chrony /usr/sbin/chronyd -F 2
+4026532310 mnt         1   772 root   /usr/sbin/irqbalance --foreground
+4026532311 mnt         1   790 root   /usr/lib/systemd/systemd-logind
+4026532312 uts         1   790 root   /usr/lib/systemd/systemd-logind
+4026532313 mnt         2   802 dbus   /usr/bin/dbus-broker-launch --scope system --audit
+4026532314 mnt         1   804 root   /usr/sbin/NetworkManager --no-daemon
+4026532316 net         5 48787 root   /usr/sbin/httpd -D FOREGROUND
+4026532375 mnt         5 48787 root   /usr/sbin/httpd -D FOREGROUND
+4026532376 uts         5 48787 root   /usr/sbin/httpd -D FOREGROUND
+4026532377 ipc         5 48787 root   /usr/sbin/httpd -D FOREGROUND
+4026532378 pid         5 48787 root   /usr/sbin/httpd -D FOREGROUND
+4026532379 cgroup      5 48787 root   /usr/sbin/httpd -D FOREGROUND</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>We see that the httpd processes running are using the mnt uts ipc pid and net namespaces.</p>
+</div>
+<div class="paragraph">
+<p>Since we explored namespaces earlier, we may as well have a look at the control-groups aligned with our process.</p>
+</div>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">systemd-cgls --no-pager</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="nowrap">... SNIP ...
+└─machine.slice (#7107)
+  → trusted.invocation_id: aaf8887d115a4205a876885134f5b7c3
+  ├─libpod-2a60daa6c3abb5d5a7282598f2747999c0c71807752911b831a4e66743f084b8.scope … (#11452)
+  │ → trusted.delegate: 1
+  │ → trusted.invocation_id: 49c9ef47d6e04e6abc3bbb20a9943692
+  │ └─container (#11505)
+  │   ├─48787 /usr/sbin/httpd -D FOREGROUND
+  │   ├─48789 /usr/sbin/httpd -D FOREGROUND
+  │   ├─48790 /usr/sbin/httpd -D FOREGROUND
+  │   ├─48791 /usr/sbin/httpd -D FOREGROUND
+  │   └─48792 /usr/sbin/httpd -D FOREGROUND
+  └─libpod-conmon-2a60daa6c3abb5d5a7282598f2747999c0c71807752911b831a4e66743f084b8.scope … (#11399)
+    → trusted.delegate: 1
+    → trusted.invocation_id: e0b9d07bb47a4af7a859e492a86b85c0
+    └─48784 /usr/bin/conmon --api-version 1 -c 2a60daa6c3abb5d5a7282598f2747999c0c71807752911b831a4e66743f084b8 -u 2a60daa6&gt;</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>What we can tell is that our container is bound by a cgroup called "machine.slice".  Otherwise, nothing remarkable to discern here.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_cleanup_2"><a class="anchor" href="#_cleanup_2"></a>Cleanup</h3>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">podman stop webserver
+podman rm webserver
+podman kill --all
+podman rm --all
+podman rmi --all --force</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_conclusion"><a class="anchor" href="#_conclusion"></a>Conclusion</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>This concludes the exercises related to podman.</p>
+</div>
+<div class="paragraph">
+<p>Time to finish this unit and return the shell to it&#8217;s home position.</p>
+</div>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">workshop-finish-exercise.sh</code></pre>
+</div>
+</div>
+<h2 id="_additional_reference_materials" class="discrete">Additional Reference Materials</h2>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://www.redhat.com/en/blog/introducing-red-hat-universal-base-image">Introducing the Red Hat Universal Base Image - Scott McCarty</a></p>
+</li>
+<li>
+<p><a href="https://developers.redhat.com/blog/2019/04/25/podman-basics-workshop-sheet/">Podman Basics Cheat Sheet - Doug Tidwell</a></p>
+</li>
+<li>
+<p><a href="https://developers.redhat.com/blog/2018/11/20/buildah-podman-containers-without-daemons/">Containers without daemons: Podman and Buildah available in RHEL 7.6 and RHEL 8 Beta - Tom Sweeney</a></p>
+</li>
+</ul>
+</div>
+<h2 id="_end_of_unit" class="discrete">End of Unit</h2>
+</div>
+</div>
+<nav class="pagination">
+  <span class="prev"><a href="ebpf.html" class="query-params-link">eBPF Tracing (bcc-tools)</a></span>
+  <span class="next"><a href="buildah.html" class="query-params-link">Containers Dev (buildah)</a></span>
+</nav>
+</article>
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <a class="rhd-logo" href="https://developers.redhat.com" target="_blank"></div>
+</footer>
+<script src="../../_/js/vendor/clipboard.js"></script>
+<script src="../../_/js/site.js"></script>
+<script async src="../../_/js/vendor/highlight.js"></script>
+  </body>
+</html>
